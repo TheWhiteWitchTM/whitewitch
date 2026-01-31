@@ -1,10 +1,10 @@
 // app/lib/metadata.ts
 import type { Metadata } from 'next'
 
-const siteUrl = 'https://mirasworld.sociallydead.me'
-const siteName = "Mira's World"
-const defaultTitle = "Mira's World – Open Source & Dev Blog"
-const defaultDescription = 'Open-source projects, code experiments, libraries, tools, and blog posts from Mira — a software developer sharing real-world code and thoughts.'
+const siteUrl = 'https://thewhitewitchtm.sociallydead.me'
+const siteName = "🧙‍♀️The White Witch™✨"
+const defaultTitle = "🧙‍♀️The White Witch™✨"
+const defaultDescription = "🧙‍♀️The White Witch™✨"
 
 export const baseMetadata: Metadata = {
 	// Core
@@ -17,19 +17,12 @@ export const baseMetadata: Metadata = {
 
 	// Keywords / authors
 	keywords: [
-		'open source',
-		'github',
-		'software development',
-		'typescript',
-		'next.js',
-		'react',
-		'programming',
 		'blog',
-		'dev tools',
-		'code',
+		'games',
+		'humor',
 	],
-	authors: [{ name: 'Mira', url: siteUrl }],
-	creator: 'Mira',
+	authors: [{ name: 'The White Witch', url: siteUrl }],
+	creator: 'The White Witch',
 
 	// Open Graph
 	openGraph: {
@@ -40,7 +33,7 @@ export const baseMetadata: Metadata = {
 		images: [
 			{
 				url: '/banner.jpg',
-				alt: "Mira's World – Open Source Projects & Blog",
+				alt: "The White Witch",
 			},
 		],
 		locale: 'en_US',
@@ -62,23 +55,11 @@ export const baseMetadata: Metadata = {
 	// ────────────────────────────────────────────────
 	icons: {
 		icon: [
-			// Primary favicon: your SVG file
-			{ url: '/icon.svg', type: 'image/svg+xml' },
-			'/favicon.svg',
+			'/favicon.ixo',
 		],
 		// Apple Touch Icon for iOS home screen / bookmarks (add the file in public/)
 		apple: '/apple-touch-icon.png',
-
-		// Optional: Safari pinned tab (SVG works here too)
-		other: [
-			{
-				rel: 'mask-icon',
-				url: '/icon.svg',
-				color: '#000000',   // neutral black, or change to your brand color
-			},
-		],
 	},
-
 	// Extras
 	alternates: {
 		canonical: siteUrl,
