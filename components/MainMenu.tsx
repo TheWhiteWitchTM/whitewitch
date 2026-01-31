@@ -53,12 +53,11 @@ interface NavItem {
 // ─── Config ───────────────────────────────────────────────────────────────
 
 const mainMenuItems: NavItem[] = [
-	{ type: "link", label: "Home", href: "/", icon: Home },
-	{ type: "link", label: "Blog", href: "/blog", icon: Newspaper },
+	{ type: "link", label: "🧙‍♀️Home", href: "/" },
+	{ type: "link", label: "✨Blog", href: "/blog" },
 	{
 		type: "submenu",
-		label: "Projects",
-		icon: LayoutDashboard,
+		label: "🕹️Games",
 		subitems: [
 			{ label: "⚡NEXT-static", href: "/projects/next-static" },
 			{ label: "📃NEXT-blog", href: "/projects/next-blog" },
@@ -66,27 +65,7 @@ const mainMenuItems: NavItem[] = [
 			{ label: "🤣Emoji UI", href: "/projects/emoji-ui" },
 		],
 	},
-	{
-		type: "submenu",
-		label: "Tools",
-		icon: Wrench,
-		subitems: [
-			{ label: "Flags", href: "/tools/flags", icon: Flag },
-			{ label: "Emoji", href: "/tools/emoji", icon: Smile },
-			{ label: "WebFont", href: "/tools/webfont", icon: Text },
-			{ type: "separator" },
-			{ label: "Image Magic", href: "/tools/image-magic", icon: PaintbrushIcon },
-		],
-	},
-	{
-		type: "submenu",
-		label: "Tutorials",
-		icon: Lightbulb,
-		subitems: [
-			{ label: "🌬️Tailwind", href: "/tutorials/tailwind"},
-			{ label: "📃Markdown", href: "/tutorials/markdown"},
-		],
-	},
+
 	/*
 	{
 		type: "card",

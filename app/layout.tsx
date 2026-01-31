@@ -27,35 +27,44 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 	const header = (
-		<Appbar className={"component"}
-			left={
-			<div className={"flex flex-row gap-2"}>
-				<Avatar className={"border-2 border-green-600 shadow-[0_0_10px_#dc2626] shadow-green-500/70>"}>
-					<AvatarImage src={"/icon-192x192.png"}/>
-				</Avatar>
-				<div className={"mt-1.5 clock-font text-green-600"}>
-					<b>Mira's World™</b>
+		<div className={"flex flex-col w-full"}>
+			<div className={"desktop flex flex-col"}>
+				<div className={"w-30 min-w-30"}>
+				<Image
+					src={"/witch.png"}
+					alt={"Witch!"}
+					width={150}
+					height={150}
+					priority
+					className={"absolute top-0 left-0 z-50 inset-1 rounded-full shadow-lg"}
+				/>
+				</div>
+				<div className={"flex-1 text-lg ml-30 mt-5 "}>
+					‍🧙‍♀️️<b>The White Witch™</b>✨
 				</div>
 			</div>
+		<Appbar className={"component"}
+			left={
+			<div className={"w-35"}/>
 		}
 			right={<Toolbar/>}
 		>
 			<MainMenu/>
 		</Appbar>
+		</div>
 	)
 
 	const footer = (
 		<Appbar className={"component"}
 			left={
-				<div className={"px-3 pt-1 flex flex-row gap-2"}>
-					<DigitalClock/>
-					<Weather/>
+				<div className={"px-3"}>
+					SpellBook will be here
 				</div>
 			}
 			right={
 			<span className={"px-5"}>
 			<Link
-				href="https://www.paypal.com/ncp/payment/BVY3E2H2E2VWA"
+				href="https://www.paypal.com/ncp/payment/4P85EQRES3RGU"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
@@ -64,7 +73,7 @@ export default function RootLayout({
 			</span>
 		}>
 			<span className={"px-5"}>
-				Build using ⚡NEXT-static & 📃NEXT-blog!
+				Build using ⚡NEXT-static & 🤣emoji-ui!
 			</span>
 		</Appbar>
 	)
@@ -77,17 +86,6 @@ export default function RootLayout({
 
 	const right = (
 		<div className={"hidden md:flex flex-col flex-1 !my-4 !p-2 component w-20"}>
-			<Link
-				href={"https://thewhitewitchtm.sociallydead.me/"}
-				target={"_blank"}>
-			<Image
-				src={"/witch.png"}
-				alt={"Logo"}
-				width={200}
-				height={200}
-				priority
-			/>
-			</Link>
 			<SidebarRight/>
 		</div>
 	)

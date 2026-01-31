@@ -203,20 +203,20 @@
   .component {
     @apply
     border
-    border-green-600
+    border-red-600
     rounded-lg
-    shadow-md
-    shadow-green-500/30
+    shadow-lg
+    shadow-red-500/30
     m-1
     p-1;
   }
   .scrollbar {
     @apply
     scrollbar-thin
-    scrollbar-thumb-green-600
-    scrollbar-track-green-950/30   /* ← subtle dark red-tinted track, adjust opacity */
-    hover:scrollbar-thumb-green-500
-    active:scrollbar-thumb-green-700
+    scrollbar-thumb-red-600
+    scrollbar-track-red-950/30   /* ← subtle dark red-tinted track, adjust opacity */
+    hover:scrollbar-thumb-red-500
+    active:scrollbar-thumb-red-700
     transition-colors duration-200;
 
     &::-webkit-scrollbar-thumb {

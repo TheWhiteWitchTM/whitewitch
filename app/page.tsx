@@ -4,18 +4,19 @@ import Intro from "./intro.mdx"
 
 export default function Home()  {
 	return (
-		<PageContent className={"prose dark:prose-invert"}>
-			<h1>♥️ Welcome Mira's World™ ☕</h1>
-			<div className={"prose dark:prose-invert"}>
-			<Image
+		<PageContent className={"fex flex-col"}>
+			<center><h1 className={"text-lg"}>🧙‍♀️ The White Witch™ ✨</h1></center>
+			<center>
+				<Image
 				src={"/banner.jpg"}
 				alt="Home Image"
-				width="150"
-				height="75"
-				className="float-left m-2 rounded-lg shadow-md"
+				width={400}
+				height={200}
 				priority
 			/>
-			<Intro/>
+			</center>
+			<div className={"prose dark:prose-invert"}>
+				<Intro/>
 			</div>
 		</PageContent>
 	)
