@@ -326,4 +326,129 @@ export default function Rogue() {
   display[player.y][player.x] = '🧙'
 
   const cells = []
-  for (let
+  for (let y = 0; y < ROWS; y++) {
+    for (let x = 0; x < COLS; x++) {
+      const char = display[y][x]
+      let textColor = 'text-gray-900'
+      let bgColor = 'bg-black'
+      let border = ''
+
+      if (char === '#') {
+        textColor = 'text-red-500'
+        bgColor = 'bg-red-950'
+      } else if (char === '.') {
+        textColor = 'text-gray-900'
+        bgColor = 'bg-gray-950'
+      } else if (char === '💰') {
+        textColor = 'text-amber-300'
+        bgColor = 'bg-black'
+        border = 'border-2 border-amber-400 rounded-sm'
+      } else if (char === '👹') {
+        textColor = 'text-rose-600'
+        bgColor = 'bg-black'
+        border = 'border-2 border-red-600 rounded-full'
+      } else if (char === '🧙') {
+        textColor = 'text-lime-400 font-bold text-4xl md:text-5xl lg:text-6xl'
+        bgColor = 'bg-black'
+        border = 'border-2 border-lime-500 rounded-full'
+      }
+
+      if (gameOver || victory) {
+        textColor = char === '🧙' ? 'text-red-700' : 'text-gray-700 opacity-60'
+        bgColor = 'bg-black'
+        border = ''
+      }
+
+      cells.push(
+        <div
+          key={`${x}-${y}`}
+          className={`
+            flex items-center justify-center
+            text-xl sm:text-2xl md:text-3xl lg:text-4xl
+            leading-none select-none
+            ${textColor} ${bgColor} ${border}
+            ${char === '🧙' && playerHit ? 'animate-pulse' : ''}
+          `}
+        >
+          {char === '#' ? '.' : char}
+        </div>
+      )
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-[9999] bg-black flex flex-col overflow-hidden">
+      <div className="shrink-0 flex justify-between px-4 py-2 bg-gray-950 border-b border-stone-800 text-base md:text-lg font-mono">
+        <div>Level: {level}/26</div>
+        <div>HP: {player.hp}</div>
+        <div>Gold: {player.gold}</div>
+      </div>
+
+      <div className="flex-1 grid grid-cols-40 grid-rows-25 gap-0 bg-black overflow-hidden">
+        {cells}
+      </div>
+
+      {showLevelCleared && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-[10000] pointer-events-none">
+          <h1 className="text-5xl md:text-7xl font-bold text-emerald-400 animate-pulse">
+            LEVEL CLEARED!
+          </h1>
+        </div>
+      )}
+
+      <div className="shrink-0 text-center text-sm text-stone-700 py-2 md:hidden">
+        arrows / wasd / hjkl
+      </div>
+
+      {victory && (
+        <div className="fixed inset-0 bg-black/90 flex flex-col items-center justify-center z-[10000]">
+          <h1 className="text-6xl md:text-8xl font-bold text-emerald-400 mb-8 animate-pulse">
+            VICTORY!
+          </h1>
+          <p className="text-3xl md:text-5xl text-amber-300 mb-10">
+            You conquered all 26 levels!
+          </p>
+          <p className="text-2xl text-gray-400 mb-12">
+            Total gold collected: {player.gold}
+          </p>
+          <Button
+            variant="outline"
+            size="lg"
+            className="text-3xl px-16 py-8 border-emerald-500 text-emerald-400 hover:bg-emerald-950"
+            onClick={() => {
+              setLevel(1)
+              resetLevel()
+            }}
+          >
+            Play Again
+          </Button>
+        </div>
+      )}
+
+      {gameOver && (
+        <div className="fixed inset-0 bg-black/90 flex flex-col items-center justify-center z-[10000]">
+          <h1 className="text-7xl md:text-10xl font-bold text-red-600 mb-8 animate-pulse">
+            YOU DIED
+          </h1>
+          <p className="text-3xl md:text-5xl text-gray-300 mb-6">
+            Level reached: {level}
+          </p>
+          <p className="text-2xl text-amber-300 mb-12">
+            Gold collected: {player.gold}
+          </p>
+          <Button
+            variant="outline"
+            size="lg"
+            className="text-3xl px-16 py-8 border-red-600 text-red-400 hover:bg-red-950"
+            onClick={() => {
+              setLevel(1)
+              resetLevel()
+            }}
+          >
+            Play Again
+          </Button>
+        </div>
+      )}
+    </div>
+  )
+}
