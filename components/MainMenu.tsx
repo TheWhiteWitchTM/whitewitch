@@ -59,10 +59,7 @@ const mainMenuItems: NavItem[] = [
 		type: "submenu",
 		label: "🕹️Games",
 		subitems: [
-			{ label: "⚡NEXT-static", href: "/projects/next-static" },
-			{ label: "📃NEXT-blog", href: "/projects/next-blog" },
-			{ type: "separator" },
-			{ label: "🤣Emoji UI", href: "/projects/emoji-ui" },
+			{ label: "🧙‍♀️Witch!", href: "/games/witch" },
 		],
 	},
 
