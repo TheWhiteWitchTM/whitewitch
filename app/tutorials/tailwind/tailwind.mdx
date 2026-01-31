@@ -1,0 +1,211 @@
+export const metadata = {
+  title: 'Tailwind CSS – Complete Tutorial & Reference',
+  description: 'From quick start to advanced customization – everything you need to master Tailwind CSS',
+}
+
+#### What is Tailwind CSS?
+
+Tailwind is a **utility-first** CSS framework. You build designs by composing small, single-purpose classes directly in your HTML/JSX (e.g. `bg-indigo-600`, `p-6`, `rounded-2xl`).
+
+Main advantages:
+- Extremely fast prototyping
+- No more fighting CSS specificity or bloated style files
+- Final production CSS is tiny (only used classes kept)
+- Full control over your design system via config
+- Works with any JavaScript framework or plain HTML
+
+#### Quick Start – Play CDN (Great for Testing & Learning)
+
+Add this one line in your `<head>` – no build tools needed:
+
+```html
+<script src="https://cdn.tailwindcss.com"></script>
+```
+
+Example full page you can save and open right now:
+
+```html
+<!DOCTYPE html>
+<html lang="en" className="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tailwind Quick Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body className="bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen flex items-center justify-center p-6">
+  <div className="bg-white/80 backdrop-blur-lg p-10 rounded-2xl shadow-2xl max-w-lg w-full border border-indigo-100">
+    <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 text-center">
+      Hello Tailwind
+    </h1>
+    <p className="text-lg text-gray-700 mb-8 text-center">
+      Style directly in your markup – no more switching files.
+    </p>
+    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-lg transition shadow-md">
+        Get Started
+      </button>
+      <button className="bg-white hover:bg-gray-50 text-indigo-700 font-semibold py-3 px-8 rounded-lg border border-indigo-200 transition">
+        Docs
+      </button>
+    </div>
+  </div>
+</body>
+</html>
+```
+
+#### Proper Setup – Tailwind CLI (Recommended for Real Projects)
+
+```bash
+# 1. Create folder & init
+mkdir my-tailwind-project
+cd my-tailwind-project
+npm init -y
+
+# 2. Install
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+**tailwind.config.js** (minimum content)
+
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './index.html',
+    './src/**/*.{html,js,ts,jsx,tsx}',
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+**src/input.css**
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+**package.json** scripts
+
+```json
+"scripts": {
+  "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+  "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
+}
+```
+
+Run `npm run dev` → link `./dist/output.css` in your HTML.
+
+#### Core Utilities – What You’ll Use Every Day
+
+##### Spacing & Layout
+
+- `p-4`, `m-6`, `px-8`, `py-10`
+- `space-x-4`, `space-y-6` (children spacing)
+- `flex`, `flex-col`, `items-center`, `justify-between`
+- `grid`, `grid-cols-3`, `gap-6`
+
+##### Sizing & Positioning
+
+- `w-full`, `w-1/2`, `w-3/4`, `max-w-md`, `min-h-screen`
+- `h-96`, `aspect-[4/3]`
+- `relative`, `absolute`, `sticky`, `z-10`
+
+##### Typography
+
+- `text-sm` → `text-6xl`
+- `font-bold`, `font-medium`, `italic`, `uppercase`
+- `leading-tight`, `tracking-wide`, `text-center`
+
+##### Colors & Effects
+
+- `bg-indigo-600`, `text-gray-900`, `border-red-400`
+- `bg-gradient-to-r from-purple-500 to-pink-500`
+- `shadow-lg`, `shadow-2xl`, `ring-2 ring-indigo-500`
+- `hover:bg-indigo-700`, `focus:outline-none focus:ring-2`
+
+##### Responsive & States
+
+Mobile-first: base classes → `sm:`, `md:`, `lg:`, `xl:`, `2xl:`
+
+Examples:
+- `text-xl md:text-3xl lg:text-5xl`
+- `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`
+- `hidden md:block`
+
+#### Practical Example – Responsive Feature Card
+
+```tsx
+<div className="mx-auto mt-16 max-w-2xl rounded-2xl bg-white p-8 shadow-xl transition hover:shadow-2xl">
+  <div className="flex flex-col md:flex-row md:items-center gap-6">
+    <div className="shrink-0">
+      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+        <span className="text-2xl font-bold">TW</span>
+      </div>
+    </div>
+    <div>
+      <h3 className="text-2xl font-bold text-gray-900">Utility-First Magic</h3>
+      <p className="mt-3 text-gray-600">
+        Build exactly what you want without fighting framework defaults.
+      </p>
+      <button className="mt-6 rounded-lg bg-indigo-600 px-6 py-3 font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+        Learn More
+      </button>
+    </div>
+  </div>
+</div>
+```
+
+#### Dark Mode Setup
+
+In `tailwind.config.js`:
+
+```js
+darkMode: 'class', // or 'media' for system preference
+```
+
+Then toggle `dark` class on `<html>` (via JS or manually).
+
+Usage:
+
+```tsx
+<div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+  Dark mode ready content
+</div>
+```
+
+#### Customization – Make It Yours
+
+```js
+theme: {
+  extend: {
+    colors: {
+      brand: {
+        50: '#f0f9ff',
+        500: '#3b82f6',
+        900: '#0f172a',
+      },
+    },
+    fontFamily: {
+      sans: ['Inter var', 'system-ui', 'sans-serif'],
+    },
+    spacing: {
+      '128': '32rem',
+    },
+  },
+}
+```
+
+#### Tips & Best Practices
+
+- Install **Tailwind CSS IntelliSense** in VS Code
+- Use arbitrary values when needed: `w-[300px]`, `bg-[#1a1a2e]`
+- Conditional classes in React: `clsx` or `twMerge`
+- Production build always uses `--minify`
+- Official docs: https://tailwindcss.com/docs

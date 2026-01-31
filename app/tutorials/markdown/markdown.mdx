@@ -1,0 +1,224 @@
+export const metadata = {
+  title: "The Complete Markdown Guide 2025 – Everything You Need to Know",
+  description: "From basics to advanced MDX features – perfect reference for writers, developers and content creators using Markdown in 2025–2026",
+}
+
+#### Why Markdown Still Rules in 2026
+
+Markdown remains the **lingua franca** of technical writing, documentation, blogs, READMEs, notes, newsletters, Obsidian vaults, Notion exports, GitHub issues, Discord messages, and increasingly – full websites via MDX.
+
+**MDX = Markdown + JSX**  
+→ Write Markdown, embed React components, use syntax highlighting, and still get static HTML output.
+
+#### 1. Basic Text Formatting
+
+```markdown
+**bold**   or __bold__
+*italic*   or _italic_
+***bold italic***
+~~strikethrough~~
+==highlight==          (not everywhere – GitHub yes, many renderers no)
+```
+
+**Result:**
+
+**bold**  
+*italic*  
+***bold italic***  
+~~strikethrough~~
+
+#### 2. Headings
+
+#### Fourth-level heading (h4)
+
+##### Fifth-level heading (h5)
+
+###### Sixth-level heading (h6)
+
+**Tip:** Most Markdown parsers support up to h6. Never skip levels for accessibility.
+
+#### 3. Lists
+
+**Unordered**
+
+```markdown
+- Item 1
+- Item 2
+  - Nested
+    - Deeper
+- Item 3
+```
+
+**Ordered**
+
+```markdown
+1. First
+2. Second
+   1. Nested ordered
+   2. Another
+3. Third
+```
+
+**Task lists**
+
+```markdown
+- [x] Done task
+- [ ] Open task
+- [ ] Another open
+```
+
+#### 4. Links & Images
+
+```markdown
+Inline link: [Next.js Docs](https://nextjs.org/docs)
+
+Reference style:
+[MDX][mdx]
+
+[mdx]: https://mdxjs.com "MDX official site"
+
+Image:
+![Alt text](/images/my-image.jpg)
+
+Image with size control (MDX / some renderers):
+<img src="/images/my-image.jpg" alt="Description" width="600" />
+```
+
+#### 5. Blockquotes
+
+```markdown
+> This is a blockquote.
+>
+> It can span multiple lines.
+>
+>> Nested quote
+```
+
+> This is a blockquote.  
+> It can span multiple lines.
+>> Nested quote
+
+#### 6. Code
+
+**Inline code**
+
+```markdown
+Use `process.env.NODE_ENV` to check environment.
+```
+
+Use `process.env.NODE_ENV` to check environment.
+
+**Code block with language**
+
+```tsx
+// app/page.tsx
+import Link from 'next/link'
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+      <h1 className="text-4xl font-bold">Welcome to Next.js + MDX</h1>
+      <Link href="/about" className="mt-8 text-blue-600 hover:underline">
+        Go to About →
+      </Link>
+    </main>
+  )
+}
+```
+
+**Code block without language**
+
+```text
+Just plain text
+  no highlighting
+```
+
+**Diff highlighting**
+
+```diff
+- Old line removed
++ New line added
+! Changed line (some renderers)
+```
+
+#### 7. Tables
+
+```markdown
+| Feature          | Markdown | MDX   | GitHub |
+|------------------|----------|-------|--------|
+| Tables           | Yes      | Yes   | Yes    |
+| Task lists       | Partial  | Yes   | Yes    |
+| JSX components   | No       | Yes   | No     |
+| Syntax highlight | Partial  | Full  | Good   |
+```
+
+| Feature          | Markdown | MDX   | GitHub |
+|------------------|----------|-------|--------|
+| Tables           | Yes      | Yes   | Yes    |
+| Task lists       | Partial  | Yes   | Yes    |
+| JSX components   | No       | Yes   | No     |
+| Syntax highlight | Partial  | Full  | Good   |
+
+**Tip:** Align columns with `:---`, `:---:`, `---:` for left/center/right.
+
+#### 8. Horizontal Rules
+
+```markdown
+---
+***
+___
+```
+
+---
+
+#### 9. Footnotes
+
+```markdown
+Here's a sentence with a footnote.[^1]
+
+[^1]: This is the footnote content.
+      It can be multi-line.
+```
+
+Here's a sentence with a footnote.[^1]
+
+[^1]: This is the footnote content.  
+It can be multi-line.
+
+#### 10. MDX-specific Features
+
+```mdx
+import { Button } from '@/components/ui/button'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+
+<Alert variant="destructive">
+  <AlertTitle>Warning!</AlertTitle>
+  <AlertDescription>
+    This is an interactive alert component inside Markdown.
+  </AlertDescription>
+</Alert>
+
+<Button variant="outline" size="sm">
+  Click me – I'm a real button!
+</Button>
+```
+
+#### 11. Best Practices & Gotchas 2026
+
+- Use consistent list markers (- or *)
+- Always specify language in code blocks for highlighting
+- Prefer reference-style links for long documents
+- Test footnotes & tables in your renderer
+- For MDX: keep frontmatter simple (title, description, date, image)
+- Avoid too deep nesting in lists (>3 levels → hard to read)
+- Use `> [!NOTE]` / `> [!TIP]` / `> [!WARNING]` callouts
+
+```markdown
+> [!TIP]
+> This is a tip callout – very useful in docs!
+```
+
+> [!TIP]  
+> This is a tip callout – very useful in docs!
+
+Happy writing 🧙‍♀️✨
