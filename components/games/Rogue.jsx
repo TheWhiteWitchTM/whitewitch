@@ -321,8 +321,8 @@ export default function Rogue() {
   }, [golds.length, level, gameOver, victory, levelCleared, resetLevel])
 
   const display = map.map(row => row.slice())
-  golds.forEach(g => { display[g.y][g.x] = '💰' })
-  monsters.forEach(m => { display[m.y][m.x] = '👹' })
+  golds.forEach(g => { display[g.y][g.x] = '💰'})
+  monsters.forEach(m => { display[m.y][m.x] = '👹'})
   display[player.y][player.x] = '🧙'
 
   const cells = []
@@ -337,8 +337,8 @@ export default function Rogue() {
         textColor = 'text-red-500'
         bgColor = 'bg-red-950'
       } else if (char === '.') {
-        textColor = 'text-gray-900'
-        bgColor = 'bg-gray-950'
+        textColor = 'text-blue-500'
+        bgColor = 'bg-blue-950'
       } else if (char === '💰') {
         textColor = 'text-amber-300'
         bgColor = 'bg-black'
@@ -377,11 +377,12 @@ export default function Rogue() {
   }
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-black flex flex-col overflow-hidden">
+    <div className="fixed inset-0 z-[100] bg-black flex flex-col overflow-hidden">
       <div className="shrink-0 flex justify-between px-4 py-2 bg-gray-950 border-b border-stone-800 text-base md:text-lg font-mono">
+        <div className={"text-lg pt-1"}>🧙‍♀️Witch!✨</div>
         <div>Level: {level}/26</div>
         <div>HP: {player.hp}</div>
-        <div>Gold: {player.gold}</div>
+        <div className={"pr-10"}>Gold: {player.gold}</div>
       </div>
 
       <div className="flex-1 grid grid-cols-40 grid-rows-25 gap-0 bg-black overflow-hidden">

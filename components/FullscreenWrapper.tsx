@@ -46,8 +46,13 @@ export function FullscreenWrapper({
 	if (!open) return null
 
 	return (
-		<div className={"fixed inset-0 z-[9999]"}>
-			{children}
+		<>
+		<div className={"absolute top-0 right-0 z-[9999]"}>
+			❌
 		</div>
+			<div className={"fixed inset-0 z-[2000]"}>
+				{children}
+			</div>
+		</>
 	)
 }
