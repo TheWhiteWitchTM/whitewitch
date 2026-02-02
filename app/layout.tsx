@@ -11,8 +11,6 @@ import {Avatar, AvatarImage} from "@/components/ui/avatar";
 import * as React from "react";
 import { ThemeProvider } from "next-themes"
 import {Toolbar} from "@/components/Toolbar";
-import { DigitalClock }  from "@/components/DigitalClock";
-import {Weather} from "@/components/Weather";
 import Image from "next/image";
 import SidebarRight from "@/components/SidebarRight";
 import { Analytics } from "@vercel/analytics/next"
@@ -39,11 +37,11 @@ export default function RootLayout({
 					className={"absolute top-0 left-0 z-50 inset-1 rounded-full shadow-lg"}
 				/>
 				</div>
-				<div className={"flex-1 text-lg ml-30 mt-5 "}>
+				<div className={"flex-1 text-lg ml-30 "}>
 					‍🧙‍♀️️<b>The White Witch™</b>✨
 				</div>
 			</div>
-		<Appbar className={"component"}
+		<Appbar className={"bg-red-800 text-white"}
 			left={
 			<div className={"w-35"}/>
 		}
@@ -55,10 +53,10 @@ export default function RootLayout({
 	)
 
 	const footer = (
-		<Appbar className={"component"}
+		<Appbar className={"bg-red-800 text-white"}
 			left={
 				<div className={"px-3"}>
-					SpellBook will be here
+					🧙‍♀️Spell Book✨
 				</div>
 			}
 			right={
@@ -72,8 +70,34 @@ export default function RootLayout({
 			</Link>
 			</span>
 		}>
-			<span className={"px-5"}>
-				Build using ⚡NEXT-static & 🤣emoji-ui!
+			<span className={"px-5 flex flex-row gap-1"}>
+				<span>
+				Build using
+				</span>
+				<Link
+					href={"https://mirasworld.sociallydead.me/projects/next-static"}
+					target={"_blank"}
+					>
+					⚡NEXT-static
+				</Link>
+				<span>
+					&
+				</span>
+				<Link
+					href={"https://mirasworld.sociallydead.me/projects/emoji-ui"}
+					target={"_blank"}
+				>
+					🤣emoji-ui
+				</Link>
+				<span>
+					by
+				</span>
+				<Link
+					href={"https://mirasworld.sociallydead.me"}
+					target={"_blank"}
+					>
+						♥️Mira♥️
+				</Link>
 			</span>
 		</Appbar>
 	)
@@ -85,7 +109,7 @@ export default function RootLayout({
 	)
 
 	const right = (
-		<div className={"hidden md:flex flex-col flex-1 !my-4 !p-2 component w-20"}>
+		<div className={"hidden md:flex flex-col flex-1 my-4 p-2 w-20"}>
 			<SidebarRight/>
 		</div>
 	)

@@ -20,7 +20,7 @@ export default function () {
 					href={"https://youtube.com/@thewhitewitchtm"}
 					target="_blank"
 				>
-					<Youtube/>
+					<Youtube className={"text-red-500"}/>
 				</Link>
 			</Button>
 			<Button
@@ -30,7 +30,7 @@ export default function () {
 					href={"https://bsky.app/profile/thewhitewitchtm.sociallydead.me"}
 					target="_blank"
 				>
-					<BlueSky className={"h-6 w-6"}/>
+					<BlueSky className={"h-5 w-5 text-red-500"}/>
 				</Link>
 			</Button>
 			<Button
@@ -40,7 +40,7 @@ export default function () {
 					href={"https://x.com/@thewhitewitchtm"}
 					target="_blank"
 				>
-					<Twitter/>
+					<Twitter className={"text-red-500"}/>
 				</Link>
 			</Button>
 			<Button
@@ -50,7 +50,7 @@ export default function () {
 					href={"https://github.com/TheWhiteWitchTM"}
 					target="_blank"
 				>
-					<Github/>
+					<Github className={"text-red-500"}/>
 				</Link>
 			</Button>
 			<Button
@@ -60,7 +60,7 @@ export default function () {
 					href={"mailto://thewhitewitchtm@gmail.com"}
 					target="_blank"
 				>
-					<Mail/>
+					<Mail className={"text-red-500"}/>
 				</Link>
 			</Button>
 		</div>
