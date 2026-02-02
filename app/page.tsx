@@ -5,7 +5,6 @@ import Intro from "./intro.mdx"
 export default function Home()  {
 	return (
 		<PageContent className={"fex flex-col"}>
-			<center><h1 className={"text-lg"}>🧙‍♀️ The White Witch™ ✨</h1></center>
 			<center>
 				<Image
 				src={"/banner.jpg"}
