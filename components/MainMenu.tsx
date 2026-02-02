@@ -118,8 +118,8 @@ export function MainMenu() {
 				const active = isActive(item);
 				const buttonClasses = cn(
 					"h-9 rounded-md text-sm font-medium transition-colors",
-					"flex items-center gap-1.5",
-					"hover:bg-accent hover:text-accent-foreground",
+					"flex items-center gap-1",
+					"cursor-pointer",
 					active && "underline underline-offset-4"
 				);
 
@@ -142,7 +142,7 @@ export function MainMenu() {
 										{item.label}
 									</Button>
 								</PopoverTrigger>
-								<PopoverContent className="w-48 p-0">
+								<PopoverContent className="w-48 p-0 border-red-600">
 									<div className="!-mt-0.5 flex flex-col py-1">
 										{item.subitems.map((sub, subIndex) => {
 											if (sub.type === "separator") {
@@ -154,8 +154,8 @@ export function MainMenu() {
 													key={subIndex}
 													href={sub.href || "#"}
 													className={cn(
-														"flex items-center gap-2 px-4 py-2 text-sm hover:bg-accent",
-														subActive && "underline underline-offset-4 bg-accent/50"
+														"flex items-center gap-2 px-4 py-2 text-sm hover:bg-red-600",
+														subActive && "underline underline-offset-4 bg-red-600/50"
 													)}
 												>
 													{sub.icon && <sub.icon className="h-4 w-4" />}

@@ -182,25 +182,13 @@
 }
 
 @layer utilities {
-  .font-geist-sans {
-    @apply font-sans;
-  }
-  .font-geist-mono {
-    @apply font-mono;
-  }
-  .font-flags {
-    @apply font-['Flags'];
-  }
-  .font-clock {
-    @apply font-['Orbitron'];
-  }
   .component {
     @apply
     border
     border-red-600
     rounded-lg
     shadow-lg
-    shadow-red-500/30
+    shadow-red-600/30
     m-1
     p-1;
   }
