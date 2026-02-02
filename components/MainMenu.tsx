@@ -142,7 +142,7 @@ export function MainMenu() {
 										{item.label}
 									</Button>
 								</PopoverTrigger>
-								<PopoverContent className="w-48 p-0 border-red-600">
+								<PopoverContent className="w-48 p-0 bg-red-700 text-white">
 									<div className="!-mt-0.5 flex flex-col py-1">
 										{item.subitems.map((sub, subIndex) => {
 											if (sub.type === "separator") {
