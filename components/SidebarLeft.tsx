@@ -1,20 +1,21 @@
 import { Construction } from "lucide-react"
+import Image from "next/image";
+import Link from "next/link";
 
 export default () => {
 	return(
-	<div>
-		<center>
-			<Construction
-				className={"text-yellow-500 h-20 w-20"}
+	<div className={"flex flex-col text-red-500"}>
+		<Link href={"/blog/epstein_files"}>
+			<h2 className={"underline"}>Epstein Files!</h2>
+			<Image
+				src={"/epstein.jpg"}
+				alt={"Epstein Files"}
+				width={250}
+				height={100}
 			/>
-		</center>
-		<code>
-			This is work in progress...
-			<p>
-				I hope you like what you see
-				so far, expect daily changes!
-			</p>
-		</code>
+			Justice for the victims!
+			Do not let the Trump crime family hide them!
+		</Link>
 	</div>
 	)
 }
