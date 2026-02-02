@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
-import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
-import "./globals.css";
+import "./css/globals.css";
 import { Toaster } from "@/components/ui/sonner"
 import {baseMetadata} from "@/app/metadata";
 import {Appbar} from "@/next-static/legacy/Appbar";
 import {MainMenu} from "@/components/MainMenu";
 import Link from "next/link";
-import {Avatar, AvatarImage} from "@/components/ui/avatar";
 import * as React from "react";
 import { ThemeProvider } from "next-themes"
 import {Toolbar} from "@/components/Toolbar";
@@ -128,7 +125,7 @@ export default function RootLayout({
 	)
 
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={"w-full h-full m-0 p-0 min-h-screen bg-background text-foreground antialiased"}>
       <Analytics/>
       <ThemeProvider
