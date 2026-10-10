@@ -1,9 +1,10 @@
+
 <p align="center">
-  <img src="https://pbs.twimg.com/profile_banners/1889645395707375617/1790767799" width="100%" />
+  <img src="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg" width="100%" />
 </p>
 
 <p align="center">
-  <img src="https://pbs.twimg.com/profile_images/2011039741165043712/OFvsOiEe.jpg" width="150" style="border-radius: 50%; margin-top: -75px; border: 4px solid #fff;" />
+  <img src="https://pbs.twimg.com/profile_images/2011039741165043712/OFvsOiEe.jpg" width="150" style="border-radius: 50%; margin-top: -75px; border: 4px solid #000;" />
 </p>
 
 <h1 align="center">🧙‍♀️ The White Witch™✨</h1>
@@ -16,13 +17,9 @@
 </p>
 
 <p align="center">
-  <a href="https://x.com/TheWhiteWitchTM">X / Twitter</a> •
+  <a href="https://x.com/TheWhiteWitchTM">X</a> •
   <a href="https://thewhitewitchtm.sociallydead.me">Website</a> •
   <a href="https://github.com/TheWhiteWitchTM">GitHub</a>
 </p>
 
 ---
-
-# whitewitch
-
-(rest of your README content goes here...)
