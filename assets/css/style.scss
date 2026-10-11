@@ -77,3 +77,8 @@ body,
   padding: 0.5rem 1rem !important;
   color: #e8e8e8 !important;
 }
+/* Lift the non-dropdown items so they match Home and Content */
+.site-nav > ul > li:not(.dropdown) > a {
+  position: relative;
+  top: -1px;
+}
