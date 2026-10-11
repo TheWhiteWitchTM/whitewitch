@@ -62,14 +62,14 @@ body {
   color: #c9a6ff !important;
 }
 
-/* Dropdown — solid hover with invisible bridge */
+/* Dropdown — click toggle */
 .dropdown {
   position: relative;
 }
 
 .dropdown > a {
   display: inline-block;
-  padding: 0.5rem 0.4rem 0.8rem 0.4rem;
+  padding: 0.5rem 0.4rem;
 }
 
 .dropdown > a::after {
@@ -94,19 +94,7 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
-/* Invisible bridge that fills any gap */
-.dropdown-menu::before {
-  content: "";
-  position: absolute;
-  top: -12px;
-  left: 0;
-  right: 0;
-  height: 12px;
-  background: transparent;
-}
-
-.dropdown:hover > .dropdown-menu,
-.dropdown:focus-within > .dropdown-menu {
+.dropdown-menu.open {
   display: block;
 }
 
@@ -129,4 +117,25 @@ body {
 /* Main content frame (default layout) */
 .page-frame {
   flex: 1 0 auto;
-  display
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.side-image {
+  flex: 0 0 140px;
+  position: sticky;
+  top: 5.5rem;
+}
+
+.side-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box
