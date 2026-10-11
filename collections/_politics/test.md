@@ -1,4 +1,3 @@
-
 ---
 title: Test Politics Post
 layout: default
