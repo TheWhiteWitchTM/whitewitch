@@ -5,6 +5,8 @@ baseurl: "/whitewitch"
 image: https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg
 collections_dir: collections
 
+collections_dir: collections
+
 collections:
   history:
     output: true
