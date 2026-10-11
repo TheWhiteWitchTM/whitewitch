@@ -26,72 +26,6 @@
     {% seo %}
     <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
-
-    <style>
-      body, .markdown-body {
-        background-color: #000 !important;
-        color: #fff !important;
-      }
-      .markdown-body a {
-        color: #8ab4f8 !important;
-      }
-      .markdown-body a:hover {
-        color: #a8c7fa !important;
-      }
-      .markdown-body hr {
-        border-color: #333 !important;
-      }
-      .markdown-body code, .markdown-body pre {
-        background-color: #111 !important;
-        color: #eee !important;
-      }
-
-      /* Navigation */
-      .site-nav {
-        margin-bottom: 1.5rem;
-      }
-      .site-nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        gap: 1.5rem;
-        align-items: center;
-      }
-      .site-nav a {
-        color: #fff !important;
-        text-decoration: none;
-        font-weight: 500;
-      }
-      .site-nav a:hover {
-        text-decoration: underline;
-      }
-      .dropdown {
-        position: relative;
-      }
-      .dropdown-menu {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: #111;
-        border: 1px solid #333;
-        min-width: 160px;
-        padding: 0.5rem 0;
-        z-index: 100;
-        border-radius: 4px;
-      }
-      .dropdown:hover .dropdown-menu {
-        display: block;
-      }
-      .dropdown-menu li {
-        display: block;
-        padding: 0.4rem 1rem;
-      }
-      .dropdown-menu a:hover {
-        background: #222;
-      }
-    </style>
   </head>
   <body>
     <div class="container-lg px-3 my-5 markdown-body">
@@ -101,7 +35,7 @@
         <ul>
           <li><a href="/whitewitch/">Home</a></li>
           <li class="dropdown">
-            <a href="#">Content ▾</a>
+            <a href="#">Content</a>
             <ul class="dropdown-menu">
               <li><a href="/whitewitch/about">About</a></li>
               <li><a href="/whitewitch/videos">Videos</a></li>
