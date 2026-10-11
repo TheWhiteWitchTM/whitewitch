@@ -34,10 +34,16 @@
 
       <div class="content-area markdown-body">
         {{ content }}
+
+        {% if page.collection %}
+          <p>
+            <a href="{{ '/' | append: page.collection | append: '/' | relative_url }}">⬅️ Back</a>
+          </p>
+        {% endif %}
       </div>
 
       <div class="side-image right">
-        <img src="{{ '/assets/images/witch.jpg' | relative_url }}" alt="Witch">
+        <img src="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg" alt="Witch">
       </div>
     </main>
 
