@@ -1,5 +1,19 @@
-articles:
-  - title: About
+items:
+  - title: 🏠 Home
+    url: /
+
+  - title: 📝 Blog
+    url: /blog/
+
+  - title: 📜 Articles
+    dropdown:
+      - title: About
+        url: /about/
+      - title: Videos
+        url: /videos/
+
+  - title: 📥 Downloads
+    url: /downloads/
+
+  - title: 🔮 About
     url: /about/
-  - title: Videos
-    url: /videos/
