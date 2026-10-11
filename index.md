@@ -1,3 +1,9 @@
+---
+layout: home
+title: The White Witch™
+description: Politics and social events. Facts & data first. I want you smarter, not recruited.
+---
+
 <p align="center">
   <img src="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg" width="100%" />
 </p>
