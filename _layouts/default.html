@@ -36,14 +36,14 @@
         {{ content }}
 
         {% if page.collection %}
-          <p style="margin: 3rem 0 4rem 0; font-size: 1.15rem;">
+          <p style="margin: 1.5rem 0 5rem 0; font-size: 1.15rem;">
             <a href="{{ '/' | append: page.collection | append: '/' | relative_url }}">⬅️ Back</a>
           </p>
         {% endif %}
       </div>
 
       <div class="side-image right">
-        <img src="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg" alt="Witch">
+        <img src="{{ '/assets/images/witch.jpg' | relative_url }}" alt="Witch">
       </div>
     </main>
 
