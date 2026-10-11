@@ -82,7 +82,21 @@ body,
   flex-wrap: wrap;
 }
 
-.site-nav a {
+.site-nav > ul > li {
+  display: flex;
+  align-items: center;
+  height: 2.2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav > ul > li > a {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  height: 100%;
+  margin: 0;
+  padding: 0;
   color: #ffffff !important;
   text-decoration: none;
   font-weight: 500;
@@ -113,4 +127,38 @@ body,
   border: 1px solid #2a2a2a;
   min-width: 180px;
   padding: 0.4rem 0;
-  z
+  z-index: 100;
+  border-radius: 8px;
+  list-style: none;
+  margin: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li {
+  display: block;
+  padding: 0;
+  height: auto;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.55rem 1.2rem;
+  color: #e8e8e8 !important;
+  white-space: nowrap;
+  height: auto;
+}
+
+.dropdown-menu a:hover {
+  background: #1a1a1a;
+  color: #c9a6ff !important;
+}
+
+/* Subtle witchy flourish on the main title area if present */
+.markdown-body img[width="100%"] {
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
