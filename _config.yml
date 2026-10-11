@@ -3,3 +3,10 @@ description: Politics and social events. Facts & data first. I want you smarter,
 url: "https://thewhitewitchtm.github.io"
 baseurl: "/whitewitch"
 image: https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg
+collections_dir: collections
+
+collections:
+  history:
+    output: true
+  politics:
+    output: true
