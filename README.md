@@ -1,6 +1,11 @@
+---
+layout: default
+title: The White Witch™
+description: Politics and social events. Facts & data first. I want you smarter, not recruited.
+---
 
 <p align="center">
-  <img src="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg" width="100%" />
+  <img src="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg" width="100%" alt="The White Witch banner" />
 </p>
 
 ---
@@ -8,7 +13,7 @@
 <br>
 
 <p align="center">
-  <img src="https://pbs.twimg.com/profile_images/2011039741165043712/OFvsOiEe.jpg" width="150" style="border-radius: 50%; margin-top: -40px; border: 4px solid #000;" />
+  <img src="https://pbs.twimg.com/profile_images/2011039741165043712/OFvsOiEe.jpg" width="150" style="border-radius: 50%; margin-top: -28px; border: 4px solid #000;" alt="The White Witch" />
 </p>
 
 <h1 align="center">🧙‍♀️ The White Witch™✨</h1>
