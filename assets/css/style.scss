@@ -62,14 +62,14 @@ body {
   color: #c9a6ff !important;
 }
 
-/* Dropdown — solid hover */
+/* Dropdown — solid hover with invisible bridge */
 .dropdown {
   position: relative;
 }
 
 .dropdown > a {
   display: inline-block;
-  padding-bottom: 0.6rem;   /* extends hover area downward */
+  padding: 0.5rem 0.4rem 0.8rem 0.4rem;
 }
 
 .dropdown > a::after {
@@ -92,6 +92,17 @@ body {
   list-style: none;
   margin: 0;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* Invisible bridge that fills any gap */
+.dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: transparent;
 }
 
 .dropdown:hover > .dropdown-menu,
@@ -118,76 +129,4 @@ body {
 /* Main content frame (default layout) */
 .page-frame {
   flex: 1 0 auto;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 1.5rem;
-  max-width: 1400px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 1.5rem 1rem 3rem;
-}
-
-.side-image {
-  flex: 0 0 140px;
-  position: sticky;
-  top: 5.5rem;
-}
-
-.side-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
-}
-
-.content-area {
-  flex: 1 1 720px;
-  min-width: 0;
-  max-width: 860px;
-}
-
-/* Home layout content area */
-.home-content {
-  flex: 1 0 auto;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
-  width: 100%;
-}
-
-/* Fixed footer always at bottom of viewport */
-.site-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
-  background: #0a0a0a;
-  border-top: 1px solid #1f1f1f;
-  padding: 0.9rem 1.5rem;
-  text-align: center;
-  font-size: 0.9rem;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4);
-}
-
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-bottom: 0.5rem;
-}
-
-.footer-links a {
-  color: #c9a6ff !important;
-  text-decoration: none;
-}
-
-.footer-links a:hover {
-  color: #e8d5ff !important;
-}
-
-.footer-note {
- 
+  display
