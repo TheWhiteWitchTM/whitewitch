@@ -1,46 +1,62 @@
----
-layout: default
-title: The White Witch™
-description: Politics and social events. Facts & data first. I want you smarter, not recruited.
----
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en-US" }}" prefix="og: http://ogp.me/ns#">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<p align="center">
-  <img src="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg" width="100%" />
-</p>
+    <title>{{ page.title | default: site.title | default: "The White Witch™" }}</title>
+    <meta name="description" content="{{ page.description | default: site.description | default: "Politics and social events. Facts & data first. I want you smarter, not recruited." }}">
 
----
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:title" content="{{ page.title | default: site.title | default: "The White Witch™" }}">
+    <meta property="og:description" content="{{ page.description | default: site.description | default: "Politics and social events. Facts & data first. I want you smarter, not recruited." }}">
+    <meta property="og:image" content="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg">
+    <meta property="og:site_name" content="The White Witch™">
 
-<br>
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@TheWhiteWitchTM">
+    <meta name="twitter:title" content="{{ page.title | default: site.title | default: "The White Witch™" }}">
+    <meta name="twitter:description" content="{{ page.description | default: site.description | default: "Politics and social events. Facts & data first. I want you smarter, not recruited." }}">
+    <meta name="twitter:image" content="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg">
 
-<p align="center">
-  <img src="https://pbs.twimg.com/profile_images/2011039741165043712/OFvsOiEe.jpg" width="150" style="border-radius: 50%; margin-top: -40px; border: 4px solid #000;" />
-</p>
+    {% seo %}
+    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
+    {% include head-custom.html %}
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
 
-<h1 align="center">🧙‍♀️ The White Witch™✨</h1>
+      <!-- Dropdown navigation -->
+      <nav class="site-nav">
+        <ul>
+          <li><a href="/whitewitch/">🏠 Home</a></li>
+          <li class="dropdown">
+            <a href="#">📜 Content</a>
+            <ul class="dropdown-menu">
+              <li><a href="/whitewitch/about">About</a></li>
+              <li><a href="/whitewitch/videos">Videos</a></li>
+              <li><a href="/whitewitch/blog">Blog</a></li>
+            </ul>
+          </li>
+          <li><a href="/whitewitch/downloads">📥 Downloads</a></li>
+          <li><a href="/whitewitch/about">🔮 About</a></li>
+          <li><a href="https://x.com/TheWhiteWitchTM">✖️ X</a></li>
+        </ul>
+      </nav>
 
-<p align="center">
-  <strong>Politics and social events. Facts & data first.</strong><br>
-  I want you smarter, not recruited.<br>
-  No paid posts. No quiet sponsors.<br>
-  Argue with the data, not the caption.
-</p>
+      {{ content }}
 
-<p align="center">
-  <em>Enter at your own risk. Side effects may include thinking for yourself, mild eye-rolling, and an inexplicable urge to check the source.</em>
-</p>
-
-<p align="center">
-  🎥 Resuming YouTube videos in November.<br>
-  Same energy, more receipts, and zero interest in your feelings about the data.
-</p>
-
----
-
-<p align="center">
-  ✉️ <a href="mailto:thewhitewitchtm@google.com">thewhitewitchtm@google.com</a>
-</p>
-
-<p align="center">
-  <a href="https://x.com/TheWhiteWitchTM">✖️ X</a> •
-  <a href="https://github.com/TheWhiteWitchTM">🐙 GitHub</a>
-</p>
+      {% if site.github.private != true and site.github.license %}
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. {% github_edit_link "Improve this page" %}.
+      </div>
+      {% endif %}
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>
