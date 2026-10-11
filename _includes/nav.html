@@ -1,18 +1,20 @@
 <header class="site-header">
   <nav class="site-nav">
     <ul>
-      <li><a href="{{ '/' | relative_url }}">🏠 Home</a></li>
-      <li><a href="{{ '/blog/' | relative_url }}">📝 Blog</a></li>
-      <li class="dropdown">
-        <a href="#">📜 Articles</a>
-        <ul class="dropdown-menu">
-          {% for item in site.data.nav.articles %}
-            <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </li>
-      <li><a href="{{ '/downloads/' | relative_url }}">📥 Downloads</a></li>
-      <li><a href="{{ '/about/' | relative_url }}">🔮 About</a></li>
+      {% for item in site.data.nav.items %}
+        {% if item.dropdown %}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">{{ item.title }}</a>
+            <ul class="dropdown-menu">
+              {% for sub in item.dropdown %}
+                <li><a href="{{ sub.url | relative_url }}">{{ sub.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+        {% else %}
+          <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+        {% endif %}
+      {% endfor %}
     </ul>
   </nav>
 </header>
