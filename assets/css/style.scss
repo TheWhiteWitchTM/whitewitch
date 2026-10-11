@@ -3,82 +3,153 @@
 
 @import "{{ site.theme }}";
 
-body,
-.markdown-body {
+/* === The White Witch™ — Dark Sarcasm Theme === */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background-color: #0a0a0a !important;
   color: #e8e8e8 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji" !important;
+  line-height: 1.6;
+  margin: 0;
 }
 
-.markdown-body a,
-.site-nav a {
-  color: #c9a6ff !important;
-  text-decoration: none !important;
-}
-
-.markdown-body a:hover,
-.site-nav a:hover {
-  color: #e8d5ff !important;
+/* Sticky header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #0a0a0a;
+  border-bottom: 1px solid #1f1f1f;
 }
 
 .site-nav {
-  margin: 0 0 2rem 0 !important;
-  padding-bottom: 0.75rem !important;
-  border-bottom: 1px solid #1f1f1f !important;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
 }
 
 .site-nav > ul {
-  list-style: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  display: flex !important;
-  flex-direction: row !important;
-  gap: 2rem !important;
-  align-items: center !important;
-  flex-wrap: wrap !important;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.site-nav > ul > li {
-  margin: 0 !important;
-  padding: 0 !important;
-  display: flex !important;
-  align-items: center !important;
+.site-nav a {
+  color: #ffffff !important;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
 }
 
-.site-nav > ul > li > a {
-  display: flex !important;
-  align-items: center !important;
-  line-height: 1.2 !important;
-  font-weight: 500 !important;
+.site-nav a:hover {
+  color: #c9a6ff !important;
 }
 
-.dropdown {
-  position: relative !important;
+/* Main content frame */
+.page-frame {
+  flex: 1 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
 }
 
-.dropdown-menu {
-  display: none !important;
-  position: absolute !important;
-  top: 100% !important;
-  left: 0 !important;
-  background: #111 !important;
-  border: 1px solid #2a2a2a !important;
-  min-width: 160px !important;
-  padding: 0.4rem 0 !important;
-  z-index: 100 !important;
-  list-style: none !important;
+.side-image {
+  flex: 0 0 140px;
+  position: sticky;
+  top: 5.5rem;
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block !important;
+.side-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
 
-.dropdown-menu a {
-  display: block !important;
-  padding: 0.5rem 1rem !important;
-  color: #e8e8e8 !important;
+.content-area {
+  flex: 1 1 720px;
+  min-width: 0;
+  max-width: 860px;
 }
-/* Lift the non-dropdown items so they match Home and Content */
-.site-nav > ul > li:not(.dropdown) > a {
-  position: relative;
-  top: -1px;
+
+/* Footer always at bottom */
+.site-footer {
+  flex-shrink: 0;
+  background: #0a0a0a;
+  border-top: 1px solid #1f1f1f;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: #c9a6ff !important;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #e8d5ff !important;
+}
+
+.footer-note {
+  color: #777;
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .page-frame {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+  }
+
+  .side-image {
+    flex: 0 0 auto;
+    width: 120px;
+    position: static;
+    order: 0;
+  }
+
+  .side-image.left { order: 1; }
+  .content-area { order: 2; }
+  .side-image.right { order: 3; }
+}
+
+@media (max-width: 600px) {
+  .site-nav > ul {
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .side-image {
+    width: 100px;
+  }
 }
