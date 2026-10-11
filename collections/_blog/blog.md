@@ -2,7 +2,6 @@
 layout: default
 title: Blog
 description: Essays, rants, and data-backed sarcasm. Eventually.
-permalink: /blog/
 ---
 
 # Blog
