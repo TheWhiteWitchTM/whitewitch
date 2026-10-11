@@ -1,3 +1,4 @@
+
 ---
 ---
 
@@ -16,7 +17,7 @@ body,
 .markdown-body {
   max-width: 900px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
+  padding: 1.5rem 1.5rem 4rem;
 }
 
 .markdown-body h1,
@@ -65,10 +66,10 @@ body,
   font-style: italic;
 }
 
-/* === Navigation === */
+/* === Navigation — kept at the top === */
 .site-nav {
-  margin-bottom: 2.5rem;
-  padding-bottom: 1rem;
+  margin: 0 0 2rem 0;
+  padding: 0 0 0.75rem 0;
   border-bottom: 1px solid #1f1f1f;
 }
 
@@ -85,7 +86,6 @@ body,
 .site-nav > ul > li {
   display: flex;
   align-items: center;
-  height: 2.2rem;
   margin: 0;
   padding: 0;
 }
@@ -93,8 +93,7 @@ body,
 .site-nav > ul > li > a {
   display: flex;
   align-items: center;
-  line-height: 1;
-  height: 100%;
+  line-height: 1.2;
   margin: 0;
   padding: 0;
   color: #ffffff !important;
@@ -121,7 +120,7 @@ body,
 .dropdown-menu {
   display: none;
   position: absolute;
-  top: 120%;
+  top: 100%;
   left: 0;
   background: #111111;
   border: 1px solid #2a2a2a;
@@ -141,7 +140,6 @@ body,
 .dropdown-menu li {
   display: block;
   padding: 0;
-  height: auto;
 }
 
 .dropdown-menu a {
@@ -149,7 +147,6 @@ body,
   padding: 0.55rem 1.2rem;
   color: #e8e8e8 !important;
   white-space: nowrap;
-  height: auto;
 }
 
 .dropdown-menu a:hover {
