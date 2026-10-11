@@ -1,7 +1,10 @@
+
 ---
 ---
 
 @import "{{ site.theme }}";
+
+/* === The White Witch™ — Dark Sarcasm Theme === */
 
 body,
 .markdown-body {
@@ -14,7 +17,7 @@ body,
 .markdown-body {
   max-width: 900px;
   margin: 0 auto;
-  padding: 1.5rem 1.5rem 4rem;
+  padding: 2rem 1.5rem 4rem;
 }
 
 .markdown-body h1,
@@ -30,15 +33,16 @@ body,
   text-shadow: 0 0 12px rgba(180, 160, 220, 0.15);
 }
 
-.markdown-body a,
-.site-nav a {
+.markdown-body a {
   color: #c9a6ff !important;
   text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
 }
 
-.markdown-body a:hover,
-.site-nav a:hover {
+.markdown-body a:hover {
   color: #e8d5ff !important;
+  border-bottom-color: #c9a6ff;
 }
 
 .markdown-body hr {
@@ -48,42 +52,47 @@ body,
   margin: 2rem 0;
 }
 
-/* Navigation — horizontal at the top */
+.markdown-body code,
+.markdown-body pre {
+  background-color: #141414 !important;
+  color: #d4d4d4 !important;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+}
+
+.markdown-body blockquote {
+  border-left: 3px solid #6b4c8a;
+  color: #bbbbbb;
+  font-style: italic;
+}
+
+/* === Navigation === */
 .site-nav {
-  margin: 0 0 2rem 0;
-  padding-bottom: 0.75rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid #1f1f1f;
 }
 
 .site-nav > ul {
   list-style: none;
-  margin: 0;
   padding: 0;
+  margin: 0;
   display: flex;
-  flex-direction: row;
   gap: 2rem;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.site-nav > ul > li {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
-
-.site-nav > ul > li > a {
-  display: flex;
-  align-items: center;
-  line-height: 1.2;
+.site-nav a {
+  color: #ffffff !important;
+  text-decoration: none;
   font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
 }
 
-/* Only nudge the Home item down so it lines up with the others */
-.site-nav > ul > li:first-child > a {
-  position: relative;
-  top: 1px;
+.site-nav a:hover {
+  color: #c9a6ff !important;
 }
 
 .dropdown {
@@ -99,36 +108,7 @@ body,
 .dropdown-menu {
   display: none;
   position: absolute;
-  top: 100%;
+  top: 120%;
   left: 0;
   background: #111111;
-  border: 1px solid #2a2a2a;
-  min-width: 180px;
-  padding: 0.4rem 0;
-  z-index: 100;
-  border-radius: 8px;
-  list-style: none;
-  margin: 0;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-
-.dropdown-menu a {
-  display: block;
-  padding: 0.55rem 1.2rem;
-  color: #e8e8e8 !important;
-  white-space: nowrap;
-}
-
-.dropdown-menu a:hover {
-  background: #1a1a1a;
-  color: #c9a6ff !important;
-}
-
-.markdown-body img[width="100%"] {
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
+  border: 1px solid #2a2
