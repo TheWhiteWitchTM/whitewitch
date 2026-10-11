@@ -27,24 +27,7 @@
     {% include head-custom.html %}
   </head>
   <body>
-    <!-- Sticky top navigation -->
-    <header class="site-header">
-      <nav class="site-nav">
-        <ul>
-          <li><a href="{{ '/' | relative_url }}">🏠 Home</a></li>
-          <li><a href="{{ '/blog/' | relative_url }}">📝 Blog</a></li>
-          <li class="dropdown">
-            <a href="#">📜 Articles</a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ '/about/' | relative_url }}">About</a></li>
-              <li><a href="{{ '/videos/' | relative_url }}">Videos</a></li>
-            </ul>
-          </li>
-          <li><a href="{{ '/downloads/' | relative_url }}">📥 Downloads</a></li>
-          <li><a href="{{ '/about/' | relative_url }}">🔮 About</a></li>
-        </ul>
-      </nav>
-    </header>
+    {% include nav.html %}
 
     <main class="page-frame">
       <div class="side-image left">
@@ -60,21 +43,7 @@
       </div>
     </main>
 
-    <!-- Always-visible footer -->
-    <footer class="site-footer">
-      <div class="footer-links">
-        <a href="mailto:thewhitewitchtm@google.com">✉️ thewhitewitchtm@google.com</a>
-        <span>•</span>
-        <a href="https://x.com/TheWhiteWitchTM" target="_blank" rel="noopener">✖️ X</a>
-        <span>•</span>
-        <a href="https://github.com/TheWhiteWitchTM" target="_blank" rel="noopener">🐙 GitHub</a>
-      </div>
-      {% if site.github.private != true and site.github.license %}
-      <div class="footer-note">
-        This site is open source. {% github_edit_link "Improve this page" %}.
-      </div>
-      {% endif %}
-    </footer>
+    {% include footer.html %}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
     <script>anchors.add();</script>
