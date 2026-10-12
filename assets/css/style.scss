@@ -7,7 +7,7 @@
 
 html, body {
   height: 100%;
-  overflow-x: hidden; /* kills the unwanted horizontal scrollbar */
+  overflow-x: hidden;
 }
 
 body {
@@ -132,6 +132,14 @@ body {
   flex: 0 0 140px;
   position: sticky;
   top: 5.5rem;
+  align-self: flex-start;
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+.side-image.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .side-image img {
