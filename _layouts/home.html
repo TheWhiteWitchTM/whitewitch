@@ -68,18 +68,17 @@
       const sides = document.querySelectorAll('.side-image');
 
       if (banner && sides.length) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            sides.forEach(side => {
-              side.classList.toggle('hidden', entry.isIntersecting);
-            });
+        const update = () => {
+          const rect = banner.getBoundingClientRect();
+          const scrolledPast = rect.bottom <= 0;
+          sides.forEach(side => {
+            side.classList.toggle('hidden', !scrolledPast);
           });
-        }, { 
-          threshold: 0,
-          rootMargin: "0px 0px -64px 0px"
-        });
+        };
 
-        observer.observe(banner);
+        update();
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
       }
     </script>
   </body>
