@@ -2,6 +2,10 @@ const output = document.getElementById('output');
 const form = document.getElementById('command-form');
 const input = document.getElementById('command');
 
+window.onerror = function(msg) {
+  if (output) output.value += '\nERROR: ' + msg + '\n';
+};
+
 let audioCtx;
 function beep(freq = 440, duration = 0.1, type = 'square') {
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -40,16 +44,23 @@ function resetGame() {
   timeLeft = 40;
   docked = false;
   Object.keys(systems).forEach(k => systems[k] = 0);
+
   galaxy = Array.from({ length: 8 }, () =>
     Array.from({ length: 8 }, () => ({ raiders: 0, outpost: false, stars: 1 + Math.floor(Math.random() * 8) }))
   );
   initGalaxy();
+
   clear();
   print('🚀 Galaxy Hunt — extended');
-  print('Destroy all raiders. Type help for commands.\n');
+  print('Destroy all raiders. Type help for commands.');
+  print('');
   status();
   print('');
-  shortScan();
+  try {
+    shortScan();
+  } catch (e) {
+    print('(short scan failed: ' + e.message + ')');
+  }
   input.disabled = false;
   input.focus();
 }
@@ -207,4 +218,84 @@ function raiderReturnFire() {
 function setShields(pct) {
   if (systems.shields > 0) { print('Shields damaged'); return; }
   pct = Math.max(0, Math.min(100, pct));
- 
+  const want = Math.floor(energy * pct / 100);
+  energy -= want;
+  shields = want;
+  print(`🛡️ Shields set to ${pct}% (${shields})`);
+  beep(280, 0.1);
+}
+
+function dock() {
+  const q = galaxy[quadY - 1][quadX - 1];
+  if (!q.outpost) { print('No outpost here'); return; }
+  docked = true;
+  energy = 3000;
+  missiles = 10;
+  shields = 0;
+  Object.keys(systems).forEach(k => systems[k] = 0);
+  print('🛡️ Docked at outpost. Energy, missiles and systems restored.');
+  beep(500, 0.2);
+}
+
+function computer() {
+  if (systems.computer > 0) { print('Computer damaged'); return; }
+  print('\n🖥️ Computer');
+  print(`Raiders remaining: ${totalRaiders()}`);
+  print(`Outposts: ${galaxy.flat().filter(q => q.outpost).length}`);
+  print(`Current date: ${date.toFixed(1)}`);
+  beep(350, 0.08);
+}
+
+function help() {
+  print(`\nCommands:`);
+  print(`  status`);
+  print(`  lscan          long-range scan`);
+  print(`  sscan          short-range scan`);
+  print(`  nav <1-8> <warp>`);
+  print(`  beam <energy>`);
+  print(`  missile`);
+  print(`  shields <0-100>`);
+  print(`  dock`);
+  print(`  computer`);
+  print(`  help`);
+  print(`  restart`);
+  print(`  quit`);
+}
+
+function gameOver(win) {
+  print(win ? '\n🏆 All raiders destroyed. Victory!' : '\n💀 Mission failed.');
+  print('Type restart to play again.');
+  beep(win ? 700 : 80, 0.5, win ? 'square' : 'sawtooth');
+  input.disabled = true;
+}
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const raw = input.value.trim().toLowerCase();
+  input.value = '';
+  if (!raw) return;
+  print(`> ${raw}`);
+  const p = raw.split(/\s+/);
+  const v = p[0];
+
+  if (v === 'status') status();
+  else if (v === 'lscan') longScan();
+  else if (v === 'sscan') shortScan();
+  else if (v === 'nav' && p.length >= 3) navigate(+p[1], +p[2]);
+  else if (v === 'beam' && p[1]) fireBeam(+p[1]);
+  else if (v === 'missile') fireMissile();
+  else if (v === 'shields' && p[1]) setShields(+p[1]);
+  else if (v === 'dock') dock();
+  else if (v === 'computer') computer();
+  else if (v === 'help') help();
+  else if (v === 'restart') resetGame();
+  else if (v === 'quit') gameOver(false);
+  else print('Unknown command. Type help.');
+
+  Object.keys(systems).forEach(k => { if (systems[k] > 0 && Math.random() < 0.15) systems[k]--; });
+
+  if (totalRaiders() <= 0) gameOver(true);
+  else if (timeLeft <= 0 || energy <= 0) gameOver(false);
+});
+
+resetGame();
