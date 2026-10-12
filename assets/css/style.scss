@@ -141,6 +141,10 @@ body {
   z-index: 10;
 }
 
+.side-image.left {
+  margin-top: -24px; /* lifts Mira so her hand isn't below the text */
+}
+
 .side-image.hidden {
   opacity: 0;
   pointer-events: none;
@@ -311,7 +315,7 @@ img[alt="The White Witch banner"] {
     position: static;
   }
 
-  .side-image.left { order: 1; }
+  .side-image.left { order: 1; margin-top: 0; }
   .content-area { order: 2; }
   .side-image.right { order: 3; }
 }
