@@ -154,3 +154,80 @@ img[alt="The White Witch banner"] {
     flex: 0 1 640px !important;
   }
 }
+/* Expandable post items (reusable) */
+.intro {
+  margin: 2rem 0 3rem;
+}
+
+.post-item {
+  margin: 2rem 0;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #222;
+}
+
+.post-image,
+.post-media {
+  max-width: 100%;
+  margin: 0.75rem 0;
+  border-radius: 6px;
+}
+
+.post-media iframe {
+  border-radius: 6px;
+  max-width: 100%;
+}
+
+.toggle-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 0.4rem;
+  color: #c9a6ff;
+}
+
+.toggle-title:hover .title-text {
+  color: #e8d5ff;
+  text-decoration: underline;
+}
+
+.toggle-emoji {
+  font-size: 0.9em;
+}
+
+.excerpt {
+  margin-bottom: 0.6rem;
+}
+
+.excerpt.hidden {
+  display: none;
+}
+
+.button-row {
+  display: flex;
+  gap: 0.75rem;
+  margin: 0.8rem 0 0.4rem;
+  flex-wrap: wrap;
+}
+
+.expand-btn,
+.discussion-btn {
+  background: transparent;
+  color: #c9a6ff;
+  border: 1px solid #c9a6ff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.expand-btn:hover,
+.discussion-btn:hover {
+  background: #c9a6ff;
+  color: #0a0a0a;
+}
+
+.full-content {
+  margin-top: 0.6rem;
+}
