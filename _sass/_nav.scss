@@ -89,3 +89,11 @@
   background: #1a1a1a;
   color: #c9a6ff !important;
 }
+
+.dropdown-separator {
+  height: 1px;
+  margin: 0.4rem 0.8rem;
+  background: #2a2a2a;
+  list-style: none;
+  pointer-events: none;
+}
