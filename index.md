@@ -66,6 +66,8 @@ description: Politics and social events. Facts & data first. I want you smarter,
 {% endfor %}
 </div>
 
+{% include discussion.html %}
+
 <style>
 .intro { margin: 2rem 0 3rem; }
 .featured-item { margin: 2rem 0; padding-bottom: 1.5rem; border-bottom: 1px solid #222; }
@@ -90,6 +92,17 @@ description: Politics and social events. Facts & data first. I want you smarter,
 }
 .excerpt .expand-btn:hover { text-decoration: underline; }
 .full-content { margin-top: 0.6rem; }
+.discussion-btn {
+  background: transparent;
+  color: #c9a6ff;
+  border: 1px solid #c9a6ff;
+  padding: 0.35rem 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
+.discussion-btn:hover { background: #c9a6ff; color: #0a0a0a; }
 </style>
 
 <script>
