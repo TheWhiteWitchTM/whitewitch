@@ -28,9 +28,19 @@
   <body>
     {% include nav.html %}
 
-    <main class="home-content markdown-body">
-      {{ content }}
-    </main>
+    <div class="page-frame">
+      <div class="side-image left">
+        <img src="{{ '/assets/images/mira.jpg' | relative_url }}" alt="Mira">
+      </div>
+
+      <main class="home-content markdown-body">
+        {{ content }}
+      </main>
+
+      <div class="side-image right">
+        <img src="{{ '/assets/images/witch.jpg' | relative_url }}" alt="Witch">
+      </div>
+    </div>
 
     {% include footer.html %}
 
