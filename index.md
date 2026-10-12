@@ -8,6 +8,8 @@ description: Politics and social events. Facts & data first. I want you smarter,
   <img src="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg" width="100%" alt="The White Witch banner" />
 </p>
 
+<div class="home-text">
+
 ---
 
 <h1 align="center">🧙‍♀️ The White Witch™✨</h1>
@@ -27,3 +29,5 @@ description: Politics and social events. Facts & data first. I want you smarter,
   🎥 Resuming YouTube videos in November.<br>
   Same energy, more receipts, and zero interest in your feelings about the data.
 </p>
+
+</div>
