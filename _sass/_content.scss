@@ -154,7 +154,8 @@ img[alt="The White Witch banner"] {
     flex: 0 1 640px !important;
   }
 }
-/* Expandable post items (reusable) */
+
+/* Expandable post items */
 .intro {
   margin: 2rem 0 3rem;
 }
@@ -178,17 +179,21 @@ img[alt="The White Witch banner"] {
 }
 
 .toggle-title {
-  display: flex;
+  display: flex !important;
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
   user-select: none;
   margin-bottom: 0.4rem;
-  color: #c9a6ff;
+}
+
+.toggle-title,
+.toggle-title .title-text {
+  color: #c9a6ff !important;
 }
 
 .toggle-title:hover .title-text {
-  color: #e8d5ff;
+  color: #e8d5ff !important;
   text-decoration: underline;
 }
 
@@ -205,10 +210,11 @@ img[alt="The White Witch banner"] {
 }
 
 .button-row {
-  display: flex;
+  display: flex !important;
+  flex-direction: row;
   gap: 0.75rem;
   margin: 0.8rem 0 0.4rem;
-  flex-wrap: wrap;
+  align-items: center;
 }
 
 .expand-btn,
@@ -220,6 +226,7 @@ img[alt="The White Witch banner"] {
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.9rem;
+  display: inline-block;
 }
 
 .expand-btn:hover,
