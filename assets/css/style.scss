@@ -130,19 +130,21 @@ body {
 
 .side-image {
   flex: 0 0 140px;
-  position: sticky;
+  position: fixed;
   top: 5.5rem;
-  align-self: flex-start;
-  height: 180px;
-  display: flex;
-  align-items: flex-start;
+  width: 140px;
   opacity: 1;
   transition: opacity 0.35s ease;
   z-index: 10;
 }
 
 .side-image.left {
-  margin-top: -24px; /* lifts Mira so her hand isn't below the text */
+  left: max(1rem, calc(50% - 700px));
+  margin-top: -24px;
+}
+
+.side-image.right {
+  right: max(1rem, calc(50% - 700px));
 }
 
 .side-image.hidden {
@@ -309,10 +311,9 @@ img[alt="The White Witch banner"] {
   }
 
   .side-image {
-    flex: 0 0 auto;
-    width: 120px;
-    height: auto;
     position: static;
+    width: 120px;
+    margin: 0;
   }
 
   .side-image.left { order: 1; margin-top: 0; }
