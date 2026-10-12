@@ -74,7 +74,10 @@
               side.classList.toggle('hidden', entry.isIntersecting);
             });
           });
-        }, { threshold: 0.1 });
+        }, { 
+          threshold: 0,
+          rootMargin: "-20% 0px 0px 0px"
+        });
 
         observer.observe(banner);
       }
