@@ -302,12 +302,32 @@ img[alt="The White Witch banner"] {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
+/* Keep content clear of fixed side images on all pages */
+@media (min-width: 901px) {
+  .page-frame {
+    padding-left: 170px !important;
+    padding-right: 170px !important;
+  }
+
+  .page-frame .content-area,
+  .page-frame .home-content,
+  .page-frame > .content-area {
+    max-width: 640px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+    flex: 0 1 640px !important;
+  }
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .page-frame {
     flex-direction: column;
     align-items: center;
     padding-top: 1rem;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
 
   .side-image {
