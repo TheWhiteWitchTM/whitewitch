@@ -27,6 +27,10 @@ items:
         url: /tools/emoji-builder/
       - title: "🏳️ Flags Wizard"
         url: /tools/flags-builder/
+      - title: "🔮 Favicon Wizard"
+        url: /tools/favicon-wizard/
+      - title: "🖼️ Transparency Wizard"
+        url: /tools/transparency-wizard/
 
   - title: "📥 Downloads"
     url: /downloads/
