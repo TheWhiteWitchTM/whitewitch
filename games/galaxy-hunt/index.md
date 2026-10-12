@@ -1,7 +1,20 @@
 ---
 layout: default
 title: Galaxy Hunt
+description: A retro terminal space combat game. Destroy the raiders before time runs out.
 permalink: /games/galaxy-hunt/
+image: /games/galaxy-hunt/banner.jpg
+---
+
+That points X (and the SEO tags) at the banner inside the game folder.
+
+Fix banner size and text alignment
+
+What is the exact file path for the banner?
+
+Give me the full image prompt
+
+
 ---
 
 <div id="game">
