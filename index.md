@@ -62,9 +62,8 @@ description: Politics and social events. Facts & data first. I want you smarter,
 
     <div class="button-row">
       <button class="expand-btn" type="button" title="Expand / collapse">▼ Show more</button>
+      {% include discussion.html %}
     </div>
-
-    {% include discussion.html %}
   </article>
 {% else %}
   <p>No featured posts yet.</p>
