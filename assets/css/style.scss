@@ -304,3 +304,16 @@ body {
     padding-right: 1rem;
   }
 }
+/* Keep the homepage banner full / original width */
+.home-content img[width="100%"],
+.markdown-body img[width="100%"],
+img[alt="The White Witch banner"] {
+  max-width: 1100px;          /* or 100% / 100vw if you want it edge-to-edge */
+  width: 100%;
+  display: block;
+  margin: 0 auto 1.5rem;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
