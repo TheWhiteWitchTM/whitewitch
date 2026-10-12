@@ -5,11 +5,11 @@ const W = 78, H = 20;
 let map, seen, player, monsters, items, level, messages, gameOver;
 let audioCtx;
 
-function beep(f = 440, d = 0.08, type = 'square') {
+function beep(f = 440, d = 0.09, type = 'square', vol = 0.12) {
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const o = audioCtx.createOscillator(), g = audioCtx.createGain();
   o.type = type; o.frequency.value = f;
-  g.gain.setValueAtTime(0.06, audioCtx.currentTime);
+  g.gain.setValueAtTime(vol, audioCtx.currentTime);
   g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + d);
   o.connect(g); g.connect(audioCtx.destination);
   o.start(); o.stop(audioCtx.currentTime + d);
@@ -65,7 +65,7 @@ function newLevel() {
   }
   if (level === 10) items.push({x:player.x+1, y:player.y, ch:'💎', name:'Amulet of Yendor', type:'amulet'});
   message(`Welcome to level ${level}.`);
-  beep(300, 0.1);
+  beep(340, 0.12, 'square', 0.15);
   updateSeen();
 }
 
@@ -113,14 +113,17 @@ function move(dx, dy) {
   if (mon) { attack(mon); }
   else if (map[ny][nx] === '·' || map[ny][nx] === '🔽') {
     player.x = nx; player.y = ny;
+    beep(220, 0.04, 'square', 0.08);
     const it = items.find(i => i.x===nx && i.y===ny);
     if (it) {
-      if (it.type==='gold') { player.gold += it.amount; message(`You pick up ${it.amount} gold.`); beep(600); }
-      else if (it.type==='amulet') { message('You found the Amulet of Yendor! You win!'); gameOver=true; beep(800,0.5); }
-      else { player.inv.push(it); message(`You pick up a ${it.name}.`); beep(500); }
+      if (it.type==='gold') { player.gold += it.amount; message(`You pick up ${it.amount} gold.`); beep(640, 0.12, 'square', 0.15); }
+      else if (it.type==='amulet') { message('You found the Amulet of Yendor! You win!'); gameOver=true; beep(880, 0.6, 'square', 0.2); }
+      else { player.inv.push(it); message(`You pick up a ${it.name}.`); beep(520, 0.1, 'square', 0.14); }
       items = items.filter(i => i !== it);
     }
     if (map[ny][nx]==='🔽' && level<10) { level++; newLevel(); return; }
+  } else {
+    beep(100, 0.05, 'square', 0.06);
   }
   monstersAct();
   updateSeen();
@@ -131,13 +134,13 @@ function attack(mon) {
   const dmg = 1 + Math.floor(Math.random()* (player.str/4 + (player.weapon?player.weapon.bonus:0)));
   mon.hp -= dmg;
   message(`You hit the ${mon.name} for ${dmg}.`);
-  beep(420);
+  beep(480, 0.1, 'square', 0.16);
   if (mon.hp <= 0) {
     message(`You defeat the ${mon.name}!`);
     player.xp += mon.xp;
     monsters = monsters.filter(m => m !== mon);
-    beep(650);
-    if (player.xp >= player.level*10) { player.level++; player.maxHp+=3; player.hp=player.maxHp; player.str++; message('You feel stronger!'); beep(720); }
+    beep(700, 0.15, 'square', 0.18);
+    if (player.xp >= player.level*10) { player.level++; player.maxHp+=3; player.hp=player.maxHp; player.str++; message('You feel stronger!'); beep(760, 0.2, 'square', 0.2); }
   }
 }
 
@@ -148,8 +151,8 @@ function monstersAct() {
       const dmg = 1 + Math.floor(Math.random()*m.dmg);
       player.hp -= dmg;
       message(`The ${m.name} hits you for ${dmg}.`);
-      beep(160,0.12,'sawtooth');
-      if (player.hp <= 0) { message('You die...'); gameOver=true; beep(70,0.6,'sawtooth'); }
+      beep(140, 0.14, 'sawtooth', 0.15);
+      if (player.hp <= 0) { message('You die...'); gameOver=true; beep(60, 0.7, 'sawtooth', 0.2); }
     } else if (Math.random()<0.6) {
       const nx = m.x+dx, ny = m.y+dy;
       if (nx>=0&&nx<W&&ny>=0&&ny<H && map[ny][nx]==='·' && !monsters.some(o=>o.x===nx&&o.y===ny) && !(nx===player.x&&ny===player.y)) {
@@ -184,6 +187,7 @@ function draw() {
 function showInv() {
   if (!player.inv.length) { message('You are empty-handed.'); }
   else message('Inventory: ' + player.inv.map((it,i)=>`${i}:${it.ch}${it.name}`).join(', '));
+  beep(300, 0.06);
   draw();
 }
 
@@ -198,7 +202,7 @@ document.addEventListener('keydown', e => {
   else if (k==='i') showInv();
   else if (k==='q') {
     const p = player.inv.find(i=>i.type==='potion');
-    if (p) { player.hp = Math.min(player.maxHp, player.hp+8); player.inv=player.inv.filter(i=>i!==p); message('You feel better.'); beep(560); }
+    if (p) { player.hp = Math.min(player.maxHp, player.hp+8); player.inv=player.inv.filter(i=>i!==p); message('You feel better.'); beep(580, 0.15, 'square', 0.16); }
     else message('No potions.');
     draw();
   }
