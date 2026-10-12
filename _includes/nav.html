@@ -11,7 +11,18 @@
                 {% if sub.separator %}
                   <li class="dropdown-separator"></li>
                 {% else %}
-                  <li><a href="{{ sub.url | relative_url }}">{{ sub.title }}</a></li>
+                  {% assign count = 0 %}
+                  {% if sub.url contains '/politics/' %}{% assign count = site.politics.size %}{% endif %}
+                  {% if sub.url contains '/history/' %}{% assign count = site.history.size %}{% endif %}
+                  {% if sub.url contains '/tech/' %}{% assign count = site.tech.size %}{% endif %}
+                  {% if sub.url contains '/business/' %}{% assign count = site.business.size %}{% endif %}
+                  {% if sub.url contains '/religion/' %}{% assign count = site.religion.size %}{% endif %}
+                  {% if sub.url contains '/jokes/' %}{% assign count = site.jokes.size %}{% endif %}
+                  <li>
+                    <a href="{{ sub.url | relative_url }}">
+                      {{ sub.title }}{% if count > 0 %} ({{ count }}){% endif %}
+                    </a>
+                  </li>
                 {% endif %}
               {% endfor %}
             </ul>
