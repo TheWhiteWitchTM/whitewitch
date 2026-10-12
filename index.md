@@ -26,7 +26,7 @@ description: Politics and social events. Facts & data first. I want you smarter,
   </p>
 </div>
 
-## Featured
+## 🚨 Featured
 
 <div class="featured-list">
 {% assign featured = "" | split: "" %}
@@ -46,6 +46,7 @@ description: Politics and social events. Facts & data first. I want you smarter,
 
     <div class="excerpt">
       {{ post.content | strip_html | truncate: 300 }}
+      <button class="expand-btn" type="button">Show more</button>
     </div>
 
     {% if post.video %}
@@ -57,11 +58,7 @@ description: Politics and social events. Facts & data first. I want you smarter,
       <img src="{{ post.image | relative_url }}" alt="" class="featured-image" loading="lazy">
     {% endif %}
 
-    <button class="expand-btn" type="button">Show more</button>
-
-    <div class="full-content" hidden>
-      <button class="close-btn" type="button" aria-label="Close">×</button>
-    </div>
+    <div class="full-content" hidden></div>
   </article>
 {% else %}
   <p>No featured posts yet.</p>
@@ -76,7 +73,6 @@ description: Politics and social events. Facts & data first. I want you smarter,
   margin: 2rem 0;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid #222;
-  position: relative;
 }
 .featured-image,
 .featured-media {
@@ -88,33 +84,21 @@ description: Politics and social events. Facts & data first. I want you smarter,
   border-radius: 6px;
   max-width: 100%;
 }
-.expand-btn,
-.close-btn {
-  background: transparent;
-  color: #c9a6ff;
-  border: 1px solid #c9a6ff;
-  padding: 0.35rem 0.9rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-.close-btn {
-  position: absolute;
-  top: 0.4rem;
-  right: 0.4rem;
-  font-size: 1.5rem;
-  line-height: 1;
-  padding: 0.15rem 0.45rem;
+.excerpt .expand-btn {
+  display: inline;
+  margin-left: 0.4rem;
+  background: none;
   border: none;
+  color: #c9a6ff;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
 }
-.expand-btn:hover,
-.close-btn:hover {
-  background: #c9a6ff;
-  color: #0a0a0a;
+.excerpt .expand-btn:hover {
+  text-decoration: underline;
 }
 .full-content {
-  margin-top: 1rem;
-  position: relative;
+  margin-top: 0.6rem;
 }
 </style>
 
@@ -122,13 +106,7 @@ description: Politics and social events. Facts & data first. I want you smarter,
 document.querySelectorAll('.featured-item').forEach(item => {
   const btn = item.querySelector('.expand-btn');
   const full = item.querySelector('.full-content');
-  const closeBtn = item.querySelector('.close-btn');
   const url = item.dataset.url;
-
-  const collapse = () => {
-    full.setAttribute('hidden', '');
-    btn.textContent = 'Show more';
-  };
 
   btn.addEventListener('click', async () => {
     if (full.hasAttribute('hidden')) {
@@ -138,20 +116,11 @@ document.querySelectorAll('.featured-item').forEach(item => {
           const res = await fetch(url);
           const html = await res.text();
           const doc = new DOMParser().parseFromString(html, 'text/html');
-          const content = doc.querySelector('.content-area') || doc.querySelector('main') || doc.body;
-          full.insertAdjacentHTML('beforeend', content.innerHTML);
+          const content = doc.querySelector('.content-area') || doc.querySelector('main');
+          // Remove back button if it exists
+          const back = content.querySelector('a[href*="blog"], a[href*="politics"]');
+          if (back) back.closest('p')?.remove() || back.remove();
+          full.innerHTML = content.innerHTML;
           full.dataset.loaded = 'true';
         } catch (e) {
-          full.insertAdjacentHTML('beforeend', '<p>Could not load post.</p>');
-        }
-      }
-      full.removeAttribute('hidden');
-      btn.textContent = 'Show less';
-    } else {
-      collapse();
-    }
-  });
-
-  closeBtn.addEventListener('click', collapse);
-});
-</script>
+          full.innerHTML
