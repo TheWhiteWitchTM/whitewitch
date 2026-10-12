@@ -16,6 +16,8 @@ items:
         url: /games/galaxy-hunt/
       - title: "🏓 Pong"
         url: /games/pong/
+      - title: "🗡️ Rogue"
+        url: /games/rogue/
       - title: "🐍 Snake"
         url: /games/snake/
 
