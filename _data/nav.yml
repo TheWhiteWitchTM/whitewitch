@@ -9,12 +9,6 @@ items:
     dropdown:
       - title: "🤮 Politics"
         url: /politics/
-      - title: "📊 Data"
-        url: /data/
-      - title: "📜 History"
-        url: /history/
-      - title: "😂 Jokes"
-        url: /jokes/
 
   - title: "🕹️ Play"
     dropdown:
