@@ -1,0 +1,33 @@
+{
+  "items": [
+    { "title": "🏠 Home", "url": "/" },
+    { "title": "📝 Blog", "url": "/blog/" },
+    {
+      "title": "📜 Articles",
+      "dropdown": [
+        { "title": "🤮 Politics", "url": "/politics/" }
+      ]
+    },
+    {
+      "title": "🕹️ Play",
+      "dropdown": [
+        { "title": "🚀 Galaxy Hunt", "url": "/games/galaxy-hunt/" },
+        { "title": "🏓 Pong", "url": "/games/pong/" },
+        { "title": "🗡️ Rogue", "url": "/games/rogue/" },
+        { "title": "🐍 Snake", "url": "/games/snake/" }
+      ]
+    },
+    {
+      "title": "🛠️ Tools",
+      "dropdown": [
+        { "title": "🧙‍♀️ Emoji Wizard", "url": "/tools/emoji-builder/" },
+        { "title": "🏳️ Flags Wizard", "url": "/tools/flags-builder/" },
+        { "separator": true },
+        { "title": "🔮 Favicon Wizard", "url": "/tools/favicon-wizard/" },
+        { "title": "🖼️ Transparency Wizard", "url": "/tools/transparency-wizard/" }
+      ]
+    },
+    { "title": "📥 Downloads", "url": "/downloads/" },
+    { "title": "🔮 About", "url": "/about/" }
+  ]
+}
