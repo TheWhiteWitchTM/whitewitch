@@ -2,6 +2,21 @@ const output = document.getElementById('output');
 const form = document.getElementById('command-form');
 const input = document.getElementById('command');
 
+let audioCtx;
+function beep(freq = 440, duration = 0.1, type = 'square') {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = type;
+  osc.frequency.value = freq;
+  gain.gain.setValueAtTime(0.07, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start();
+  osc.stop(audioCtx.currentTime + duration);
+}
+
 function print(text) {
   output.value += text + '\n';
   output.scrollTop = output.scrollHeight;
@@ -9,24 +24,35 @@ function print(text) {
 
 function clear() { output.value = ''; }
 
-// Systems that can be damaged
 const systems = {
   warp: 0, sensors: 0, beams: 0, missiles: 0, shields: 0, computer: 0
 };
 
-let energy = 3000;
-let missiles = 10;
-let shields = 0;
-let quadX = 4, quadY = 4;
-let secX = 4, secY = 4;
-let date = 3500;
-let timeLeft = 40;
-let docked = false;
+let energy, missiles, shields, quadX, quadY, secX, secY, date, timeLeft, docked, galaxy;
 
-// galaxy[y][x] = { raiders: n, outpost: bool, stars: n }
-const galaxy = Array.from({ length: 8 }, () =>
-  Array.from({ length: 8 }, () => ({ raiders: 0, outpost: false, stars: 1 + Math.floor(Math.random() * 8) }))
-);
+function resetGame() {
+  energy = 3000;
+  missiles = 10;
+  shields = 0;
+  quadX = 4; quadY = 4;
+  secX = 4; secY = 4;
+  date = 3500;
+  timeLeft = 40;
+  docked = false;
+  Object.keys(systems).forEach(k => systems[k] = 0);
+  galaxy = Array.from({ length: 8 }, () =>
+    Array.from({ length: 8 }, () => ({ raiders: 0, outpost: false, stars: 1 + Math.floor(Math.random() * 8) }))
+  );
+  initGalaxy();
+  clear();
+  print('🚀 Galaxy Hunt — extended');
+  print('Destroy all raiders. Type help for commands.\n');
+  status();
+  print('');
+  shortScan();
+  input.disabled = false;
+  input.focus();
+}
 
 function initGalaxy() {
   let raidersLeft = 12;
@@ -73,6 +99,7 @@ function longScan() {
     }
     print(line);
   }
+  beep(300, 0.08);
 }
 
 function shortScan() {
@@ -81,7 +108,6 @@ function shortScan() {
   print(`\n🔍 Short-range scan of quadrant ${quadX},${quadY}`);
   print(`Raiders: ${q.raiders}  Outpost: ${q.outpost ? 'yes' : 'no'}  Stars: ${q.stars}`);
   print(`You are in sector ${secX},${secY}`);
-  // simple 8x8 visual
   for (let y = 1; y <= 8; y++) {
     let line = '';
     for (let x = 1; x <= 8; x++) {
@@ -93,6 +119,7 @@ function shortScan() {
     }
     print(line);
   }
+  beep(320, 0.08);
 }
 
 function navigate(course, warp) {
@@ -105,7 +132,6 @@ function navigate(course, warp) {
   const rad = (course - 1) * Math.PI / 4;
   secX += Math.round(Math.cos(rad) * warp * 2);
   secY += Math.round(Math.sin(rad) * warp * 2);
-  // quadrant wrap
   while (secX < 1) { secX += 8; quadX = Math.max(1, quadX - 1); }
   while (secX > 8) { secX -= 8; quadX = Math.min(8, quadX + 1); }
   while (secY < 1) { secY += 8; quadY = Math.max(1, quadY - 1); }
@@ -114,10 +140,10 @@ function navigate(course, warp) {
   timeLeft -= 1;
   docked = false;
   print(`Course ${course}, warp ${warp}… arrived at ${quadX},${quadY} / ${secX},${secY}`);
+  beep(180, 0.15);
   const q = galaxy[quadY - 1][quadX - 1];
   if (q.raiders > 0) print(`👾 ${q.raiders} raider(s) in this quadrant!`);
   if (q.outpost) print('🛡️ Outpost in this quadrant. Dock to resupply.');
-  // random damage chance
   if (Math.random() < 0.08) damageRandom();
 }
 
@@ -126,6 +152,7 @@ function damageRandom() {
   const sys = keys[Math.floor(Math.random() * keys.length)];
   systems[sys] += 1 + Math.floor(Math.random() * 3);
   print(`⚠️ ${sys} damaged!`);
+  beep(120, 0.2, 'sawtooth');
 }
 
 function fireBeam(amount) {
@@ -134,9 +161,11 @@ function fireBeam(amount) {
   energy -= amount;
   const q = galaxy[quadY - 1][quadX - 1];
   print(`💥 Beams (${amount})`);
+  beep(600, 0.1);
   if (q.raiders > 0 && Math.random() > 0.35) {
     q.raiders--;
     print('👾 Raider destroyed!');
+    beep(800, 0.15);
     if (q.raiders === 0) print('Quadrant clear.');
   } else print('Miss or no effect.');
   raiderReturnFire();
@@ -148,9 +177,11 @@ function fireMissile() {
   missiles--;
   const q = galaxy[quadY - 1][quadX - 1];
   print('🚀 Missile away');
+  beep(400, 0.12);
   if (q.raiders > 0 && Math.random() > 0.25) {
     q.raiders--;
     print('💥 Hit! Raider destroyed!');
+    beep(750, 0.18);
   } else print('Miss.');
   raiderReturnFire();
 }
@@ -162,11 +193,13 @@ function raiderReturnFire() {
   if (shields >= hit) {
     shields -= hit;
     print(`🛡️ Shields absorbed ${hit}`);
+    beep(200, 0.08);
   } else {
     const overflow = hit - shields;
     shields = 0;
     energy = Math.max(0, energy - overflow);
     print(`💥 Hit! Shields down, ${overflow} energy lost`);
+    beep(100, 0.25, 'sawtooth');
     if (Math.random() < 0.3) damageRandom();
   }
 }
@@ -174,85 +207,4 @@ function raiderReturnFire() {
 function setShields(pct) {
   if (systems.shields > 0) { print('Shields damaged'); return; }
   pct = Math.max(0, Math.min(100, pct));
-  const want = Math.floor(energy * pct / 100);
-  energy -= want;
-  shields = want;
-  print(`🛡️ Shields set to ${pct}% (${shields})`);
-}
-
-function dock() {
-  const q = galaxy[quadY - 1][quadX - 1];
-  if (!q.outpost) { print('No outpost here'); return; }
-  docked = true;
-  energy = 3000;
-  missiles = 10;
-  shields = 0;
-  Object.keys(systems).forEach(k => systems[k] = 0);
-  print('🛡️ Docked at outpost. Energy, missiles and systems restored.');
-}
-
-function computer() {
-  if (systems.computer > 0) { print('Computer damaged'); return; }
-  print('\n🖥️ Computer');
-  print(`Raiders remaining: ${totalRaiders()}`);
-  print(`Outposts: ${galaxy.flat().filter(q => q.outpost).length}`);
-  print(`Current date: ${date.toFixed(1)}`);
-}
-
-function help() {
-  print(`\nCommands:`);
-  print(`  status`);
-  print(`  lscan          long-range scan`);
-  print(`  sscan          short-range scan`);
-  print(`  nav <1-8> <warp>`);
-  print(`  beam <energy>`);
-  print(`  missile`);
-  print(`  shields <0-100>`);
-  print(`  dock`);
-  print(`  computer`);
-  print(`  help`);
-  print(`  quit`);
-}
-
-function gameOver(win) {
-  print(win ? '\n🏆 All raiders destroyed. Victory!' : '\n💀 Mission failed.');
-  print('Refresh to play again.');
-  input.disabled = true;
-}
-
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const raw = input.value.trim().toLowerCase();
-  input.value = '';
-  if (!raw) return;
-  print(`> ${raw}`);
-  const p = raw.split(/\s+/);
-  const v = p[0];
-
-  if (v === 'status') status();
-  else if (v === 'lscan') longScan();
-  else if (v === 'sscan') shortScan();
-  else if (v === 'nav' && p.length >= 3) navigate(+p[1], +p[2]);
-  else if (v === 'beam' && p[1]) fireBeam(+p[1]);
-  else if (v === 'missile') fireMissile();
-  else if (v === 'shields' && p[1]) setShields(+p[1]);
-  else if (v === 'dock') dock();
-  else if (v === 'computer') computer();
-  else if (v === 'help') help();
-  else if (v === 'quit') gameOver(false);
-  else print('Unknown command. Type help.');
-
-  // repair tick
-  Object.keys(systems).forEach(k => { if (systems[k] > 0 && Math.random() < 0.15) systems[k]--; });
-
-  if (totalRaiders() <= 0) gameOver(true);
-  else if (timeLeft <= 0 || energy <= 0) gameOver(false);
-});
-
-initGalaxy();
-clear();
-print('🚀 Galaxy Hunt — extended');
-print('Destroy all raiders. Type help for commands.\n');
-status();
-print('');
-shortScan();
+ 
