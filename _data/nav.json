@@ -5,7 +5,12 @@
     {
       "title": "📜 Articles",
       "dropdown": [
-        { "title": "🤮 Politics", "url": "/politics/" }
+        { "title": "🤮 Politics", "url": "/politics/" },
+        { "title": "📜 History", "url": "/history/" },
+        { "title": "💻 Tech", "url": "/tech/" },
+        { "title": "📈 Business", "url": "/business/" },
+        { "title": "✝️ Religion", "url": "/religion/" },
+        { "title": "😂 Jokes", "url": "/jokes/" }
       ]
     },
     {
