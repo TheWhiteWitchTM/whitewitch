@@ -70,9 +70,9 @@
       if (banner && sides.length) {
         const update = () => {
           const rect = banner.getBoundingClientRect();
-          const scrolledPast = rect.bottom <= 0;
+          const bannerStillVisible = rect.bottom > 0;
           sides.forEach(side => {
-            side.classList.toggle('hidden', !scrolledPast);
+            side.classList.toggle('hidden', bannerStillVisible);
           });
         };
 
