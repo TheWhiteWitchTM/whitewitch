@@ -14,6 +14,8 @@ items:
     dropdown:
       - title: "🚀 Galaxy Hunt"
         url: /games/galaxy-hunt/
+      - title: "🏓 Pong"
+        url: /games/pong/
       - title: "🐍 Snake"
         url: /games/snake/
 
