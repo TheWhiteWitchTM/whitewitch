@@ -10,6 +10,11 @@ items:
       - title: Politics
         url: /politics/
 
+   - title: 🕹️ Play
+    dropdown:
+      - title: Galaxy Hunt
+        url: /games/galaxy-hunt/
+
   - title: 📥 Downloads
     url: /downloads/
 
