@@ -23,7 +23,7 @@ items:
 
   - title: "🛠️ Tools"
     dropdown:
-      - title: "😀 Emoji Builder"
+      - title: "🧙‍♀️ Emoji Wizard"
         url: /tools/emoji-builder/
       - title: "🏳️ Flags Builder"
         url: /tools/flags-builder/
