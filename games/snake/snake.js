@@ -3,7 +3,7 @@ const statusEl = document.getElementById('status');
 
 const COLS = 40;
 const ROWS = 20;
-let snake, dir, food, obstacles, score, alive, loop, speed;
+let snake, dir, food, obstacles, score, alive, started, loop, speed;
 let audioCtx;
 
 function beep(freq = 440, duration = 0.08, type = 'square') {
@@ -25,12 +25,12 @@ function init() {
   dir = {x: 1, y: 0};
   score = 0;
   alive = true;
+  started = false;
   speed = 180;
   obstacles = [];
   placeFood();
   placeObstacles(5);
   if (loop) clearInterval(loop);
-  loop = setInterval(tick, speed);
   draw();
 }
 
@@ -54,8 +54,14 @@ function placeObstacles(count) {
   }
 }
 
+function start() {
+  if (started) return;
+  started = true;
+  loop = setInterval(tick, speed);
+}
+
 function tick() {
-  if (!alive) return;
+  if (!alive || !started) return;
   const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
 
   if (head.x < 0 || head.x >= COLS || head.y < 0 || head.y >= ROWS ||
@@ -93,6 +99,7 @@ function draw(dead = false) {
 
   let text = '';
   for (let y = 0; y < ROWS; y++) text += grid[y].join('') + '\n';
+  if (!started) text += '\nPress S to start';
   if (dead) text += '\n💀 CRASH! Press R to restart.';
   output.value = text;
   statusEl.textContent = `Score: ${score}  Speed: ${Math.round(1000/speed)}`;
@@ -101,8 +108,9 @@ function draw(dead = false) {
 
 document.addEventListener('keydown', (e) => {
   const key = e.key.toLowerCase();
-  if (!alive && key === 'r') { init(); return; }
-  if (!alive) return;
+  if (key === 'r') { init(); return; }
+  if (!started && key === 's') { start(); return; }
+  if (!alive || !started) return;
 
   if ((key === 'arrowup' || key === 'w') && dir.y === 0) dir = {x: 0, y: -1};
   else if ((key === 'arrowdown' || key === 's') && dir.y === 0) dir = {x: 0, y: 1};
