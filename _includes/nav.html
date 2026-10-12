@@ -19,9 +19,23 @@
                   {% if sub.url contains '/religion/' %}{% assign count = site.religion.size %}{% endif %}
                   {% if sub.url contains '/jokes/' %}{% assign count = site.jokes.size %}{% endif %}
                   {% if count > 0 %}
+                    {% assign newest = nil %}
+                    {% if sub.url contains '/politics/' %}{% assign newest = site.politics | sort: 'date' | reverse | first %}{% endif %}
+                    {% if sub.url contains '/history/' %}{% assign newest = site.history | sort: 'date' | reverse | first %}{% endif %}
+                    {% if sub.url contains '/tech/' %}{% assign newest = site.tech | sort: 'date' | reverse | first %}{% endif %}
+                    {% if sub.url contains '/business/' %}{% assign newest = site.business | sort: 'date' | reverse | first %}{% endif %}
+                    {% if sub.url contains '/religion/' %}{% assign newest = site.religion | sort: 'date' | reverse | first %}{% endif %}
+                    {% if sub.url contains '/jokes/' %}{% assign newest = site.jokes | sort: 'date' | reverse | first %}{% endif %}
+
+                    {% assign is_new = false %}
+                    {% if newest and newest.date %}
+                      {% assign days = 'now' | date: '%s' | minus: newest.date | divided_by: 86400 %}
+                      {% if days <= 3 %}{% assign is_new = true %}{% endif %}
+                    {% endif %}
+
                     <li>
                       <a href="{{ sub.url | relative_url }}">
-                        {{ sub.title }} ({{ count }})
+                        {{ sub.title }} ({{ count }}){% if is_new %} ✨{% endif %}
                       </a>
                     </li>
                   {% endif %}
