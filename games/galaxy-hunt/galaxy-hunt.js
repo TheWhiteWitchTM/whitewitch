@@ -254,3 +254,5 @@ clear();
 print('🚀 Galaxy Hunt — extended');
 print('Destroy all raiders. Type help for commands.\n');
 status();
+print('');
+shortScan();
