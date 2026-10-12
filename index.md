@@ -110,6 +110,7 @@ description: Politics and social events. Facts & data first. I want you smarter,
 }
 .full-content { margin-top: 0.6rem; }
 .giscus-container { margin-top: 1rem; }
+.excerpt.hidden { display: none; }
 </style>
 
 <script>
@@ -118,12 +119,14 @@ document.querySelectorAll('.featured-item').forEach(item => {
   const emoji = item.querySelector('.toggle-emoji');
   const expandBtn = item.querySelector('.expand-btn');
   const discBtn = item.querySelector('.discussion-btn');
+  const excerpt = item.querySelector('.excerpt');
   const full = item.querySelector('.full-content');
   const giscus = item.querySelector('.giscus-container');
   const url = item.dataset.url;
 
   const collapse = () => {
     full.setAttribute('hidden', '');
+    excerpt.classList.remove('hidden');
     expandBtn.innerHTML = '▼ Show more';
     emoji.textContent = '▼';
   };
@@ -145,6 +148,7 @@ document.querySelectorAll('.featured-item').forEach(item => {
       }
     }
     full.removeAttribute('hidden');
+    excerpt.classList.add('hidden');
     expandBtn.innerHTML = '▲ Show less';
     emoji.textContent = '▲';
   };
@@ -164,10 +168,10 @@ document.querySelectorAll('.featured-item').forEach(item => {
         discBtn.textContent = 'Loading…';
         const script = document.createElement('script');
         script.src = 'https://giscus.app/client.js';
-        script.setAttribute('data-repo', 'TheWhiteWitchTM/whitewitch');
-        script.setAttribute('data-repo-id', 'YOUR_REPO_ID');
-        script.setAttribute('data-category', 'YOUR_CATEGORY');
-        script.setAttribute('data-category-id', 'YOUR_CATEGORY_ID');
+        script.setAttribute('data-repo', '{{ site.data.giscus.repo | default: "TheWhiteWitchTM/whitewitch" }}');
+        script.setAttribute('data-repo-id', '{{ site.data.giscus.repo_id }}');
+        script.setAttribute('data-category', '{{ site.data.giscus.category }}');
+        script.setAttribute('data-category-id', '{{ site.data.giscus.category_id }}');
         script.setAttribute('data-mapping', 'pathname');
         script.setAttribute('data-theme', 'dark');
         script.setAttribute('data-lang', 'en');
