@@ -1,18 +1,21 @@
 const output = document.getElementById('output');
 const statusEl = document.getElementById('status');
 
-const W = 78, H = 20;
+const W = 70, H = 18;
 let map, seen, player, monsters, items, level, messages, gameOver;
 let audioCtx;
 
-function beep(f = 440, d = 0.09, type = 'square', vol = 0.12) {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-  o.type = type; o.frequency.value = f;
-  g.gain.setValueAtTime(vol, audioCtx.currentTime);
-  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + d);
-  o.connect(g); g.connect(audioCtx.destination);
-  o.start(); o.stop(audioCtx.currentTime + d);
+function beep(f = 440, d = 0.07, type = 'square', vol = 0.15) {
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = type; o.frequency.value = f;
+    g.gain.setValueAtTime(vol, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + d);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + d);
+  } catch (e) {}
 }
 
 const MONSTERS = [
@@ -33,73 +36,76 @@ function init() {
 }
 
 function newLevel() {
-  map = Array.from({length:H}, () => Array(W).fill('⬛'));
+  map = Array.from({length:H}, () => Array(W).fill('#'));
   seen = Array.from({length:H}, () => Array(W).fill(false));
   monsters = [];
   items = [];
-  for (let i = 0; i < 6; i++) {
-    const rw = 5 + Math.floor(Math.random()*6);
-    const rh = 3 + Math.floor(Math.random()*4);
+  for (let i = 0; i < 5; i++) {
+    const rw = 4 + Math.floor(Math.random()*5);
+    const rh = 3 + Math.floor(Math.random()*3);
     const rx = 1 + Math.floor(Math.random()*(W-rw-2));
     const ry = 1 + Math.floor(Math.random()*(H-rh-2));
-    for (let y = ry; y < ry+rh; y++)
-      for (let x = rx; x < rx+rw; x++) map[y][x] = '·';
+    for (let y = ry; y < ry+rh && y < H-1; y++)
+      for (let x = rx; x < rx+rw && x < W-1; x++) map[y][x] = '.';
   }
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 6; i++) {
     let x = Math.floor(Math.random()*W), y = Math.floor(Math.random()*H);
-    for (let s = 0; s < 15; s++) {
-      if (x>0&&x<W-1&&y>0&&y<H-1) map[y][x] = '·';
+    for (let s = 0; s < 12; s++) {
+      if (x>0&&x<W-1&&y>0&&y<H-1) map[y][x] = '.';
       const d = Math.floor(Math.random()*4);
-      if (d===0) x++; else if (d===1) x--; else if (d===2) y++; else y--;
+      if (d===0) x = Math.min(W-2, x+1);
+      else if (d===1) x = Math.max(1, x-1);
+      else if (d===2) y = Math.min(H-2, y+1);
+      else y = Math.max(1, y-1);
     }
   }
-  do { player.x = Math.floor(Math.random()*W); player.y = Math.floor(Math.random()*H); }
-  while (map[player.y][player.x] !== '·');
-  for (let i = 0; i < 4 + level; i++) spawnMonster();
-  for (let i = 0; i < 3; i++) spawnItem();
+  do { player.x = 1+Math.floor(Math.random()*(W-2)); player.y = 1+Math.floor(Math.random()*(H-2)); }
+  while (map[player.y][player.x] !== '.');
+  for (let i = 0; i < 3 + level; i++) spawnMonster();
+  for (let i = 0; i < 2; i++) spawnItem();
   if (level < 10) {
     let sx, sy;
-    do { sx = Math.floor(Math.random()*W); sy = Math.floor(Math.random()*H); }
-    while (map[sy][sx] !== '·');
-    map[sy][sx] = '🔽';
+    do { sx = 1+Math.floor(Math.random()*(W-2)); sy = 1+Math.floor(Math.random()*(H-2)); }
+    while (map[sy][sx] !== '.');
+    map[sy][sx] = '>';
   }
-  if (level === 10) items.push({x:player.x+1, y:player.y, ch:'💎', name:'Amulet of Yendor', type:'amulet'});
+  if (level === 10) items.push({x:player.x+1, y:player.y, ch:'*', name:'Amulet of Yendor', type:'amulet'});
   message(`Welcome to level ${level}.`);
-  beep(340, 0.12, 'square', 0.15);
+  beep(360, 0.1, 'square', 0.18);
   updateSeen();
 }
 
 function spawnMonster() {
   const m = MONSTERS[Math.min(MONSTERS.length-1, Math.floor(Math.random()*level))];
-  let x,y;
-  do { x = Math.floor(Math.random()*W); y = Math.floor(Math.random()*H); }
-  while (map[y][x] !== '·' || (x===player.x && y===player.y));
-  monsters.push({...m, x, y, hp:m.hp});
+  let x,y, tries=0;
+  do { x = 1+Math.floor(Math.random()*(W-2)); y = 1+Math.floor(Math.random()*(H-2)); tries++; }
+  while ((map[y][x] !== '.' || (x===player.x && y===player.y)) && tries < 50);
+  if (tries < 50) monsters.push({...m, x, y, hp:m.hp});
 }
 
 function spawnItem() {
   const types = [
-    {ch:'🧪', name:'potion of healing', type:'potion'},
-    {ch:'📜', name:'scroll of identify', type:'scroll'},
-    {ch:'🗡️', name:'sword', type:'weapon', bonus:2},
-    {ch:'🛡️', name:'armor', type:'armor', bonus:2},
-    {ch:'💰', name:'gold', type:'gold', amount:10+Math.floor(Math.random()*20)}
+    {ch:'!', name:'potion of healing', type:'potion'},
+    {ch:'?', name:'scroll', type:'scroll'},
+    {ch:')', name:'sword', type:'weapon', bonus:2},
+    {ch:'[', name:'armor', type:'armor', bonus:2},
+    {ch:'*', name:'gold', type:'gold', amount:10+Math.floor(Math.random()*20)}
   ];
   const it = types[Math.floor(Math.random()*types.length)];
-  let x,y;
-  do { x = Math.floor(Math.random()*W); y = Math.floor(Math.random()*H); }
-  while (map[y][x] !== '·');
-  items.push({...it, x, y});
+  let x,y, tries=0;
+  do { x = 1+Math.floor(Math.random()*(W-2)); y = 1+Math.floor(Math.random()*(H-2)); tries++; }
+  while (map[y][x] !== '.' && tries < 50);
+  if (tries < 50) items.push({...it, x, y});
 }
 
 function message(msg) {
   messages.push(msg);
-  if (messages.length > 3) messages.shift();
+  if (messages.length > 2) messages.shift();
 }
 
 function updateSeen() {
-  for (let dy = -4; dy <= 4; dy++)
-    for (let dx = -4; dx <= 4; dx++) {
+  for (let dy = -3; dy <= 3; dy++)
+    for (let dx = -3; dx <= 3; dx++) {
       const x = player.x+dx, y = player.y+dy;
       if (x>=0&&x<W&&y>=0&&y<H) seen[y][x] = true;
     }
@@ -111,19 +117,19 @@ function move(dx, dy) {
   if (nx<0||nx>=W||ny<0||ny>=H) return;
   const mon = monsters.find(m => m.x===nx && m.y===ny);
   if (mon) { attack(mon); }
-  else if (map[ny][nx] === '·' || map[ny][nx] === '🔽') {
+  else if (map[ny][nx] === '.' || map[ny][nx] === '>') {
     player.x = nx; player.y = ny;
-    beep(220, 0.04, 'square', 0.08);
+    beep(240, 0.05, 'square', 0.12);
     const it = items.find(i => i.x===nx && i.y===ny);
     if (it) {
-      if (it.type==='gold') { player.gold += it.amount; message(`You pick up ${it.amount} gold.`); beep(640, 0.12, 'square', 0.15); }
-      else if (it.type==='amulet') { message('You found the Amulet of Yendor! You win!'); gameOver=true; beep(880, 0.6, 'square', 0.2); }
-      else { player.inv.push(it); message(`You pick up a ${it.name}.`); beep(520, 0.1, 'square', 0.14); }
+      if (it.type==='gold') { player.gold += it.amount; message(`Picked up ${it.amount} gold.`); beep(660, 0.1); }
+      else if (it.type==='amulet') { message('Amulet of Yendor! You win!'); gameOver=true; beep(900, 0.5); }
+      else { player.inv.push(it); message(`Picked up ${it.name}.`); beep(540, 0.1); }
       items = items.filter(i => i !== it);
     }
-    if (map[ny][nx]==='🔽' && level<10) { level++; newLevel(); return; }
+    if (map[ny][nx]==='>' && level<10) { level++; newLevel(); return; }
   } else {
-    beep(100, 0.05, 'square', 0.06);
+    beep(90, 0.04, 'square', 0.08);
   }
   monstersAct();
   updateSeen();
@@ -134,13 +140,13 @@ function attack(mon) {
   const dmg = 1 + Math.floor(Math.random()* (player.str/4 + (player.weapon?player.weapon.bonus:0)));
   mon.hp -= dmg;
   message(`You hit the ${mon.name} for ${dmg}.`);
-  beep(480, 0.1, 'square', 0.16);
+  beep(500, 0.09, 'square', 0.16);
   if (mon.hp <= 0) {
-    message(`You defeat the ${mon.name}!`);
+    message(`Defeated the ${mon.name}!`);
     player.xp += mon.xp;
     monsters = monsters.filter(m => m !== mon);
-    beep(700, 0.15, 'square', 0.18);
-    if (player.xp >= player.level*10) { player.level++; player.maxHp+=3; player.hp=player.maxHp; player.str++; message('You feel stronger!'); beep(760, 0.2, 'square', 0.2); }
+    beep(720, 0.12);
+    if (player.xp >= player.level*10) { player.level++; player.maxHp+=3; player.hp=player.maxHp; player.str++; message('Level up!'); beep(780, 0.18); }
   }
 }
 
@@ -150,12 +156,12 @@ function monstersAct() {
     if (Math.abs(player.x-m.x)+Math.abs(player.y-m.y) === 1) {
       const dmg = 1 + Math.floor(Math.random()*m.dmg);
       player.hp -= dmg;
-      message(`The ${m.name} hits you for ${dmg}.`);
-      beep(140, 0.14, 'sawtooth', 0.15);
-      if (player.hp <= 0) { message('You die...'); gameOver=true; beep(60, 0.7, 'sawtooth', 0.2); }
-    } else if (Math.random()<0.6) {
+      message(`${mon.name} hits you for ${dmg}.`);
+      beep(130, 0.12, 'sawtooth', 0.15);
+      if (player.hp <= 0) { message('You die...'); gameOver=true; beep(50, 0.6, 'sawtooth', 0.2); }
+    } else if (Math.random()<0.5) {
       const nx = m.x+dx, ny = m.y+dy;
-      if (nx>=0&&nx<W&&ny>=0&&ny<H && map[ny][nx]==='·' && !monsters.some(o=>o.x===nx&&o.y===ny) && !(nx===player.x&&ny===player.y)) {
+      if (nx>0&&nx<W-1&&ny>0&&ny<H-1 && map[ny][nx]==='.' && !monsters.some(o=>o.x===nx&&o.y===ny) && !(nx===player.x&&ny===player.y)) {
         m.x=nx; m.y=ny;
       }
     }
@@ -171,29 +177,29 @@ function draw() {
       let ch = map[y][x];
       const mon = monsters.find(m => m.x===x && m.y===y);
       const it = items.find(i => i.x===x && i.y===y);
-      if (x===player.x && y===player.y) ch = '🧙';
+      if (x===player.x && y===player.y) ch = '@';
       else if (mon) ch = mon.ch;
       else if (it) ch = it.ch;
       line += ch;
     }
     text += line + '\n';
   }
-  text += messages.join(' | ');
+  text += '\n' + messages.join(' | ');
   if (gameOver) text += '\nPress R to restart.';
   output.value = text;
   statusEl.textContent = `Level ${level}  HP ${player.hp}/${player.maxHp}  Str ${player.str}  Gold ${player.gold}  XP ${player.xp}`;
 }
 
 function showInv() {
-  if (!player.inv.length) { message('You are empty-handed.'); }
-  else message('Inventory: ' + player.inv.map((it,i)=>`${i}:${it.ch}${it.name}`).join(', '));
-  beep(300, 0.06);
+  if (!player.inv.length) message('Empty.');
+  else message('Inv: ' + player.inv.map((it,i)=>`${i}${it.ch}`).join(' '));
+  beep(280, 0.05);
   draw();
 }
 
 document.addEventListener('keydown', e => {
   const k = e.key.toLowerCase();
-  if (k==='r' && gameOver) { init(); return; }
+  if (k==='r') { init(); return; }
   if (gameOver) return;
   if (k==='arrowup'||k==='w') move(0,-1);
   else if (k==='arrowdown'||k==='s') move(0,1);
@@ -202,11 +208,11 @@ document.addEventListener('keydown', e => {
   else if (k==='i') showInv();
   else if (k==='q') {
     const p = player.inv.find(i=>i.type==='potion');
-    if (p) { player.hp = Math.min(player.maxHp, player.hp+8); player.inv=player.inv.filter(i=>i!==p); message('You feel better.'); beep(580, 0.15, 'square', 0.16); }
+    if (p) { player.hp = Math.min(player.maxHp, player.hp+8); player.inv=player.inv.filter(i=>i!==p); message('Healed.'); beep(600, 0.12); }
     else message('No potions.');
     draw();
   }
-  else if (k==='>') { if (map[player.y][player.x]==='🔽') { level++; newLevel(); } else message('No stairs here.'); draw(); }
+  else if (k==='>') { if (map[player.y][player.x]==='>') { level++; newLevel(); } else message('No stairs.'); draw(); }
   e.preventDefault();
 });
 
