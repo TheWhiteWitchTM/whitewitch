@@ -6,8 +6,19 @@ image: https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg
 
 collections_dir: collections
 
+collections_dir: collections
+
 collections:
   blog:
     output: true
   politics:
     output: true
+  data:
+    output: true
+  history:
+    output: true
+  jokes:
+    output: true
+  about:
+    output: true
+    
