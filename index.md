@@ -28,7 +28,7 @@ description: Politics and social events. Facts & data first. I want you smarter,
 
 ## 🚨 Featured
 
-<div class="featured-list">
+<div class="post-list">
 {% assign featured = "" | split: "" %}
 {% for post in site.blog %}
   {% if post.featured %}{% assign featured = featured | push: post %}{% endif %}
@@ -39,7 +39,7 @@ description: Politics and social events. Facts & data first. I want you smarter,
 {% assign featured = featured | sort: "date" | reverse %}
 
 {% for post in featured limit: 6 %}
-  <article class="featured-item" data-url="{{ post.url | relative_url }}">
+  <article class="post-item" data-url="{{ post.url | relative_url }}">
     <h2 class="toggle-title">
       <span class="toggle-emoji" title="Expand / collapse">▼</span>
       <span class="title-text">{{ post.title }}</span>
@@ -51,11 +51,11 @@ description: Politics and social events. Facts & data first. I want you smarter,
 
     {% if post.video %}
       {% assign yt_id = post.video | split: "/" | last | split: "?" | first | replace: "watch?v=", "" | replace: "youtu.be/", "" %}
-      <div class="featured-media">
+      <div class="post-media">
         <iframe width="100%" height="315" src="https://www.youtube.com/embed/{{ yt_id }}" frameborder="0" allowfullscreen loading="lazy"></iframe>
       </div>
     {% elsif post.image %}
-      <img src="{{ post.image | relative_url }}" alt="" class="featured-image" loading="lazy">
+      <img src="{{ post.image | relative_url }}" alt="" class="post-image" loading="lazy">
     {% endif %}
 
     <div class="full-content" hidden></div>
@@ -72,7 +72,7 @@ description: Politics and social events. Facts & data first. I want you smarter,
 </div>
 
 <script>
-document.querySelectorAll('.featured-item').forEach(item => {
+document.querySelectorAll('.post-item').forEach(item => {
   const title = item.querySelector('.toggle-title');
   const emoji = item.querySelector('.toggle-emoji');
   const expandBtn = item.querySelector('.expand-btn');
