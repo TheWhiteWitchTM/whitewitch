@@ -18,11 +18,13 @@
                   {% if sub.url contains '/business/' %}{% assign count = site.business.size %}{% endif %}
                   {% if sub.url contains '/religion/' %}{% assign count = site.religion.size %}{% endif %}
                   {% if sub.url contains '/jokes/' %}{% assign count = site.jokes.size %}{% endif %}
-                  <li>
-                    <a href="{{ sub.url | relative_url }}">
-                      {{ sub.title }}{% if count > 0 %} ({{ count }}){% endif %}
-                    </a>
-                  </li>
+                  {% if count > 0 %}
+                    <li>
+                      <a href="{{ sub.url | relative_url }}">
+                        {{ sub.title }} ({{ count }})
+                      </a>
+                    </li>
+                  {% endif %}
                 {% endif %}
               {% endfor %}
             </ul>
