@@ -1,22 +1,33 @@
+Here’s the updated full _data/nav.yml with an emoji on Politics:
+
 items:
-  - title: 🏠 Home
+  title: 🏠 Home
     url: /
 
-  - title: 📝 Blog
+  title: 📝 Blog
     url: /blog/
 
-  - title: 📜 Articles
+  title: 📜 Articles
     dropdown:
-      - title: Politics
+      title: 🤮 Politics
         url: /politics/
 
-  - title: 🕹️ Play
+  title: 🕹️ Play
     dropdown:
-      - title: Galaxy Hunt
+      title: 🚀 Galaxy Hunt
         url: /games/galaxy-hunt/
+      title: 🐍 Snake
+        url: /games/snake/
 
-  - title: 📥 Downloads
+  title: 🛠️ Tools
+    dropdown:
+      title: 😀 Emoji Builder
+        url: /tools/emoji-builder/
+      title: 🏳️ Flags Builder
+        url: /tools/flags-builder/
+
+  title: 📥 Downloads
     url: /downloads/
 
-  - title: 🔮 About
+  title: 🔮 About
     url: /about/
