@@ -40,8 +40,9 @@ description: Politics and social events. Facts & data first. I want you smarter,
 
 {% for post in featured limit: 6 %}
   <article class="featured-item" data-url="{{ post.url | relative_url }}">
-    <h2>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    <h2 class="toggle-title">
+      <span class="toggle-emoji">▼</span>
+      <span class="title-text">{{ post.title }}</span>
     </h2>
 
     <div class="excerpt">
@@ -66,24 +67,17 @@ description: Politics and social events. Facts & data first. I want you smarter,
 </div>
 
 <style>
-.intro {
-  margin: 2rem 0 3rem;
+.intro { margin: 2rem 0 3rem; }
+.featured-item { margin: 2rem 0; padding-bottom: 1.5rem; border-bottom: 1px solid #222; }
+.featured-image, .featured-media { max-width: 100%; margin: 0.75rem 0; border-radius: 6px; }
+.featured-media iframe { border-radius: 6px; max-width: 100%; }
+.toggle-title {
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 0.4rem;
 }
-.featured-item {
-  margin: 2rem 0;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid #222;
-}
-.featured-image,
-.featured-media {
-  max-width: 100%;
-  margin: 0.75rem 0;
-  border-radius: 6px;
-}
-.featured-media iframe {
-  border-radius: 6px;
-  max-width: 100%;
-}
+.toggle-title:hover .title-text { text-decoration: underline; }
+.toggle-emoji { margin-right: 0.4rem; font-size: 0.9em; }
 .excerpt .expand-btn {
   display: inline;
   margin-left: 0.4rem;
@@ -94,33 +88,51 @@ description: Politics and social events. Facts & data first. I want you smarter,
   padding: 0;
   font-size: inherit;
 }
-.excerpt .expand-btn:hover {
-  text-decoration: underline;
-}
-.full-content {
-  margin-top: 0.6rem;
-}
+.excerpt .expand-btn:hover { text-decoration: underline; }
+.full-content { margin-top: 0.6rem; }
 </style>
 
 <script>
 document.querySelectorAll('.featured-item').forEach(item => {
+  const title = item.querySelector('.toggle-title');
+  const emoji = item.querySelector('.toggle-emoji');
   const btn = item.querySelector('.expand-btn');
   const full = item.querySelector('.full-content');
   const url = item.dataset.url;
 
-  btn.addEventListener('click', async () => {
-    if (full.hasAttribute('hidden')) {
-      if (!full.dataset.loaded) {
-        btn.textContent = 'Loading…';
-        try {
-          const res = await fetch(url);
-          const html = await res.text();
-          const doc = new DOMParser().parseFromString(html, 'text/html');
-          const content = doc.querySelector('.content-area') || doc.querySelector('main');
-          // Remove back button if it exists
-          const back = content.querySelector('a[href*="blog"], a[href*="politics"]');
-          if (back) back.closest('p')?.remove() || back.remove();
-          full.innerHTML = content.innerHTML;
-          full.dataset.loaded = 'true';
-        } catch (e) {
-          full.innerHTML
+  const collapse = () => {
+    full.setAttribute('hidden', '');
+    btn.textContent = 'Show more';
+    emoji.textContent = '▼';
+  };
+
+  const expand = async () => {
+    if (!full.dataset.loaded) {
+      btn.textContent = 'Loading…';
+      try {
+        const res = await fetch(url);
+        const html = await res.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const content = doc.querySelector('.content-area') || doc.querySelector('main');
+        const back = content.querySelector('a[href*="blog"], a[href*="politics"]');
+        if (back) back.closest('p')?.remove() || back.remove();
+        full.innerHTML = content.innerHTML;
+        full.dataset.loaded = 'true';
+      } catch (e) {
+        full.innerHTML = '<p>Could not load post.</p>';
+      }
+    }
+    full.removeAttribute('hidden');
+    btn.textContent = 'Show less';
+    emoji.textContent = '▲';
+  };
+
+  const toggle = () => {
+    if (full.hasAttribute('hidden')) expand();
+    else collapse();
+  };
+
+  title.addEventListener('click', toggle);
+  btn.addEventListener('click', toggle);
+});
+</script>
