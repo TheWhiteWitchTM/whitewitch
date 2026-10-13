@@ -22,7 +22,44 @@
   <div class="button-row">
     <button class="btn btn-outline expand-btn" type="button" title="Expand / collapse">▼ Show more</button>
     <button class="btn btn-outline share-btn" type="button" title="Copy link" data-url="{{ include.post.url | absolute_url }}">📋 Share</button>
+    <button class="btn btn-outline discussion-btn" type="button" title="Toggle discussion">💬 Discussion</button>
   </div>
 
-  {% include discussion.html %}
+  <div class="giscus-container" hidden></div>
+
+  <script>
+  (function() {
+    const article = document.currentScript.closest('article');
+    const btn = article.querySelector('.discussion-btn');
+    const container = article.querySelector('.giscus-container');
+
+    if (!btn || !container) return;
+
+    btn.addEventListener('click', () => {
+      if (container.hasAttribute('hidden')) {
+        if (!container.dataset.loaded) {
+          btn.textContent = 'Loading…';
+          const script = document.createElement('script');
+          script.src = 'https://giscus.app/client.js';
+          script.setAttribute('data-repo', '{{ site.data.giscus.repo | default: "TheWhiteWitchTM/whitewitch" }}');
+          script.setAttribute('data-repo-id', '{{ site.data.giscus.repo_id }}');
+          script.setAttribute('data-category', '{{ site.data.giscus.category }}');
+          script.setAttribute('data-category-id', '{{ site.data.giscus.category_id }}');
+          script.setAttribute('data-mapping', 'pathname');
+          script.setAttribute('data-theme', 'dark');
+          script.setAttribute('data-lang', 'en');
+          script.crossOrigin = 'anonymous';
+          script.async = true;
+          container.appendChild(script);
+          container.dataset.loaded = 'true';
+        }
+        container.removeAttribute('hidden');
+        btn.innerHTML = '💬 Discussion off';
+      } else {
+        container.setAttribute('hidden', '');
+        btn.innerHTML = '💬 Discussion';
+      }
+    });
+  })();
+  </script>
 </article>
