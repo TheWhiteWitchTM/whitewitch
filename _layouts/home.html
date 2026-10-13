@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en-US" }}" prefix="og: http://ogp.me/ns#">
   <head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧙‍♀️</text></svg>">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ page.title | default: site.title | default: "The White Witch™" }}</title>
+    <meta name="description" content="{{ page.description | default: site.description | default: "Politics and social events. Facts & data first. I want you smarter, not recruited." }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:title" content="{{ page.title | default: site.title | default: "The White Witch™" }}">
+    <meta property="og:description" content="{{ page.description | default: site.description | default: "Politics and social events. Facts & data first. I want you smarter, not recruited." }}">
+    <meta property="og:image" content="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg">
+    <meta property="og:site_name" content="The White Witch™">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@TheWhiteWitchTM">
+    <meta name="twitter:title" content="{{ page.title | default: site.title | default: "The White Witch™" }}">
+    <meta name="twitter:description" content="{{ page.description | default: site.description | default: "Politics and social events. Facts & data first. I want you smarter, not recruited." }}">
+    <meta name="twitter:image" content="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg">
+
+    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
   </head>
   <body>
     {% include nav.html %}
+
+    <!-- Banner outside the constrained column -->
+    <img src="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg" alt="The White Witch banner" class="site-banner">
 
     <div class="page-frame">
       <div class="side-image left">
@@ -40,18 +65,9 @@
         }
       });
     </script>
-    <script>
-      const toggle = document.querySelector('.nav-toggle');
-      const menu = document.querySelector('.site-nav > ul');
-      if (toggle && menu) {
-        toggle.addEventListener('click', () => {
-          menu.classList.toggle('open');
-        });
-      }
-    </script>
 
     <script>
-      const banner = document.querySelector('img[alt="The White Witch banner"]');
+      const banner = document.querySelector('.site-banner');
       const sides = document.querySelectorAll('.side-image');
 
       if (banner && sides.length) {
@@ -63,13 +79,20 @@
           });
         }, { 
           threshold: 0,
-          rootMargin: "0px 0px -124px 0px"
+          rootMargin: "0px 0px -180px 0px"
         });
 
         observer.observe(banner);
       }
     </script>
-
-    {% include post-scripts.html %}
+    <script>
+      const toggle = document.querySelector('.nav-toggle');
+      const menu = document.querySelector('.site-nav > ul');
+      if (toggle && menu) {
+        toggle.addEventListener('click', () => {
+          menu.classList.toggle('open');
+        });
+      }
+    </script>
   </body>
 </html>
