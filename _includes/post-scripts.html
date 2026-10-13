@@ -62,7 +62,9 @@ document.querySelectorAll('.share-btn').forEach(btn => {
   });
 });
 
-// Discussion buttons — unique term per post so each gets its own thread
+// Load Giscus once, then just show/hide the already-configured containers
+let giscusLoaded = false;
+
 document.querySelectorAll('.discussion-btn').forEach(btn => {
   const article = btn.closest('.post-item');
   const container = article.querySelector('.giscus-container');
@@ -70,22 +72,13 @@ document.querySelectorAll('.discussion-btn').forEach(btn => {
 
   btn.addEventListener('click', () => {
     if (container.hasAttribute('hidden')) {
-      if (!container.dataset.loaded) {
-        btn.textContent = 'Loading…';
+      if (!giscusLoaded) {
         const script = document.createElement('script');
         script.src = 'https://giscus.app/client.js';
-        script.setAttribute('data-repo', '{{ site.data.giscus.repo | default: "TheWhiteWitchTM/whitewitch" }}');
-        script.setAttribute('data-repo-id', '{{ site.data.giscus.repo_id }}');
-        script.setAttribute('data-category', '{{ site.data.giscus.category }}');
-        script.setAttribute('data-category-id', '{{ site.data.giscus.category_id }}');
-        script.setAttribute('data-mapping', 'specific');
-        script.setAttribute('data-term', article.dataset.url || 'general');
-        script.setAttribute('data-theme', 'dark');
-        script.setAttribute('data-lang', 'en');
         script.crossOrigin = 'anonymous';
         script.async = true;
-        container.appendChild(script);
-        container.dataset.loaded = 'true';
+        document.body.appendChild(script);
+        giscusLoaded = true;
       }
       container.removeAttribute('hidden');
       btn.innerHTML = '💬 Discussion off';
