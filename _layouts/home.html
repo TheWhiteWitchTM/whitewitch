@@ -6,45 +6,25 @@
   <body>
     {% include nav.html %}
 
+    <!-- Banner outside the constrained column -->
     <img src="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg" alt="The White Witch banner" class="site-banner">
 
     <div class="page-frame">
       <div class="side-image left">
         <img src="{{ '/assets/images/mira.jpg' | relative_url }}" alt="Mira">
       </div>
+
       <main class="home-content markdown-body">
         {{ content }}
       </main>
+
       <div class="side-image right">
         <img src="{{ '/assets/images/witch.jpg' | relative_url }}" alt="Witch">
       </div>
     </div>
 
     {% include footer.html %}
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
-    <script>anchors.add();</script>
-    <script>
-      document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-        toggle.addEventListener('click', function(e) {
-          e.preventDefault();
-          const menu = this.nextElementSibling;
-          const isOpen = menu.classList.contains('open');
-          document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
-          if (!isOpen) menu.classList.add('open');
-        });
-      });
-      document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown')) {
-          document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
-        }
-      });
-      const navToggle = document.querySelector('.nav-toggle');
-      const navMenu = document.querySelector('.site-nav > ul');
-      if (navToggle && navMenu) {
-        navToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
-      }
-    </script>
-    {% include post-scripts.html %}
+    {% include scripts.html %}
+    {% include home-scripts.html %}
   </body>
 </html>
