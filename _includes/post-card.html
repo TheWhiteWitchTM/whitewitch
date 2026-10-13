@@ -5,7 +5,11 @@
   </h2>
 
   <div class="excerpt">
-    {{ include.post.content | strip_html | truncate: 300 }}
+    {% if include.post.description %}
+      {{ include.post.description }}
+    {% else %}
+      {{ include.post.content | strip_html | truncate: 300 }}
+    {% endif %}
   </div>
 
   {% if include.post.video %}
