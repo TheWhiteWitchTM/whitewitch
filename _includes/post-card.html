@@ -8,6 +8,8 @@
     {{ include.post.content | strip_html | truncate: 300 }}
   </div>
 
+  <div class="full-content" hidden></div>
+
   {% if include.post.video %}
     {% if include.post.video contains "youtube.com" or include.post.video contains "youtu.be" %}
       {% assign yt_id = include.post.video | split: "/" | last | split: "?" | first | replace: "watch?v=", "" | replace: "youtu.be/", "" %}
@@ -25,8 +27,6 @@
   {% elsif include.post.image %}
     <img src="{{ include.post.image | relative_url }}" alt="" class="post-image" loading="lazy">
   {% endif %}
-
-  <div class="full-content" hidden></div>
 
   <div class="button-row">
     <button class="btn btn-outline expand-btn" type="button" title="Expand / collapse">▼ Show more</button>
