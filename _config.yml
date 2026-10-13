@@ -9,6 +9,8 @@ collections_dir: collections
 collections:
   blog:
     output: true
+  rants:
+    output: true
   politics:
     output: true
   history:
