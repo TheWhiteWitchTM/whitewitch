@@ -5,7 +5,7 @@ description: Games and tools are coming. Eventually. Probably.
 permalink: /downloads/
 ---
 
-# Downloads
+# 📥 Downloads
 
 Nothing here yet.
 
