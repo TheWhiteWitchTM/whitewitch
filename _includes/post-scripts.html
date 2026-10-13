@@ -61,4 +61,37 @@ document.querySelectorAll('.share-btn').forEach(btn => {
     }
   });
 });
+
+// Discussion buttons — one handler per card
+document.querySelectorAll('.discussion-btn').forEach(btn => {
+  const article = btn.closest('.post-item');
+  const container = article.querySelector('.giscus-container');
+  if (!container) return;
+
+  btn.addEventListener('click', () => {
+    if (container.hasAttribute('hidden')) {
+      if (!container.dataset.loaded) {
+        btn.textContent = 'Loading…';
+        const script = document.createElement('script');
+        script.src = 'https://giscus.app/client.js';
+        script.setAttribute('data-repo', '{{ site.data.giscus.repo | default: "TheWhiteWitchTM/whitewitch" }}');
+        script.setAttribute('data-repo-id', '{{ site.data.giscus.repo_id }}');
+        script.setAttribute('data-category', '{{ site.data.giscus.category }}');
+        script.setAttribute('data-category-id', '{{ site.data.giscus.category_id }}');
+        script.setAttribute('data-mapping', 'pathname');
+        script.setAttribute('data-theme', 'dark');
+        script.setAttribute('data-lang', 'en');
+        script.crossOrigin = 'anonymous';
+        script.async = true;
+        container.appendChild(script);
+        container.dataset.loaded = 'true';
+      }
+      container.removeAttribute('hidden');
+      btn.innerHTML = '💬 Discussion off';
+    } else {
+      container.setAttribute('hidden', '');
+      btn.innerHTML = '💬 Discussion';
+    }
+  });
+});
 </script>
