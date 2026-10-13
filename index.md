@@ -5,7 +5,7 @@ description: Politics and social events. Facts & data first. I want you smarter,
 ---
 
 <p align="center">
-  <img src="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg" width="100%" alt="The White Witch banner" />
+  <img src="{{ '/assets/images/site.jpg' | relative_url }}" width="100%" alt="The White Witch banner" />
 </p>
 
 <div class="intro">
@@ -60,8 +60,8 @@ description: Politics and social events. Facts & data first. I want you smarter,
     <div class="full-content" hidden></div>
 
     <div class="button-row">
-      <button class="expand-btn" type="button" title="Expand / collapse">▼ Show more</button>
-      <button class="share-btn" type="button" title="Copy link" data-url="{{ post.url | absolute_url }}">📋 Share</button>
+      <button class="btn btn-outline expand-btn" type="button" title="Expand / collapse">▼ Show more</button>
+      <button class="btn btn-ghost share-btn" type="button" title="Copy link" data-url="{{ post.url | absolute_url }}">📋 Share</button>
       {% include discussion.html %}
     </div>
   </article>
