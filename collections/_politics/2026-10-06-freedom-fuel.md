@@ -1,7 +1,7 @@
 ---
 title: "Freedom Fuel: Another Trump Hoax or Just Unpaid Gas?"
 description: "Live from the pumps Trump swore were pure patriotism. Regular $3.99, diesel $4.68. The supplier still hasn’t been paid."
-video: https://x.com/TheWhiteWitchTM/status/2107524443283284175
+video: "https://x.com/TheWhiteWitchTM/status/2107524443283284175"
 date: 2026-10-06
 ---
 
