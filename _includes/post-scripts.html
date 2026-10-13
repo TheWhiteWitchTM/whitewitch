@@ -20,16 +20,32 @@ document.querySelectorAll('.post-item').forEach(item => {
     if (!full.dataset.loaded) {
       expandBtn.textContent = 'Loading…';
       try {
+        console.log('Fetching:', url);
         const res = await fetch(url);
+        if (!res.ok) throw new Error('HTTP ' + res.status + ' for ' + url);
         const html = await res.text();
         const doc = new DOMParser().parseFromString(html, 'text/html');
-        const content = doc.querySelector('.content-area') || doc.querySelector('main');
-        const back = content.querySelector('a[href*="blog"], a[href*="politics"], a[href*="history"]');
-        if (back) back.closest('p')?.remove() || back.remove();
+
+        let content = doc.querySelector('.content-area') || doc.querySelector('main') || doc.querySelector('.markdown-body');
+        if (!content) content = doc.body;
+        if (!content) throw new Error('No content element found');
+
+        // Remove back button more carefully
+        const backs = content.querySelectorAll('a[href="javascript:history.back()"], a[href*="←"], .button-row');
+        backs.forEach(el => {
+          const row = el.closest('.button-row') || el.closest('p');
+          if (row && row !== content) row.remove();
+          else if (el !== content) el.remove();
+        });
+
+        const giscus = content.querySelector('.giscus-container');
+        if (giscus) giscus.remove();
+
         full.innerHTML = content.innerHTML;
         full.dataset.loaded = 'true';
       } catch (e) {
-        full.innerHTML = '<p>Could not load post.</p>';
+        console.error('Expand failed:', url, e);
+        full.innerHTML = '<p>Could not load post. (' + e.message + ')</p>';
       }
     }
     full.removeAttribute('hidden');
@@ -58,33 +74,6 @@ document.querySelectorAll('.share-btn').forEach(btn => {
     } catch (e) {
       btn.innerHTML = '❌ Failed';
       setTimeout(() => { btn.innerHTML = '📋 Share'; }, 1500);
-    }
-  });
-});
-
-// Load Giscus once, then just show/hide the already-configured containers
-let giscusLoaded = false;
-
-document.querySelectorAll('.discussion-btn').forEach(btn => {
-  const article = btn.closest('.post-item');
-  const container = article.querySelector('.giscus-container');
-  if (!container) return;
-
-  btn.addEventListener('click', () => {
-    if (container.hasAttribute('hidden')) {
-      if (!giscusLoaded) {
-        const script = document.createElement('script');
-        script.src = 'https://giscus.app/client.js';
-        script.crossOrigin = 'anonymous';
-        script.async = true;
-        document.body.appendChild(script);
-        giscusLoaded = true;
-      }
-      container.removeAttribute('hidden');
-      btn.innerHTML = '💬 Discussion off';
-    } else {
-      container.setAttribute('hidden', '');
-      btn.innerHTML = '💬 Discussion';
     }
   });
 });
