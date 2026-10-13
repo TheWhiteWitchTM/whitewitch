@@ -32,7 +32,6 @@
     const article = document.currentScript.closest('article');
     const btn = article.querySelector('.discussion-btn');
     const container = article.querySelector('.giscus-container');
-
     if (!btn || !container) return;
 
     btn.addEventListener('click', () => {
