@@ -1,0 +1,40 @@
+/* Magical scrollbar — works in Chrome, Edge, Safari, Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #c9a6ff #1a121f;
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+  border-left: 1px solid #1f1528;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #e8d5ff 0%, #c9a6ff 40%, #9b6dff 100%);
+  border-radius: 10px;
+  border: 2px solid #0a0a0a;
+  box-shadow: 0 0 6px rgba(201, 166, 255, 0.45);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #f5e9ff 0%, #d8b4ff 40%, #b07cff 100%);
+  box-shadow: 0 0 10px rgba(201, 166, 255, 0.7);
+}
+
+::-webkit-scrollbar-corner {
+  background: #0a0a0a;
+}
+
+/* Thinner on small screens */
+@media (max-width: 600px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+}
