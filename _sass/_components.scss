@@ -1,0 +1,76 @@
+/* Button base — shadcn-style variants for the dark theme */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.2;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:focus-visible {
+  outline: 2px solid #c9a6ff;
+  outline-offset: 2px;
+}
+
+/* Primary — solid accent */
+.btn-primary {
+  background: #c9a6ff;
+  color: #0a0a0a;
+  border-color: #c9a6ff;
+}
+.btn-primary:hover {
+  background: #e8d5ff;
+  border-color: #e8d5ff;
+}
+
+/* Secondary — subtle filled */
+.btn-secondary {
+  background: #1a1a1a;
+  color: #e8e8e8;
+  border-color: #2a2a2a;
+}
+.btn-secondary:hover {
+  background: #222;
+  border-color: #3a3a3a;
+}
+
+/* Ghost — transparent, accent on hover */
+.btn-ghost {
+  background: transparent;
+  color: #c9a6ff;
+  border-color: transparent;
+}
+.btn-ghost:hover {
+  background: rgba(201, 166, 255, 0.1);
+  color: #e8d5ff;
+}
+
+/* Outline — border only */
+.btn-outline {
+  background: transparent;
+  color: #c9a6ff;
+  border-color: #c9a6ff;
+}
+.btn-outline:hover {
+  background: #c9a6ff;
+  color: #0a0a0a;
+}
+
+/* Destructive */
+.btn-destructive {
+  background: #7f1d1d;
+  color: #fecaca;
+  border-color: #7f1d1d;
+}
+.btn-destructive:hover {
+  background: #991b1b;
+}
