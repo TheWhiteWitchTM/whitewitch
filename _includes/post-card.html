@@ -22,17 +22,6 @@
   <div class="button-row">
     <button class="btn btn-outline expand-btn" type="button" title="Expand / collapse">▼ Show more</button>
     <button class="btn btn-outline share-btn" type="button" title="Copy link" data-url="{{ include.post.url | absolute_url }}">📋 Share</button>
-    <button class="btn btn-outline discussion-btn" type="button" title="Toggle discussion">💬 Discussion</button>
+    <a class="btn btn-outline discussion-btn" href="{{ include.post.url | relative_url }}#discussion" title="Go to discussion">💬 Discussion</a>
   </div>
-
-  <div class="giscus-container giscus"
-       data-repo="{{ site.data.giscus.repo | default: 'TheWhiteWitchTM/whitewitch' }}"
-       data-repo-id="{{ site.data.giscus.repo_id }}"
-       data-category="{{ site.data.giscus.category }}"
-       data-category-id="{{ site.data.giscus.category_id }}"
-       data-mapping="specific"
-       data-term="{{ include.post.url | relative_url }}"
-       data-theme="dark"
-       data-lang="en"
-       hidden></div>
 </article>
