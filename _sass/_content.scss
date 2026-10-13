@@ -238,15 +238,15 @@ img[alt="The White Witch banner"] {
 .full-content {
   margin-top: 0.6rem;
 }
+/* Giscus discussion container — full width below post */
+.giscus-container {
+  width: 100%;
+  margin-top: 1rem;
+  clear: both;
+}
 
-.giscus-container,
 .giscus,
 .giscus-frame {
   width: 100% !important;
   max-width: 100% !important;
-  margin-top: 1.5rem;
-}
-
-.giscus-frame {
-  min-height: 250px; /* optional, so it doesn’t collapse while loading */
 }
