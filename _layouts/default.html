@@ -13,7 +13,12 @@
 
       <div class="content-area home-content markdown-body">
         {{ content }}
-        {% include post-actions.html %}
+
+        {% if page.collection %}
+          <p style="margin: 1.5rem 0 5rem 0; font-size: 1.15rem;">
+            <a href="{{ '/' | append: page.collection | append: '/' | relative_url }}">⬅️ Back</a>
+          </p>
+        {% endif %}
       </div>
 
       <div class="side-image right">
@@ -22,30 +27,7 @@
     </main>
 
     {% include footer.html %}
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
-    <script>anchors.add();</script>
-    <script>
-      document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-        toggle.addEventListener('click', function(e) {
-          e.preventDefault();
-          const menu = this.nextElementSibling;
-          const isOpen = menu.classList.contains('open');
-          document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
-          if (!isOpen) menu.classList.add('open');
-        });
-      });
-      document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown')) {
-          document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
-        }
-      });
-      const navToggle = document.querySelector('.nav-toggle');
-      const navMenu = document.querySelector('.site-nav > ul');
-      if (navToggle && navMenu) {
-        navToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
-      }
-    </script>
+    {% include scripts.html %}
     {% include post-scripts.html %}
   </body>
 </html>
