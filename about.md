@@ -1,6 +1,7 @@
 ---
 layout: default
 title: About
+image: /assets/images/about.jpg
 permalink: /about/
 ---
 
