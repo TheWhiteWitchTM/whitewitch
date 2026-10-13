@@ -1,6 +1,7 @@
 ---
 layout: default
 title: About
+description: Dual German-American. Facts first, sarcasm included. How I actually work and why the typos happen.
 image: /assets/images/about.jpg
 permalink: /about/
 ---
@@ -21,11 +22,11 @@ permalink: /about/
 **🚫 Soft stuff stays out**
 
 ---
-
-## ℹ️ Details
+# ℹ️ Details
 
 <div class="post-list">
 {% for item in site.about %}
   {% include post-card.html post=item %}
 {% endfor %}
 </div>
+#
