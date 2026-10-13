@@ -12,11 +12,10 @@
                   <li class="dropdown-separator"></li>
                 {% else %}
                   {% assign count = 0 %}
-                  {% assign is_special = false %}
                   {% assign newest = nil %}
+                  {% assign show = false %}
 
                   {% if sub.url contains '/highlights/' %}
-                    {% assign is_special = true %}
                     {% assign highlights = "" | split: "" %}
                     {% for collection in site.collections %}
                       {% for post in collection.docs %}
@@ -28,26 +27,55 @@
                     {% assign count = highlights.size %}
                     {% if count > 0 %}
                       {% assign newest = highlights | sort: "date" | reverse | first %}
+                      {% assign show = true %}
                     {% endif %}
+                  {% elsif sub.url contains '/rants/' %}
+                    {% assign count = site.rants.size %}
+                    {% if count > 0 %}
+                      {% assign newest = site.rants | sort: 'date' | reverse | first %}
+                      {% assign show = true %}
+                    {% endif %}
+                  {% elsif sub.url contains '/politics/' %}
+                    {% assign count = site.politics.size %}
+                    {% if count > 0 %}
+                      {% assign newest = site.politics | sort: 'date' | reverse | first %}
+                      {% assign show = true %}
+                    {% endif %}
+                  {% elsif sub.url contains '/history/' %}
+                    {% assign count = site.history.size %}
+                    {% if count > 0 %}
+                      {% assign newest = site.history | sort: 'date' | reverse | first %}
+                      {% assign show = true %}
+                    {% endif %}
+                  {% elsif sub.url contains '/tech/' %}
+                    {% assign count = site.tech.size %}
+                    {% if count > 0 %}
+                      {% assign newest = site.tech | sort: 'date' | reverse | first %}
+                      {% assign show = true %}
+                    {% endif %}
+                  {% elsif sub.url contains '/business/' %}
+                    {% assign count = site.business.size %}
+                    {% if count > 0 %}
+                      {% assign newest = site.business | sort: 'date' | reverse | first %}
+                      {% assign show = true %}
+                    {% endif %}
+                  {% elsif sub.url contains '/religion/' %}
+                    {% assign count = site.religion.size %}
+                    {% if count > 0 %}
+                      {% assign newest = site.religion | sort: 'date' | reverse | first %}
+                      {% assign show = true %}
+                    {% endif %}
+                  {% elsif sub.url contains '/jokes/' %}
+                    {% assign count = site.jokes.size %}
+                    {% if count > 0 %}
+                      {% assign newest = site.jokes | sort: 'date' | reverse | first %}
+                      {% assign show = true %}
+                    {% endif %}
+                  {% else %}
+                    {% assign show = true %}
                   {% endif %}
 
-                  {% if sub.url contains '/rants/' %}{% assign count = site.rants.size %}{% assign is_special = true %}{% endif %}
-                  {% if sub.url contains '/politics/' %}{% assign count = site.politics.size %}{% assign is_special = true %}{% endif %}
-                  {% if sub.url contains '/history/' %}{% assign count = site.history.size %}{% assign is_special = true %}{% endif %}
-                  {% if sub.url contains '/tech/' %}{% assign count = site.tech.size %}{% assign is_special = true %}{% endif %}
-                  {% if sub.url contains '/business/' %}{% assign count = site.business.size %}{% assign is_special = true %}{% endif %}
-                  {% if sub.url contains '/religion/' %}{% assign count = site.religion.size %}{% assign is_special = true %}{% endif %}
-                  {% if sub.url contains '/jokes/' %}{% assign count = site.jokes.size %}{% assign is_special = true %}{% endif %}
-
-                  {% if is_special and count > 0 %}
-                    {% if sub.url contains '/rants/' %}{% assign newest = site.rants | sort: 'date' | reverse | first %}{% endif %}
-                    {% if sub.url contains '/politics/' %}{% assign newest = site.politics | sort: 'date' | reverse | first %}{% endif %}
-                    {% if sub.url contains '/history/' %}{% assign newest = site.history | sort: 'date' | reverse | first %}{% endif %}
-                    {% if sub.url contains '/tech/' %}{% assign newest = site.tech | sort: 'date' | reverse | first %}{% endif %}
-                    {% if sub.url contains '/business/' %}{% assign newest = site.business | sort: 'date' | reverse | first %}{% endif %}
-                    {% if sub.url contains '/religion/' %}{% assign newest = site.religion | sort: 'date' | reverse | first %}{% endif %}
-                    {% if sub.url contains '/jokes/' %}{% assign newest = site.jokes | sort: 'date' | reverse | first %}{% endif %}
-
+                  {% if show %}
                     {% assign is_new = false %}
                     {% if newest and newest.date %}
                       {% assign now_sec = 'now' | date: '%s' %}
@@ -58,11 +86,9 @@
 
                     <li>
                       <a href="{{ sub.url | relative_url }}">
-                        {{ sub.title }} ({{ count }}){% if is_new %} ✨{% endif %}
+                        {{ sub.title }}{% if count > 0 %} ({{ count }}){% endif %}{% if is_new %} ✨{% endif %}
                       </a>
                     </li>
-                  {% else %}
-                    <li><a href="{{ sub.url | relative_url }}">{{ sub.title }}</a></li>
                   {% endif %}
                 {% endif %}
               {% endfor %}
