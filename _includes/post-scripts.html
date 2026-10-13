@@ -62,7 +62,7 @@ document.querySelectorAll('.share-btn').forEach(btn => {
   });
 });
 
-// Discussion buttons — one handler per card
+// Discussion buttons — unique term per post so each gets its own thread
 document.querySelectorAll('.discussion-btn').forEach(btn => {
   const article = btn.closest('.post-item');
   const container = article.querySelector('.giscus-container');
@@ -78,7 +78,8 @@ document.querySelectorAll('.discussion-btn').forEach(btn => {
         script.setAttribute('data-repo-id', '{{ site.data.giscus.repo_id }}');
         script.setAttribute('data-category', '{{ site.data.giscus.category }}');
         script.setAttribute('data-category-id', '{{ site.data.giscus.category_id }}');
-        script.setAttribute('data-mapping', 'pathname');
+        script.setAttribute('data-mapping', 'specific');
+        script.setAttribute('data-term', article.dataset.url || 'general');
         script.setAttribute('data-theme', 'dark');
         script.setAttribute('data-lang', 'en');
         script.crossOrigin = 'anonymous';
