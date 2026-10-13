@@ -1,30 +1,29 @@
-/* Magical scrollbar — works in Chrome, Edge, Safari, Firefox */
+/* Magical scrollbar — dark, subtle, matching the theme */
 html {
   scrollbar-width: thin;
-  scrollbar-color: #c9a6ff #1a121f;
+  scrollbar-color: #6b4c8a #111111;
 }
 
 /* WebKit (Chrome, Edge, Safari) */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
 }
 
 ::-webkit-scrollbar-track {
   background: #0a0a0a;
-  border-left: 1px solid #1f1528;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #e8d5ff 0%, #c9a6ff 40%, #9b6dff 100%);
-  border-radius: 10px;
+  background: linear-gradient(180deg, #8a6bb5 0%, #6b4c8a 50%, #5a3d75 100%);
+  border-radius: 9px;
   border: 2px solid #0a0a0a;
-  box-shadow: 0 0 6px rgba(201, 166, 255, 0.45);
+  box-shadow: 0 0 4px rgba(107, 76, 138, 0.25);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #f5e9ff 0%, #d8b4ff 40%, #b07cff 100%);
-  box-shadow: 0 0 10px rgba(201, 166, 255, 0.7);
+  background: linear-gradient(180deg, #a07ac8 0%, #7d5a9e 50%, #6b4c8a 100%);
+  box-shadow: 0 0 6px rgba(160, 122, 200, 0.35);
 }
 
 ::-webkit-scrollbar-corner {
