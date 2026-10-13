@@ -21,10 +21,10 @@ permalink: /about/
 
 ---
 
-## More
+## ℹ️ Details
 
 <div class="post-list">
 {% for item in site.about %}
   {% include post-card.html post=item %}
 {% endfor %}
-</div>
+</div>**
