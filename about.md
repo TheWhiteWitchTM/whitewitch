@@ -6,18 +6,18 @@ permalink: /about/
 
 # 🔮 About
 
-Hi. Mira aka 🧙‍♀️ The White Witch™✨!
+## 👋 Hi. Mira aka 🧙‍♀️ The White Witch™✨!
 
-🇩🇪🇺🇸 Dual: German and American  
-🗺️ Location: Germany  
-🏫 Background: technology, economics, history  
-👀 Method: facts first. Data and open-source intel.  
-🇺🇦 Ukraine: war file, not a costume  
-🇺🇸🇩🇪 Politics: US and German, because both passports are real  
-📙 Tone: sarcasm, dark humor, questionable jokes  
-👍🏼 Likes: music, culture, facts, debates  
-👎🏼 Dislikes: propaganda, sloppy claims, tyranny  
-🚫 Soft stuff stays out
+**🇩🇪🇺🇸 Dual:** German and American  
+**🗺️ Location:** Germany  
+**🏫 Background:** technology, economics, history  
+**👀 Method:** facts first. Data and open-source intel.  
+**🇺🇦 Ukraine:** war file, not a costume  
+**🇺🇸🇩🇪 Politics:** US and German, because both passports are real  
+**📙 Tone:** sarcasm, dark humor, questionable jokes  
+**👍🏼 Likes:** music, culture, facts, debates  
+**👎🏼 Dislikes:** propaganda, sloppy claims, tyranny  
+**🚫 Soft stuff stays out**
 
 ---
 
