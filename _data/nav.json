@@ -5,6 +5,9 @@
     {
       "title": "📜 Articles",
       "dropdown": [
+        { "title": "✨ Highlights", "url": "/highlights/" },
+        { "separator": true },
+        { "title": "😡 Rants", "url": "/rants/" },
         { "title": "🤮 Politics", "url": "/politics/" },
         { "title": "📜 History", "url": "/history/" },
         { "title": "💻 Tech", "url": "/tech/" },
@@ -33,7 +36,6 @@
       ]
     },
     { "title": "📥 Downloads", "url": "/downloads/" },
-    { "title": "🔮 About", "url": "/about/" },
-    { "title": "✨ Highlights", "url": "/highlights/" }
+    { "title": "🔮 About", "url": "/about/" }
   ]
 }
