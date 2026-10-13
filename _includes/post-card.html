@@ -25,5 +25,14 @@
     <button class="btn btn-outline discussion-btn" type="button" title="Toggle discussion">💬 Discussion</button>
   </div>
 
-  <div class="giscus-container" hidden></div>
+  <div class="giscus-container giscus"
+       data-repo="{{ site.data.giscus.repo | default: 'TheWhiteWitchTM/whitewitch' }}"
+       data-repo-id="{{ site.data.giscus.repo_id }}"
+       data-category="{{ site.data.giscus.category }}"
+       data-category-id="{{ site.data.giscus.category_id }}"
+       data-mapping="specific"
+       data-term="{{ include.post.url | relative_url }}"
+       data-theme="dark"
+       data-lang="en"
+       hidden></div>
 </article>
