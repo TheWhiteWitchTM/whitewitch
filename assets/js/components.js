@@ -15,3 +15,15 @@ function base(html, selector = null) {
   return inserted.length === 1 ? inserted[0] : inserted;
 }
 
+function button(text, className = '', onClick = null, selector = null) {
+  const html = `<button class="btn btn-outline ${className}">${text}</button>`;
+  const el = base(html, selector);
+
+  if (onClick && el) {
+    const target = Array.isArray(el) ? el[0] : el;
+    target.addEventListener('click', onClick);
+  }
+
+  return el;
+}
+
