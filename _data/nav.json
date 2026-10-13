@@ -33,6 +33,7 @@
       ]
     },
     { "title": "📥 Downloads", "url": "/downloads/" },
-    { "title": "🔮 About", "url": "/about/" }
+    { "title": "🔮 About", "url": "/about/" },
+    { "title": "✨ Highlights", "url": "/highlights/" }
   ]
 }
