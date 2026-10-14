@@ -1,0 +1,6 @@
+<div class="post-list">
+{% assign sorted = include.collection | sort: "date" | reverse %}
+{% for item in sorted %}
+  {% include post-card.html post=item %}
+{% endfor %}
+</div>
