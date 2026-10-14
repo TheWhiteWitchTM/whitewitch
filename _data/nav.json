@@ -9,7 +9,9 @@
         { "separator": true },
         { "title": "⚡ Shorts", "url": "/shorts/" },
         { "title": "🎥 Videos", "url": "/videos/" },
-        { "title": "📜 Articles", "url": "/articles/" }
+        { "title": "📜 Articles", "url": "/articles/" },
+        { "separator": true },
+        { "title": "😡 Rants", "url": "/rants/" }
       ]
     },
     {
