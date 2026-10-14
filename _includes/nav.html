@@ -59,7 +59,7 @@
 
                   <li>
                     <a href="{{ sub.url | relative_url }}">
-                      {{ sub.title }} ({{ count }}){% if is_new %} New{% endif %}
+                      {{ sub.title }}{% if count > 0 %} ({{ count }}){% endif %}{% if is_new %} New{% endif %}
                     </a>
                   </li>
                 {% endif %}
