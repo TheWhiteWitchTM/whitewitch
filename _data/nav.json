@@ -20,6 +20,7 @@
       "title": "🕹️ Play",
       "dropdown": [
         { "title": "🌲 Adventureland", "url": "/games/adventureland/" },
+        { "title": "🏴‍☠️ Pirate Adventure", "url": "/games/pirate/" },
         { "separator": true },
         { "title": "🚀 Galaxy Hunt", "url": "/games/galaxy-hunt/" },
         { "title": "🏓 Pong", "url": "/games/pong/" },
