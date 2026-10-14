@@ -9,19 +9,11 @@ collections_dir: collections
 collections:
   blog:
     output: true
-  rants:
+  articles:
     output: true
-  politics:
+  videos:
     output: true
-  history:
-    output: true
-  tech:
-    output: true
-  business:
-    output: true
-  religion:
-    output: true
-  jokes:
+  shorts:
     output: true
   about:
     output: true
@@ -35,7 +27,6 @@ feed:
   posts_limit: 20
   collections:
     - blog
-    - history
-    - politics
-    - rants
-    - tech
+    - articles
+    - videos
+    - shorts
