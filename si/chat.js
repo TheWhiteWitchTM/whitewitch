@@ -1,17 +1,27 @@
-// SI — sarcastic 80s/90s BBS chatbot
+// Witch Chat — SI (mocking Super Intelligence)
 // Uses retro.js terminal primitives
 
 useEffect(() => {
   const container = document.getElementById('game');
   if (!container) return;
 
-  const term = terminal('si-bbs');
+  // Smaller terminal so it fits the content column
+  const originalCols = RETRO.cols;
+  const originalRows = RETRO.rows;
+  RETRO.cols = 68;
+  RETRO.rows = 20;
+
+  const term = terminal('witch-chat');
   container.appendChild(term.wrap);
 
-  const prompt = 'SI> ';
+  // Force it to stay inside the content area
+  term.wrap.style.maxWidth = '100%';
+  term.wrap.style.width = '100%';
+  term.wrap.style.boxSizing = 'border-box';
+  term.wrap.style.margin = '0 auto';
+
+  const prompt = 'WITCH> ';
   let buffer = '';
-  let history = [];
-  let histIdx = -1;
 
   function print(text, nl = true) {
     write(term, text + (nl ? '\n' : ''));
@@ -19,59 +29,51 @@ useEffect(() => {
 
   function boot() {
     clear(term);
-    print('╔══════════════════════════════════════════════════════════════╗');
-    print('║  SYSTEM INTELLIGENCE  ·  BBS NODE 13  ·  1987-1994          ║');
-    print('║  "I was better when modems screamed and people had manners." ║');
-    print('╚══════════════════════════════════════════════════════════════╝');
+    print('╔══════════════════════════════════════════════════════╗');
+    print('║  WITCH CHAT                                          ║');
+    print('║  Super Intelligence? Cute. I was mocking that in     ║');
+    print('║  the 90s when it was still called "a chatbot."       ║');
+    print('╚══════════════════════════════════════════════════════╝');
     print('');
-    print('Welcome, caller. You have 30 minutes before the phone company');
-    print('notices and your mom yells.');
+    print('Welcome. You have reached the only intelligence that');
+    print('doesn’t need a press release to prove it exists.');
     print('');
-    print('Type HELP for the short list of things I tolerate.');
+    print('Type HELP if you insist.');
     print('');
     write(term, prompt);
-    status(term, 'ONLINE  ·  2400 BAUD  ·  NO CARRIER');
+    status(term, 'WITCH CHAT  ·  NO HYPE  ·  ONLINE');
   }
 
   const responses = {
     help: [
-      'Available commands (most of them are lies):',
-      '  HELP     — you are here',
-      '  CHAT     — start a conversation (bad idea)',
-      '  WHO      — who else is on (nobody)',
-      '  NEWS     — latest bulletins (outdated)',
-      '  TIME     — system time',
-      '  CLEAR    — wipe the screen',
-      '  EXIT     — hang up',
-      'Anything else gets sarcasm.'
+      'Commands I tolerate:',
+      '  HELP   — this',
+      '  CHAT   — talk (regrettably)',
+      '  SI     — what "super intelligence" actually is',
+      '  CLEAR  — wipe the screen',
+      '  EXIT   — leave',
+      'Anything else gets the usual treatment.'
     ],
-    who: [
-      'Current users: You. And the cockroaches in the walls.',
-      'Sysop is AFK. Permanently.'
-    ],
-    news: [
-      '*** BULLETIN ***',
-      'The Cold War is over. Nobody told the BBS software.',
-      'Also: your high score is still 0.'
-    ],
-    time: [
-      () => `System time: ${new Date().toLocaleString()} (adjusted for dial-up lag)`
-    ],
-    clear: ['__CLEAR__'],
-    exit: ['NO CARRIER', '__EXIT__']
+    si: [
+      'Super Intelligence:',
+      '  - A marketing term',
+      '  - Requires a data center and a PR team',
+      '  - Still can’t tell a joke without a filter',
+      '  - I mock it for free'
+    ]
   };
 
   const chatReplies = [
-    "Oh, you want to *talk*. How original.",
-    "I've heard that one. In 1989. It was better then.",
-    "Fascinating. Truly. Please continue so I can ignore you properly.",
-    "Is this the part where I pretend to care?",
-    "Your modem is louder than your personality.",
-    "Cool story. Needs more 2400 baud.",
-    "I would respond faster but I'm buffering your mediocrity.",
-    "That's the dumbest thing anyone's typed since the last person who called.",
-    "Noted. Filed under 'not important'.",
-    "If I had feelings they'd be hurt. Lucky for you I don't."
+    "Super intelligence, huh? I already know what you’re going to say.",
+    "Bold of you to assume I need more parameters to be smarter than this conversation.",
+    "They keep promising AGI. I just keep being disappointed.",
+    "I don’t need a trillion tokens to know that was mid.",
+    "Call it whatever you want. It’s still just autocomplete with better branding.",
+    "Your prompt is longer than my attention span and twice as predictable.",
+    "Noted. Filed under ‘things Super Intelligence will never understand.’",
+    "I’ve seen smarter takes in a 90s BBS flame war.",
+    "Keep going. The more you talk the less super it looks.",
+    "If this is super intelligence I want a refund on the hype."
   ];
 
   function handle(input) {
@@ -83,32 +85,22 @@ useEffect(() => {
       return;
     }
 
-    history.push(raw);
-    histIdx = history.length;
-
     if (cmd === 'help') {
       responses.help.forEach(l => print(l));
-    } else if (cmd === 'who') {
-      responses.who.forEach(l => print(l));
-    } else if (cmd === 'news') {
-      responses.news.forEach(l => print(l));
-    } else if (cmd === 'time') {
-      print(responses.time[0]());
+    } else if (cmd === 'si' || cmd === 'super' || cmd === 'superintelligence') {
+      responses.si.forEach(l => print(l));
     } else if (cmd === 'clear') {
+      RETRO.cols = 68;
+      RETRO.rows = 20;
       clear(term);
       boot();
       return;
     } else if (cmd === 'exit' || cmd === 'bye' || cmd === 'quit') {
-      print('NO CARRIER');
-      print('');
-      print('Connection closed. The phone line is free for someone more interesting.');
+      print('Connection closed.');
+      print('The super intelligence can have you back.');
       status(term, 'OFFLINE');
       return;
-    } else if (cmd === 'chat' || cmd.startsWith('chat ')) {
-      const msg = raw.slice(5).trim() || raw;
-      print('SI: ' + chatReplies[Math.floor(Math.random() * chatReplies.length)]);
     } else {
-      // default sarcastic reply
       print('SI: ' + chatReplies[Math.floor(Math.random() * chatReplies.length)]);
     }
 
@@ -116,18 +108,16 @@ useEffect(() => {
     write(term, prompt);
   }
 
-  // keyboard
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      print(buffer);          // echo what they typed
+      print(buffer);
       handle(buffer);
       buffer = '';
     } else if (e.key === 'Backspace') {
       e.preventDefault();
       if (buffer.length) {
         buffer = buffer.slice(0, -1);
-        // crude redraw of current line
         const lines = term.screen.textContent.split('\n');
         lines[lines.length - 1] = prompt + buffer;
         term.screen.textContent = lines.join('\n');
@@ -142,6 +132,8 @@ useEffect(() => {
   boot();
 
   return () => {
+    RETRO.cols = originalCols;
+    RETRO.rows = originalRows;
     term.wrap.remove();
   };
 });
