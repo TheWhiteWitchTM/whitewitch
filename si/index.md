@@ -1,15 +1,17 @@
 ---
 layout: default
-title: Witch Chat — SI
-description: Witch Chat. Super Intelligence is just a marketing term.
+title: SI Witch
+description: White Witch Chat. Super Intelligence is just a marketing term.
 permalink: /si/
+image: chat.jpg
 ---
 
-<div id="game"></div>
+# 🧙‍♀️ SI Witch
 
-<p style="color:#39ff14;font-family:monospace;margin-top:0.5rem;max-width:70ch;">
-  Type at the prompt. Try <code>help</code>, <code>chat</code>, or just insult the idea of super intelligence.
-</p>
+Fake super intelligence. Real sarcasm.  
+Type at the prompt. Ask what day it is, who I am, or just talk.
+
+<div id="game"></div>
 
 <script src="{{ '/assets/js/components.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/retro.js' | relative_url }}"></script>
