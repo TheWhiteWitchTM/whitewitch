@@ -2,6 +2,7 @@
   "items": [
     { "title": "🏠 Home", "url": "/" },
     { "title": "📝 Blog", "url": "/blog/" },
+    { "title": "🧙‍♀️ SI Witch", "url": "/si/" },
     {
       "title": "📚 Content",
       "dropdown": [
