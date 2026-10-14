@@ -354,3 +354,104 @@ useEffect(() => {
     if (verb === "jump") {
       if (current === "ledge1") { current = "ledge2"; look(); }
       else if (current === "ledge2") { current = "ledge1"; look(); }
+      else print("You can't jump here.");
+      return;
+    }
+
+    if (verb === "fill" && noun === "bladder") {
+      if (inventory.includes("bladder") && current === "swamp") {
+        print("You fill the bladder with swamp gas.");
+      } else print("You can't fill that here.");
+      return;
+    }
+
+    if (verb === "light" && noun === "gas") {
+      if (current === "chamber" && inventory.includes("bladder")) {
+        print("You light the gas! The bladder explodes and blows a hole in the window.");
+        windowBlown = true;
+        rooms.chamber.exits.e = "ledge1";
+        inventory = inventory.filter(i => i !== "bladder");
+      } else print("Nothing happens.");
+      return;
+    }
+
+    if (verb === "dam" && noun === "lava") {
+      if (current === "lava" && inventory.includes("bricks")) {
+        print("You dam the lava with the bricks. A firestone falls free.");
+        lavaDammed = true;
+        rooms.lava.objects.push("firestone");
+        inventory = inventory.filter(i => i !== "bricks");
+      } else print("You can't do that.");
+      return;
+    }
+
+    if (verb === "pour" && noun === "water") {
+      if (lavaDammed && inventory.includes("bottle")) {
+        print("You pour water on the hot firestone. It cools enough to take.");
+      } else print("Nothing to pour on.");
+      return;
+    }
+
+    if (verb === "catch" && noun === "fish") {
+      if (current === "shore" && inventory.includes("net") && inventory.includes("bottle")) {
+        print("You catch a golden fish with the net and put it in the bottle!");
+        rooms.shore.objects.push("fish");
+      } else print("You need the net and bottle.");
+      return;
+    }
+
+    if (verb === "get" && noun === "bees") {
+      if (current === "bees" && inventory.includes("bottle") && inventory.includes("mud")) {
+        print("Protected by the mud, you catch the bees in the bottle.");
+        get("bees");
+      } else print("The bees sting you! You need mud and a bottle.");
+      return;
+    }
+
+    if (verb === "drop" && noun === "bees") {
+      if (current === "meadow" && inventory.includes("bees")) {
+        print("You release the bees! They attack the dragon, which flies away. Dragon eggs are left behind.");
+        rooms.meadow.objects = rooms.meadow.objects.filter(o => o !== "dragon");
+        rooms.meadow.objects.push("eggs");
+        inventory = inventory.filter(i => i !== "bees");
+      } else drop("bees");
+      return;
+    }
+
+    print("I don't understand. Type HELP.");
+  }
+
+  function onKey(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      term.writeln("");
+      handle(inputBuffer);
+      inputBuffer = "";
+      term.write("> ");
+    } else if (e.key === "Backspace") {
+      e.preventDefault();
+      if (inputBuffer.length) {
+        inputBuffer = inputBuffer.slice(0, -1);
+        term.write("\b");
+      }
+    } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      e.preventDefault();
+      inputBuffer += e.key;
+      term.write(e.key);
+    }
+  }
+
+  term.wrap.addEventListener("keydown", onKey);
+
+  term.clear();
+  print("ADVENTURELAND", 10);
+  print("Complete classic chain — White Witch Edition", 2);
+  print("Collect all 13 *treasures* in the stump. Type HELP.", 7);
+  print("");
+  look();
+
+  return () => {
+    term.wrap.removeEventListener("keydown", onKey);
+    term.destroy();
+  };
+});
