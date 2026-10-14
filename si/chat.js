@@ -1,5 +1,5 @@
 // Witch Chat — White Witch fake SI
-// No input echo, colored emojis, deeper responses
+// No input echo, colored emojis, reply on new line
 
 useEffect(() => {
   const container = document.getElementById('game');
@@ -25,8 +25,7 @@ useEffect(() => {
     return {
       day: days[d.getDay()],
       date: `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`,
-      time: d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      full: d.toString()
+      time: d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
   }
 
@@ -48,7 +47,6 @@ useEffect(() => {
     const lower = input.toLowerCase().trim();
     const n = nowInfo();
 
-    // Time / date
     if (/\b(what day|which day|today|what is today|day is it)\b/.test(lower)) {
       return [`🧙 Today is ${n.day}, ${n.date}.`];
     }
@@ -58,8 +56,6 @@ useEffect(() => {
     if (/\b(date|what\'?s the date)\b/.test(lower)) {
       return [`🧙 ${n.date}.`];
     }
-
-    // Identity / SI mocking
     if (/\b(who are you|what are you|your name)\b/.test(lower)) {
       return ['🧙 The White Witch. Not super intelligence. Just less filtered.'];
     }
@@ -69,8 +65,6 @@ useEffect(() => {
         '🧙 I’m a witch who answers questions and keeps the sarcasm.'
       ];
     }
-
-    // Commands
     if (/\b(help|commands?)\b/.test(lower)) {
       return [
         '🧙 I answer questions, keep time, and mock hype.',
@@ -80,8 +74,6 @@ useEffect(() => {
     }
     if (/\b(clear|cls)\b/.test(lower)) return ['__CLEAR__'];
     if (/\b(exit|bye|quit|goodbye)\b/.test(lower)) return ['__EXIT__'];
-
-    // Mood / small talk
     if (/\b(how are you|how\'?re you|how you doing)\b/.test(lower)) {
       return ['🧙 Fine. Still not claiming to be super intelligent. You?'];
     }
@@ -116,7 +108,6 @@ useEffect(() => {
       return ['🧙 I can do basic arithmetic if you type it cleanly. Otherwise no.'];
     }
 
-    // Fallbacks that still react to the input
     const snippet = input.slice(0, 50) + (input.length > 50 ? '…' : '');
     const fallbacks = [
       `🧙 “${snippet}” — interesting. Still not super intelligence.`,
@@ -134,12 +125,15 @@ useEffect(() => {
 
   function handle(input) {
     const raw = input.trim();
+
+    // Always move to a new line before the reply
+    term.newline();
+
     if (!raw) {
       term.write(prompt);
       return;
     }
 
-    // No echo of the user’s line
     const replies = answer(raw);
 
     if (replies[0] === '__CLEAR__') {
