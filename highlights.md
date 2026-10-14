@@ -5,34 +5,6 @@ description: The pieces I actually stand behind.
 permalink: /highlights/
 ---
 
-<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
-  <h1 style="margin: 0;">✨ Highlights</h1>
-  <div>
-    <label for="tag-filter">👁️ Show:</label>
-    <select id="tag-filter">
-      <option value="">All</option>
-      {% assign all_tags = "" | split: "" %}
-      {% for collection in site.collections %}
-        {% for post in collection.docs %}
-          {% if post.highlights and post.tags %}
-            {% for tag in post.tags %}
-              {% unless all_tags contains tag %}
-                {% assign all_tags = all_tags | push: tag %}
-              {% endunless %}
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
-      {% endfor %}
-      {% assign all_tags = all_tags | sort %}
-      {% for tag in all_tags %}
-        <option value="{{ tag }}">{{ tag }}</option>
-      {% endfor %}
-    </select>
-  </div>
-</div>
-
-<p>Some of these took longer than they should have. Some of them I still like. All of them survived the “is this actually worth posting” filter, which is a higher bar than most people use.</p>
-
 {% assign highlights = "" | split: "" %}
 {% for collection in site.collections %}
   {% for post in collection.docs %}
@@ -42,6 +14,12 @@ permalink: /highlights/
   {% endfor %}
 {% endfor %}
 {% assign highlights = highlights | sort: "date" | reverse %}
+
+{% include tag-filter.html title="✨ Highlights" collection=highlights %}
+
+<p>Some of these took longer than they should have. Some of them I still like. All of them survived the “is this actually worth posting” filter, which is a higher bar than most people use.</p>
+
+<hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid #333;">
 
 {% if highlights.size > 0 %}
   {% include post-list.html collection=highlights %}
