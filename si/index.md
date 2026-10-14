@@ -3,7 +3,7 @@ layout: default
 title: SI Witch
 description: White Witch Chat. Super Intelligence is just a marketing term.
 permalink: /si/
-image: chat.jpg
+image: /si/chat.jpg
 ---
 
 # 🧙‍♀️ SI Witch
