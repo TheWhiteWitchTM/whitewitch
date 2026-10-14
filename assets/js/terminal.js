@@ -1,4 +1,4 @@
-// terminal.js — 80x24 ANSI terminal class for retro games / shells
+// terminal.js — pure 80x24 ANSI display buffer (no keyboard handling)
 class Terminal {
   constructor(options = {}) {
     this.cols = 80;
@@ -9,7 +9,6 @@ class Terminal {
     this.bg = options.bg || '#000000';
     this.border = options.border || '#39ff14';
 
-    // 16 ANSI colors
     this.colors = [
       '#000000','#aa0000','#00aa00','#aa5500',
       '#0000aa','#aa00aa','#00aaaa','#aaaaaa',
@@ -19,6 +18,7 @@ class Terminal {
 
     this.wrap = document.createElement('div');
     this.wrap.className = 'terminal';
+    this.wrap.tabIndex = 0;
     this.wrap.style.cssText = `
       background: ${this.bg};
       color: ${this.fg};
@@ -34,13 +34,13 @@ class Terminal {
       box-shadow: 0 0 12px ${this.border}40;
       position: relative;
       box-sizing: border-box;
+      outline: none;
     `;
 
     this.screen = document.createElement('div');
     this.screen.style.cssText = 'width:100%;height:100%;overflow:hidden;';
     this.wrap.appendChild(this.screen);
 
-    // Buffer: each cell has char + attributes
     this.buffer = Array.from({ length: this.rows }, () =>
       Array.from({ length: this.cols }, () => ({ ch: ' ', fg: 7, bg: 0, bright: false }))
     );
@@ -60,7 +60,7 @@ class Terminal {
     this.render();
   }
 
-  // ---- Core drawing ----
+  // ---- Drawing ----
   put(ch, x = this.cx, y = this.cy) {
     if (x < 0 || x >= this.cols || y < 0 || y >= this.rows) return;
     this.buffer[y][x] = {
@@ -79,6 +79,11 @@ class Terminal {
         if (this.cy >= this.rows) this.scroll();
       } else if (ch === '\r') {
         this.cx = 0;
+      } else if (ch === '\b') {
+        if (this.cx > 0) {
+          this.cx--;
+          this.put(' ');
+        }
       } else {
         if (this.cx >= this.cols) {
           this.cx = 0;
@@ -96,7 +101,7 @@ class Terminal {
     this.write(text + '\n');
   }
 
-  // ---- Cursor & screen control ----
+  // ---- Cursor & screen ----
   moveTo(x, y) {
     this.cx = Math.max(0, Math.min(this.cols - 1, x));
     this.cy = Math.max(0, Math.min(this.rows - 1, y));
@@ -131,7 +136,7 @@ class Terminal {
   setBright(b) { this.bright = !!b; }
   resetAttr() { this.fgIdx = 7; this.bgIdx = 0; this.bright = false; }
 
-  // ---- ANSI parsing (optional but handy) ----
+  // ---- ANSI ----
   writeAnsi(text) {
     let i = 0;
     while (i < text.length) {
@@ -156,8 +161,8 @@ class Terminal {
             else if (n >= 100 && n <= 107) this.bgIdx = n - 100;
           }
         } else if (cmd === 'H' || cmd === 'f') {
-          this.cy = (nums[0] || 1) - 1;
-          this.cx = (nums[1] || 1) - 1;
+          this.cy = Math.max(0, Math.min(this.rows - 1, (nums[0] || 1) - 1));
+          this.cx = Math.max(0, Math.min(this.cols - 1, (nums[1] || 1) - 1));
         } else if (cmd === 'J' && (nums[0] === 2 || nums[0] === 0)) {
           this.clear();
         } else if (cmd === 'K') {
@@ -175,7 +180,6 @@ class Terminal {
     }
   }
 
-  // ---- Render ----
   render() {
     let html = '';
     for (let y = 0; y < this.rows; y++) {
@@ -192,14 +196,12 @@ class Terminal {
     this.screen.innerHTML = html;
   }
 
-  // ---- Cleanup ----
   destroy() {
     clearInterval(this._blink);
     this.wrap.remove();
   }
 }
 
-// Convenience factory (matches your old terminal() style)
 function createTerminal(options) {
   return new Terminal(options);
 }
