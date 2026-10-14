@@ -2,7 +2,7 @@
 layout: default
 title: "Autism: Musk and I Share Something, and Why RFK Jr. Is Clueless"
 date: 2026-10-14
-featured: true
+highlight: true
 description: "The spectrum is not a ruined potato. Heritability, diagnostic expansion, and the people who ship rockets or write assembly at fourteen. RFK Jr. skipped the data."
 tags: [autism, science, personal]
 ---
