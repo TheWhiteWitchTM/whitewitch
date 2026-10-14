@@ -2,22 +2,25 @@
   "items": [
     { "title": "🏠 Home", "url": "/" },
     { "title": "📝 Blog", "url": "/blog/" },
-    { "title": "🧙‍♀️ SI Witch", "url": "/si/" },
     {
-      "title": "📚 Content",
+      "title": "📜 Articles",
       "dropdown": [
         { "title": "✨ Highlights", "url": "/highlights/" },
         { "separator": true },
-        { "title": "⚡ Shorts", "url": "/shorts/" },
-        { "title": "🎥 Videos", "url": "/videos/" },
-        { "title": "📜 Articles", "url": "/articles/" },
-        { "separator": true },
-        { "title": "😡 Rants", "url": "/rants/" }
+        { "title": "😡 Rants", "url": "/rants/" },
+        { "title": "🤮 Politics", "url": "/politics/" },
+        { "title": "📜 History", "url": "/history/" },
+        { "title": "💻 Tech", "url": "/tech/" },
+        { "title": "📈 Business", "url": "/business/" },
+        { "title": "✝️ Religion", "url": "/religion/" },
+        { "title": "😂 Jokes", "url": "/jokes/" }
       ]
     },
     {
       "title": "🕹️ Play",
       "dropdown": [
+        { "title": "🌲 Adventureland", "url": "/games/adventureland/" },
+        { "separator": true },
         { "title": "🚀 Galaxy Hunt", "url": "/games/galaxy-hunt/" },
         { "title": "🏓 Pong", "url": "/games/pong/" },
         { "title": "🗡️ Rogue", "url": "/games/rogue/" },
