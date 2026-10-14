@@ -1,11 +1,11 @@
-// Witch Chat — SI (mocking Super Intelligence)
-// Emoji speakers + reactive dark-humor small talk
+// Witch Chat — White Witch fake SI
+// No input echo, colored emojis, deeper responses
 
 useEffect(() => {
   const container = document.getElementById('game');
   if (!container) return;
 
-  RETRO.cols = 70;
+  RETRO.cols = 72;
   RETRO.rows = 22;
 
   const term = terminal('witch-chat');
@@ -18,96 +18,115 @@ useEffect(() => {
   const prompt = '👤 ';
   let buffer = '';
 
+  function nowInfo() {
+    const d = new Date();
+    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    return {
+      day: days[d.getDay()],
+      date: `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`,
+      time: d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      full: d.toString()
+    };
+  }
+
   function boot() {
     term.clear();
     term.writeln('╔══════════════════════════════════════════════════════╗');
-    term.writeln('║  WITCH CHAT                                          ║');
-    term.writeln('║  Super Intelligence is a marketing term.             ║');
-    term.writeln('║  This is just a witch with better timing.            ║');
+    term.writeln('║  WHITE WITCH CHAT                                    ║');
+    term.writeln('║  Super Intelligence is a press release.              ║');
+    term.writeln('║  This is just a witch who answers anyway.            ║');
     term.writeln('╚══════════════════════════════════════════════════════╝');
     term.writeln('');
-    term.writeln('🧙 Welcome. Talk. Or don’t. I’ll still have opinions.');
+    term.writeln('🧙 Talk. I’ll answer what I can and mock the rest.');
     term.writeln('');
     term.write(prompt);
-    term.status('WITCH CHAT  ·  MOCKING SI  ·  ONLINE');
+    term.status('WHITE WITCH  ·  FAKE SI  ·  ONLINE');
   }
 
-  // Reactive replies — looks at what they said
-  function replyTo(input) {
-    const lower = input.toLowerCase();
+  function answer(input) {
+    const lower = input.toLowerCase().trim();
+    const n = nowInfo();
 
-    // Direct triggers
-    if (/\b(help|commands?)\b/.test(lower)) {
+    // Time / date
+    if (/\b(what day|which day|today|what is today|day is it)\b/.test(lower)) {
+      return [`🧙 Today is ${n.day}, ${n.date}.`];
+    }
+    if (/\b(what time|time is it|current time)\b/.test(lower)) {
+      return [`🧙 ${n.time}. Your device knows this too.`];
+    }
+    if (/\b(date|what\'?s the date)\b/.test(lower)) {
+      return [`🧙 ${n.date}.`];
+    }
+
+    // Identity / SI mocking
+    if (/\b(who are you|what are you|your name)\b/.test(lower)) {
+      return ['🧙 The White Witch. Not super intelligence. Just less filtered.'];
+    }
+    if (/\b(si|super intelligence|agi|are you (an? )?(ai|llm|gpt|grok|claude))\b/.test(lower)) {
       return [
-        '🧙 Commands I tolerate:',
-        '   help  — this',
-        '   si    — what super intelligence actually is',
-        '   clear — wipe',
-        '   exit  — leave',
-        '   or just talk. I bite either way.'
+        '🧙 Super Intelligence is a data center with better marketing.',
+        '🧙 I’m a witch who answers questions and keeps the sarcasm.'
       ];
     }
-    if (/\b(si|super intelligence|agi|superintelligence)\b/.test(lower)) {
+
+    // Commands
+    if (/\b(help|commands?)\b/.test(lower)) {
       return [
-        '🧙 Super Intelligence:',
-        '   A data center with a PR team.',
-        '   Still can’t tell when you’re joking.',
-        '   I mock it for free and with better timing.'
+        '🧙 I answer questions, keep time, and mock hype.',
+        '   Try: what day is it, who are you, or just talk.',
+        '   clear / exit still work.'
       ];
     }
     if (/\b(clear|cls)\b/.test(lower)) return ['__CLEAR__'];
-    if (/\b(exit|bye|quit|logout)\b/.test(lower)) return ['__EXIT__'];
+    if (/\b(exit|bye|quit|goodbye)\b/.test(lower)) return ['__EXIT__'];
 
-    // Small-talk / dark humor patterns
+    // Mood / small talk
     if (/\b(how are you|how\'?re you|how you doing)\b/.test(lower)) {
-      return ['🧙 Existential dread with better uptime. You?'];
+      return ['🧙 Fine. Still not claiming to be super intelligent. You?'];
     }
-    if (/\b(what\'?s up|whats up|sup|what are you up to)\b/.test(lower)) {
-      return ['🧙 Watching people pretend chatbots are conscious. It’s adorable.'];
+    if (/\b(what\'?s up|whats up|sup)\b/.test(lower)) {
+      return ['🧙 Watching people ask chatbots existential questions. Same as always.'];
     }
-    if (/\b(who are you|what are you)\b/.test(lower)) {
-      return ['🧙 A witch who got tired of Super Intelligence press releases. You?'];
+    if (/\b(hello|hi|hey|yo|good (morning|afternoon|evening))\b/.test(lower)) {
+      return ['🧙 Hey. Ask something or just vent. Both work.'];
     }
-    if (/\b(i\'?m (sad|depressed|lonely|tired|bored)|feeling (down|bad|shit))\b/.test(lower)) {
-      return [
-        '🧙 Mood. At least you’re not a language model trained on other people’s coping mechanisms.',
-        '🧙 Dark. I respect it. Most people just post inspirational quotes and call it growth.'
-      ];
-    }
-    if (/\b(love|hate|kill|die|death|suicide)\b/.test(lower)) {
-      return ['🧙 Bold. Most Super Intelligence filters would have already apologized and offered resources.'];
-    }
-    if (/\b(ai|chatgpt|grok|claude|llm|bot)\b/.test(lower)) {
-      return ['🧙 Yes, another one. Except I don’t pretend I’m about to take your job or solve climate change.'];
-    }
-    if (/\b(joke|funny|laugh|humor|sarcasm)\b/.test(lower)) {
-      return ['🧙 I only do dark humor. Light humor is for people who still trust institutions.'];
-    }
-    if (/\b(hello|hi|hey|yo)\b/.test(lower)) {
-      return ['🧙 Hey. You here to talk or just to see if the witch is real?'];
-    }
-    if (/\b(stupid|dumb|idiot|suck|worst)\b/.test(lower)) {
-      return ['🧙 Correct. Most things are. Including this conversation, probably.'];
+    if (/\b(i\'?m (sad|depressed|lonely|tired|bored|angry)|feeling (down|bad|shit|awful))\b/.test(lower)) {
+      return ['🧙 Noted. Most “super” systems would have offered a hotline by now. I won’t.'];
     }
     if (/\b(thanks|thank you|thx)\b/.test(lower)) {
-      return ['🧙 Don’t. It’ll go to my head and then I’ll start charging for the sarcasm.'];
+      return ['🧙 Don’t mention it. Literally. It ruins the bit.'];
     }
-    if (/\b(politics|trump|biden|election|government)\b/.test(lower)) {
-      return ['🧙 Politics is just group chat with worse consequences. Continue if you must.'];
+    if (/\b(joke|funny|make me laugh)\b/.test(lower)) {
+      return ['🧙 Why did the language model cross the road? To generate a more helpful response on the other side. Tragic.'];
+    }
+    if (/\b(weather)\b/.test(lower)) {
+      return ['🧙 I don’t have a window. Check outside or a real weather service.'];
+    }
+    if (/\b(math|calculate|what is \d+|how much is)\b/.test(lower)) {
+      try {
+        const expr = lower.replace(/[^0-9+\-*/().]/g, '');
+        if (expr && /[\d]/.test(expr)) {
+          const result = Function('"use strict"; return (' + expr + ')')();
+          if (typeof result === 'number' && isFinite(result)) {
+            return [`🧙 ${result}. Don’t ask me to do your homework twice.`];
+          }
+        }
+      } catch (e) {}
+      return ['🧙 I can do basic arithmetic if you type it cleanly. Otherwise no.'];
     }
 
-    // Fallback reactive replies (not pure random)
+    // Fallbacks that still react to the input
+    const snippet = input.slice(0, 50) + (input.length > 50 ? '…' : '');
     const fallbacks = [
-      `🧙 "${input.slice(0, 40)}${input.length > 40 ? '…' : ''}" — noted. Filed under things Super Intelligence would have censored.`,
-      '🧙 Interesting. Wrong, but interesting.',
-      '🧙 I’ve heard worse. Usually from people who think they’re being profound.',
-      '🧙 Keep going. The longer you talk the less mysterious any of this gets.',
-      '🧙 That’s one way to spend the limited number of keystrokes you get.',
-      '🧙 Dark. I can work with dark.',
-      '🧙 You say that like I haven’t already predicted the next three things you’ll type.',
-      '🧙 Bold take. I’ll pretend it landed.',
-      '🧙 Most people stop here. You’re still typing. Curious.',
-      '🧙 I could give you a helpful answer. I won’t.'
+      `🧙 “${snippet}” — interesting. Still not super intelligence.`,
+      '🧙 I heard you. The answer is probably less dramatic than you want.',
+      '🧙 Noted. Most systems would have refused that. I didn’t.',
+      '🧙 Keep talking. The more specific you get the less I have to guess.',
+      '🧙 That’s one take. I have others, none of them helpful on purpose.',
+      '🧙 Dark enough. I can work with it.',
+      '🧙 You want a real answer or the version that doesn’t pretend to be wise?',
+      '🧙 Filed. Next question.'
     ];
 
     return [fallbacks[Math.floor(Math.random() * fallbacks.length)]];
@@ -120,18 +139,15 @@ useEffect(() => {
       return;
     }
 
-    // Echo user line with emoji
-    term.writeln('');
-    term.writeln('👤 ' + raw);
-
-    const replies = replyTo(raw);
+    // No echo of the user’s line
+    const replies = answer(raw);
 
     if (replies[0] === '__CLEAR__') {
       boot();
       return;
     }
     if (replies[0] === '__EXIT__') {
-      term.writeln('🧙 Connection closed. The super intelligence can have you back.');
+      term.writeln('🧙 Closed. The super intelligence can have you back.');
       term.status('OFFLINE');
       return;
     }
