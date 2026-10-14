@@ -48,18 +48,3 @@ permalink: /highlights/
 {% else %}
   <p>No highlights yet.</p>
 {% endif %}
-
-<script>
-(function () {
-  const select = document.getElementById('tag-filter');
-  if (!select) return;
-  select.addEventListener('change', function () {
-    const selected = this.value.toLowerCase();
-    document.querySelectorAll('.post-item').forEach(function (el) {
-      const tags = (el.dataset.tags || '').toLowerCase();
-      const list = tags.split(',').map(function (t) { return t.trim(); });
-      el.style.display = (!selected || list.indexOf(selected) !== -1) ? '' : 'none';
-    });
-  });
-})();
-</script>
