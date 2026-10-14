@@ -1,4 +1,4 @@
-// retro.js — terminal that preserves emoji color
+// retro.js — emoji color preserved, proper line handling
 const RETRO = {
   cols: 80,
   rows: 24,
@@ -13,7 +13,6 @@ function terminal(className = '') {
   wrap.className = `retro-terminal ${className}`.trim();
   wrap.style.cssText = `
     background: ${RETRO.bg};
-    color: ${RETRO.fg};
     font-family: ${RETRO.font};
     font-size: 15px;
     line-height: 1.25;
@@ -21,7 +20,7 @@ function terminal(className = '') {
     height: ${RETRO.rows * 1.25}em;
     padding: 8px;
     overflow: hidden;
-    white-space: pre-wrap;
+    white-space: pre;
     border: 2px solid ${RETRO.fg};
     box-shadow: 0 0 12px ${RETRO.fg}40;
     position: relative;
@@ -34,6 +33,7 @@ function terminal(className = '') {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    color: ${RETRO.fg};
   `;
   wrap.appendChild(screen);
 
@@ -44,6 +44,14 @@ function terminal(className = '') {
     cursorVisible: true
   };
 
+  // Force green only on non-emoji text so emojis keep native color
+  function colorize(text) {
+    return text.replace(
+      /([^\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F600}-\u{1F64F}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}]+)/gu,
+      '<span style="color:#39ff14">$1</span>'
+    );
+  }
+
   function render() {
     const html = state.lines.map((line, y) => {
       let display = line;
@@ -52,12 +60,13 @@ function terminal(className = '') {
         const after = line.slice(state.cx);
         display = before + (state.cursorVisible ? RETRO.cursor : ' ') + after.slice(1);
       }
-      // Let emojis keep their color by not wrapping the whole line in a forced color
-      return display
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-    }).join('\n');
+      return colorize(
+        display
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+      );
+    }).join('<br>');
 
     screen.innerHTML = html;
   }
@@ -114,6 +123,9 @@ function terminal(className = '') {
         state.lines[state.cy] = line.join('');
         render();
       }
+    },
+    newline() {
+      this.write('\n');
     },
     status(text) {
       state.lines[RETRO.rows - 1] = text.padEnd(RETRO.cols).slice(0, RETRO.cols);
