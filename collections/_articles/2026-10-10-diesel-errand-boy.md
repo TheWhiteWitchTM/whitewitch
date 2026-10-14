@@ -2,7 +2,7 @@
 layout: default
 title: "America: From Leader of the Free World to Putin’s Diesel Errand Boy"
 date: 2026-10-10
-featured: true
+highlight: true
 description: "Temporary Russian diesel license, warm words for strongmen, territorial daydreams. The free-world heavy just became the war’s logistics partner."
 tags: [politics, us, russia]
 ---
