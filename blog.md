@@ -10,4 +10,4 @@ permalink: /blog/
 
 The stuff that isn’t politics, history, or a rant. Games, tools, and the occasional experiment. Same rules: no paid posts, no quiet sponsors, and no pretending the data doesn’t matter.
 
-{% include post-list.html collection=site.posts %}
+{% include post-list.html collection=site.blog %}
