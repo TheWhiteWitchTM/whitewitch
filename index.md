@@ -22,7 +22,6 @@ description: Politics and social events. Facts & data first. I want you smarter,
 
 ## 🚨 Featured
 
-<div class="post-list">
 {% assign featured = "" | split: "" %}
 {% for collection in site.collections %}
   {% for post in collection.docs %}
@@ -31,11 +30,5 @@ description: Politics and social events. Facts & data first. I want you smarter,
     {% endif %}
   {% endfor %}
 {% endfor %}
-{% assign featured = featured | sort: "date" | reverse %}
 
-{% for post in featured limit: 6 %}
-  {% include post-card.html post=post %}
-{% else %}
-  <p>No featured posts yet.</p>
-{% endfor %}
-</div>
+{% include post-list.html collection=featured %}
