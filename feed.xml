@@ -1,0 +1,36 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.title | xml_escape }}</title>
+  <subtitle>{{ site.description | xml_escape }}</subtitle>
+  <link href="{{ '/feed.xml' | absolute_url }}" rel="self" type="application/atom+xml"/>
+  <link href="{{ '/' | absolute_url }}"/>
+  <id>{{ '/' | absolute_url }}</id>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <author>
+    <name>The White Witch™</name>
+  </author>
+
+  {% assign items = "" | split: "" %}
+  {% for collection in site.collections %}
+    {% if collection.label == "blog" or collection.label == "history" or collection.label == "politics" or collection.label == "rants" or collection.label == "tech" %}
+      {% for doc in collection.docs %}
+        {% assign items = items | push: doc %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+
+  {% assign sorted = items | sort: "date" | reverse %}
+  {% for item in sorted limit: 20 %}
+    <entry>
+      <title>{{ item.title | xml_escape }}</title>
+      <link href="{{ item.url | absolute_url }}"/>
+      <id>{{ item.url | absolute_url }}</id>
+      <updated>{{ item.date | date_to_xmlschema }}</updated>
+      <published>{{ item.date | date_to_xmlschema }}</published>
+      <content type="html">{{ item.content | strip_html | truncate: 500 | xml_escape }}</content>
+    </entry>
+  {% endfor %}
+</feed>
