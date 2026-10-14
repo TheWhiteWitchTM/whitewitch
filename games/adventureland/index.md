@@ -3,6 +3,7 @@ layout: default
 title: Adventureland
 description: A faithful clone of Scott Adams' Adventureland (1978) with ANSI terminal graphics.
 permalink: /games/adventureland/
+mage: /games/adventureland/box.jpg
 ---
 
 # 🌲 Adventureland
