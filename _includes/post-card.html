@@ -1,4 +1,4 @@
-<article class="post-item" data-url="{{ include.post.url | relative_url }}">
+<article class="post-item" data-url="{{ include.post.url | relative_url }}" data-tags="{{ include.post.tags | join: ',' }}">
   <h2 class="toggle-title">
     <span class="toggle-emoji" title="Expand / collapse">▼</span>
     <span class="title-text">{{ include.post.title }}</span>
