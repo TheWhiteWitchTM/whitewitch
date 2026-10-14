@@ -15,7 +15,7 @@ layout: null
 
   {% assign items = "" | split: "" %}
   {% for collection in site.collections %}
-    {% if collection.label == "blog" or collection.label == "history" or collection.label == "politics" or collection.label == "rants" or collection.label == "tech" %}
+    {% if collection.label == "blog" or collection.label == "articles" or collection.label == "videos" or collection.label == "shorts" or collection.label == "rants" %}
       {% for doc in collection.docs %}
         {% assign items = items | push: doc %}
       {% endfor %}
