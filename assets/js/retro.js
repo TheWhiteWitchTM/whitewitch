@@ -1,16 +1,13 @@
-// retro.js — terminal primitives that sit on top of components.js
-// Assumes components.js is already loaded (useEffect, etc.)
-
+// retro.js — proper terminal foundation
 const RETRO = {
   cols: 80,
   rows: 24,
   font: '"Courier New", Courier, monospace',
-  fg: '#39ff14',   // poison green
+  fg: '#39ff14',
   bg: '#000000',
   cursor: '█'
 };
 
-// Create an 80×24 terminal element
 function terminal(className = '') {
   const wrap = document.createElement('div');
   wrap.className = `retro-terminal ${className}`.trim();
@@ -18,7 +15,7 @@ function terminal(className = '') {
     background: ${RETRO.bg};
     color: ${RETRO.fg};
     font-family: ${RETRO.font};
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.2;
     width: ${RETRO.cols}ch;
     height: ${RETRO.rows * 1.2}em;
@@ -28,6 +25,7 @@ function terminal(className = '') {
     border: 2px solid ${RETRO.fg};
     box-shadow: 0 0 12px ${RETRO.fg}40;
     position: relative;
+    font-weight: 600;
   `;
 
   const screen = document.createElement('div');
@@ -39,65 +37,105 @@ function terminal(className = '') {
   `;
   wrap.appendChild(screen);
 
-  // simple cursor
-  const cursor = document.createElement('span');
-  cursor.className = 'retro-cursor';
-  cursor.textContent = RETRO.cursor;
-  cursor.style.cssText = `
-    position: absolute;
-    color: ${RETRO.fg};
-    animation: blink 1s step-end infinite;
-  `;
-  wrap.appendChild(cursor);
+  // Internal state
+  const state = {
+    lines: Array(RETRO.rows).fill(''),
+    cx: 0,
+    cy: 0,
+    cursorVisible: true
+  };
 
-  // blink keyframes (injected once)
-  if (!document.getElementById('retro-blink')) {
-    const style = document.createElement('style');
-    style.id = 'retro-blink';
-    style.textContent = `
-      @keyframes blink { 50% { opacity: 0; } }
-    `;
-    document.head.appendChild(style);
+  function render() {
+    // Build display with cursor in the text itself so typing is always visible
+    const display = state.lines.map((line, y) => {
+      if (y === state.cy) {
+        const before = line.slice(0, state.cx);
+        const after = line.slice(state.cx);
+        return before + (state.cursorVisible ? RETRO.cursor : ' ') + after.slice(1);
+      }
+      return line;
+    });
+    screen.textContent = display.join('\n');
   }
 
-  return { wrap, screen, cursor };
+  function scrollUp() {
+    state.lines.shift();
+    state.lines.push('');
+    if (state.cy > 0) state.cy--;
+  }
+
+  const api = {
+    wrap,
+    screen,
+    write(text) {
+      for (const ch of text) {
+        if (ch === '\n') {
+          state.cy++;
+          state.cx = 0;
+          if (state.cy >= RETRO.rows) {
+            scrollUp();
+            state.cy = RETRO.rows - 1;
+          }
+          continue;
+        }
+        if (state.cx >= RETRO.cols) {
+          state.cy++;
+          state.cx = 0;
+          if (state.cy >= RETRO.rows) {
+            scrollUp();
+            state.cy = RETRO.rows - 1;
+          }
+        }
+        const line = state.lines[state.cy].split('');
+        line[state.cx] = ch;
+        state.lines[state.cy] = line.join('').padEnd(RETRO.cols).slice(0, RETRO.cols);
+        state.cx++;
+      }
+      render();
+    },
+    writeln(text = '') {
+      this.write(text + '\n');
+    },
+    clear() {
+      state.lines = Array(RETRO.rows).fill('');
+      state.cx = 0;
+      state.cy = 0;
+      render();
+    },
+    setCursor(x, y) {
+      state.cx = Math.max(0, Math.min(x, RETRO.cols - 1));
+      state.cy = Math.max(0, Math.min(y, RETRO.rows - 1));
+      render();
+    },
+    getCursor() {
+      return { x: state.cx, y: state.cy };
+    },
+    backspace() {
+      if (state.cx > 0) {
+        state.cx--;
+        const line = state.lines[state.cy].split('');
+        line[state.cx] = ' ';
+        state.lines[state.cy] = line.join('');
+        render();
+      }
+    },
+    status(text) {
+      state.lines[RETRO.rows - 1] = text.padEnd(RETRO.cols).slice(0, RETRO.cols);
+      render();
+    }
+  };
+
+  // Blink cursor
+  setInterval(() => {
+    state.cursorVisible = !state.cursorVisible;
+    render();
+  }, 500);
+
+  render();
+  return api;
 }
 
-// Write text into the terminal (simple line-based for now)
-function write(term, text) {
-  const lines = term.screen.textContent.split('\n');
-  const newLines = (term.screen.textContent + text).split('\n');
-  // keep only last RETRO.rows lines
-  const visible = newLines.slice(-RETRO.rows);
-  term.screen.textContent = visible.join('\n');
-  // move cursor to end
-  const last = visible[visible.length - 1] || '';
-  term.cursor.style.left = `${last.length}ch`;
-  term.cursor.style.top = `${(visible.length - 1) * 1.2}em`;
-}
-
-// Clear the terminal
-function clear(term) {
-  term.screen.textContent = '';
-  term.cursor.style.left = '0';
-  term.cursor.style.top = '0';
-}
-
-// Simple status line (bottom row)
-function status(term, text) {
-  const lines = term.screen.textContent.split('\n');
-  while (lines.length < RETRO.rows - 1) lines.push('');
-  lines[RETRO.rows - 1] = text.padEnd(RETRO.cols).slice(0, RETRO.cols);
-  term.screen.textContent = lines.join('\n');
-}
-
-// Example usage (you can delete this once you wire the games)
-useEffect(() => {
-  const t = terminal();
-  document.body.appendChild(t.wrap);   // or append to a game container
-  write(t, 'RETRO TERMINAL ONLINE\n');
-  write(t, '80x24  POISON GREEN\n');
-  write(t, '> ');
-  status(t, 'READY');
-  return () => t.wrap.remove();
-});
+// Compatibility helpers (so older code still works)
+function write(term, text) { term.write(text); }
+function clear(term) { term.clear(); }
+function status(term, text) { term.status(text); }
