@@ -25,3 +25,16 @@ collections:
     output: true
   about:
     output: true
+
+plugins:
+  - jekyll-feed
+
+feed:
+  path: /feed.xml
+  posts_limit: 20
+  collections:
+    - blog
+    - history
+    - politics
+    - rants
+    - tech
