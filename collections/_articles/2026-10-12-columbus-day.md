@@ -2,7 +2,6 @@
 layout: default
 title: "Columbus Day: The Man Who Missed the Continent and Found a Genocide"
 date: 2026-10-12
-featured: true
 description: "Norse sailors reached North America 500 years earlier. Columbus never set foot on it. His own reports describe the rest."
 tags: [history, columbus]
 ---
