@@ -1,4 +1,4 @@
-// retro.js — proper terminal foundation
+// retro.js — terminal that preserves emoji color
 const RETRO = {
   cols: 80,
   rows: 24,
@@ -16,16 +16,16 @@ function terminal(className = '') {
     color: ${RETRO.fg};
     font-family: ${RETRO.font};
     font-size: 15px;
-    line-height: 1.2;
+    line-height: 1.25;
     width: ${RETRO.cols}ch;
-    height: ${RETRO.rows * 1.2}em;
+    height: ${RETRO.rows * 1.25}em;
     padding: 8px;
     overflow: hidden;
-    white-space: pre;
+    white-space: pre-wrap;
     border: 2px solid ${RETRO.fg};
     box-shadow: 0 0 12px ${RETRO.fg}40;
     position: relative;
-    font-weight: 600;
+    font-weight: 500;
   `;
 
   const screen = document.createElement('div');
@@ -37,7 +37,6 @@ function terminal(className = '') {
   `;
   wrap.appendChild(screen);
 
-  // Internal state
   const state = {
     lines: Array(RETRO.rows).fill(''),
     cx: 0,
@@ -46,16 +45,21 @@ function terminal(className = '') {
   };
 
   function render() {
-    // Build display with cursor in the text itself so typing is always visible
-    const display = state.lines.map((line, y) => {
+    const html = state.lines.map((line, y) => {
+      let display = line;
       if (y === state.cy) {
         const before = line.slice(0, state.cx);
         const after = line.slice(state.cx);
-        return before + (state.cursorVisible ? RETRO.cursor : ' ') + after.slice(1);
+        display = before + (state.cursorVisible ? RETRO.cursor : ' ') + after.slice(1);
       }
-      return line;
-    });
-    screen.textContent = display.join('\n');
+      // Let emojis keep their color by not wrapping the whole line in a forced color
+      return display
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }).join('\n');
+
+    screen.innerHTML = html;
   }
 
   function scrollUp() {
@@ -86,7 +90,7 @@ function terminal(className = '') {
             state.cy = RETRO.rows - 1;
           }
         }
-        const line = state.lines[state.cy].split('');
+        const line = (state.lines[state.cy] || '').split('');
         line[state.cx] = ch;
         state.lines[state.cy] = line.join('').padEnd(RETRO.cols).slice(0, RETRO.cols);
         state.cx++;
@@ -102,18 +106,10 @@ function terminal(className = '') {
       state.cy = 0;
       render();
     },
-    setCursor(x, y) {
-      state.cx = Math.max(0, Math.min(x, RETRO.cols - 1));
-      state.cy = Math.max(0, Math.min(y, RETRO.rows - 1));
-      render();
-    },
-    getCursor() {
-      return { x: state.cx, y: state.cy };
-    },
     backspace() {
       if (state.cx > 0) {
         state.cx--;
-        const line = state.lines[state.cy].split('');
+        const line = (state.lines[state.cy] || '').split('');
         line[state.cx] = ' ';
         state.lines[state.cy] = line.join('');
         render();
@@ -125,17 +121,15 @@ function terminal(className = '') {
     }
   };
 
-  // Blink cursor
   setInterval(() => {
     state.cursorVisible = !state.cursorVisible;
     render();
-  }, 500);
+  }, 530);
 
   render();
   return api;
 }
 
-// Compatibility helpers (so older code still works)
 function write(term, text) { term.write(text); }
 function clear(term) { term.clear(); }
 function status(term, text) { term.status(text); }
