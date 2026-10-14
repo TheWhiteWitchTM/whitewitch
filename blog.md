@@ -10,8 +10,4 @@ permalink: /blog/
 
 The stuff that isn’t politics, history, or a rant. Games, tools, and the occasional experiment. Same rules: no paid posts, no quiet sponsors, and no pretending the data doesn’t matter.
 
-<div class="post-list">
-{% for item in site.blog %}
-  {% include post-card.html post=item %}
-{% endfor %}
-</div>
+{% include post-list.html collection=site.blog %}
