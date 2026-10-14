@@ -15,9 +15,7 @@
         {{ content }}
 
         {% if page.collection %}
-          <p style="margin: 1.5rem 0 5rem 0; font-size: 1.15rem;">
-            <a href="{{ '/' | append: page.collection | append: '/' | relative_url }}">⬅️ Back</a>
-          </p>
+          {% include post-actions.html %}
         {% endif %}
       </div>
 
