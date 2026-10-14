@@ -6,12 +6,18 @@ image: /assets/images/rants.jpg
 permalink: /rants/
 ---
 
-# 😡 Rants
+{% assign items = site.rants | sort: "date" | reverse %}
 
-These are the ones that made me close the laptop, open it again, and still hit publish. Dark humor is optional. Accuracy is not. Soft takes stay out.
+{% include tag-filter.html title="😡 Rants" collection=items %}
 
-<div class="post-list">
-{% for item in site.rants %}
-  {% include post-card.html post=item %}
-{% endfor %}
-</div>
+<p>These are the ones that made me close the laptop, open it again, and still hit publish.</p>
+<p>Angry, blunt, and still checked against the data.</p>
+<p>Soft takes stay out. Accuracy does not.</p>
+
+<hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid #333;">
+
+{% if items.size > 0 %}
+  {% include post-list.html collection=items %}
+{% else %}
+  <p>No rants yet.</p>
+{% endif %}
