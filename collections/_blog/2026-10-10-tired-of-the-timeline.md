@@ -7,6 +7,8 @@ description: "Politics broke me. So I rage-quit the feed and started a free GitH
 tags: [meta, site]
 ---
 
+## 🧙‍♀️ I Got Tired of the Timeline So I Built This Instead
+
 Politics broke me.
 
 Not in the dramatic “I shall write a manifesto” way. More in the “I opened the app, saw the same three arguments for the fourth day in a row, and closed the laptop before I said something that would require an apology I don’t feel like writing” way.
