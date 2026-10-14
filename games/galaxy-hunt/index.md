@@ -6,8 +6,9 @@ permalink: /games/galaxy-hunt/
 image: /games/galaxy-hunt/banner.jpg
 ---
 
+# 🚀 Galaxy Hunt
+
 <div id="game">
-  <h1>🚀 Galaxy Hunt</h1>
   <textarea id="output" readonly rows="24" cols="80"></textarea>
   <form id="command-form">
     <input id="command" autocomplete="off" autofocus placeholder="Command (nav, lscan, sscan, beam, missile, help…)">
@@ -64,4 +65,5 @@ image: /games/galaxy-hunt/banner.jpg
   }
 </style>
 
-<script src="{{ '/games/galaxy-hunt/galaxy-hunt.js' | relative_url }}"></script>
+<script src="/assets/js/terminal.js"></script>
+<script src="/games/galaxy-hunt/galaxy-hunt.js"></script>
