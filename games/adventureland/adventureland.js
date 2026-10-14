@@ -4,8 +4,9 @@ useEffect(() => {
 
   const term = new Terminal({ border: '#39ff14' });
   container.appendChild(term.wrap);
+  term.wrap.focus();
 
-  // ---- Game data (simplified but faithful core of Adventureland) ----
+  // ---- Game data (same as before) ----
   const rooms = {
     forest: {
       name: "Forest",
@@ -124,10 +125,10 @@ useEffect(() => {
   let current = "forest";
   let inventory = [];
   let score = 0;
-  let lampOn = false;
   let treasures = 0;
+  let inputBuffer = "";
 
-  function print(text, color = 2) { // green by default
+  function print(text, color = 2) {
     term.setFg(color);
     term.writeln(text);
     term.resetAttr();
@@ -153,6 +154,7 @@ useEffect(() => {
     print(`Score: ${score}/100   Treasures: ${treasures}/13`, 3);
     term.writeln("");
     term.write("> ");
+    inputBuffer = "";
   }
 
   function get(id) {
@@ -174,9 +176,7 @@ useEffect(() => {
     if (idx === -1) return print("You aren't carrying that.");
     inventory.splice(idx, 1);
     rooms[current].objects.push(id);
-    if (objects[id].treasure && current === "stump") {
-      score += 3; // bonus for storing
-    }
+    if (objects[id].treasure && current === "stump") score += 3;
     print(`You drop the ${objects[id].name}.`);
   }
 
@@ -226,7 +226,6 @@ useEffect(() => {
     if (verb === "say" && noun === "bunyon") {
       if (inventory.includes("axe") && current === "bog") {
         print("A voice booms: 'BUNYON!' The ox and axe vanish!");
-        // teleport logic simplified
         rooms.grove.objects.push("ox", "axe");
         inventory = inventory.filter(i => i !== "axe");
         rooms.bog.objects = rooms.bog.objects.filter(i => i !== "ox");
@@ -254,25 +253,28 @@ useEffect(() => {
     print("I don't understand.");
   }
 
-  // Input handling
-  let buffer = "";
-  document.addEventListener("keydown", (e) => {
+  // Game owns the keyboard completely
+  function onKey(e) {
     if (e.key === "Enter") {
       e.preventDefault();
       term.writeln("");
-      handle(buffer);
-      buffer = "";
+      handle(inputBuffer);
+      inputBuffer = "";
       term.write("> ");
     } else if (e.key === "Backspace") {
-      if (buffer.length) {
-        buffer = buffer.slice(0, -1);
-        term.backspace?.() || term.write("\b \b");
+      e.preventDefault();
+      if (inputBuffer.length) {
+        inputBuffer = inputBuffer.slice(0, -1);
+        term.write("\b");
       }
-    } else if (e.key.length === 1 && !e.ctrlKey) {
-      buffer += e.key;
+    } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      e.preventDefault();
+      inputBuffer += e.key;
       term.write(e.key);
     }
-  });
+  }
+
+  term.wrap.addEventListener("keydown", onKey);
 
   // Boot
   term.clear();
@@ -282,5 +284,8 @@ useEffect(() => {
   print("");
   look();
 
-  return () => term.destroy();
+  return () => {
+    term.wrap.removeEventListener("keydown", onKey);
+    term.destroy();
+  };
 });
