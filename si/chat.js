@@ -1,47 +1,65 @@
 // Witch Chat — SI (mocking Super Intelligence)
-// Uses retro.js terminal primitives
+// Proper terminal behavior: output scrolls, input stays at bottom
 
 useEffect(() => {
   const container = document.getElementById('game');
   if (!container) return;
 
-  // Smaller terminal so it fits the content column
   const originalCols = RETRO.cols;
   const originalRows = RETRO.rows;
   RETRO.cols = 68;
-  RETRO.rows = 20;
+  RETRO.rows = 22;
 
   const term = terminal('witch-chat');
   container.appendChild(term.wrap);
 
-  // Force it to stay inside the content area
   term.wrap.style.maxWidth = '100%';
   term.wrap.style.width = '100%';
   term.wrap.style.boxSizing = 'border-box';
   term.wrap.style.margin = '0 auto';
+  term.wrap.style.fontSize = '15px';          // slightly larger
+  term.screen.style.fontWeight = '600';       // bolder so typing is readable
+  term.cursor.style.fontWeight = '700';
+  term.cursor.style.textShadow = '0 0 6px #39ff14';
 
   const prompt = 'WITCH> ';
   let buffer = '';
+  let lines = [];                             // history only
 
-  function print(text, nl = true) {
-    write(term, text + (nl ? '\n' : ''));
+  function redraw() {
+    const visible = lines.slice(-(RETRO.rows - 1));
+    while (visible.length < RETRO.rows - 1) visible.unshift('');
+    const inputLine = prompt + buffer;
+    term.screen.textContent = visible.join('\n') + '\n' + inputLine;
+    // cursor always on the input line
+    term.cursor.style.left = `${inputLine.length}ch`;
+    term.cursor.style.top = `${(RETRO.rows - 1) * 1.2}em`;
+  }
+
+  function println(text) {
+    const parts = String(text).split('\n');
+    parts.forEach(p => lines.push(p));
+    // keep history from growing forever
+    if (lines.length > 200) lines = lines.slice(-200);
+    redraw();
   }
 
   function boot() {
-    clear(term);
-    print('╔══════════════════════════════════════════════════════╗');
-    print('║  WITCH CHAT                                          ║');
-    print('║  Super Intelligence? Cute. I was mocking that in     ║');
-    print('║  the 90s when it was still called "a chatbot."       ║');
-    print('╚══════════════════════════════════════════════════════╝');
-    print('');
-    print('Welcome. You have reached the only intelligence that');
-    print('doesn’t need a press release to prove it exists.');
-    print('');
-    print('Type HELP if you insist.');
-    print('');
-    write(term, prompt);
+    lines = [];
+    buffer = '';
+    println('╔══════════════════════════════════════════════════════╗');
+    println('║  WITCH CHAT                                          ║');
+    println('║  Super Intelligence? Cute. I was mocking that in     ║');
+    println('║  the 90s when it was still called "a chatbot."       ║');
+    println('╚══════════════════════════════════════════════════════╝');
+    println('');
+    println('Welcome. You have reached the only intelligence that');
+    println('doesn’t need a press release to prove it exists.');
+    println('');
+    println('Type HELP if you insist.');
+    println('');
     status(term, 'WITCH CHAT  ·  NO HYPE  ·  ONLINE');
+    redraw();
   }
 
   const responses = {
@@ -80,52 +98,44 @@ useEffect(() => {
     const raw = input.trim();
     const cmd = raw.toLowerCase();
 
-    if (!raw) {
-      write(term, prompt);
-      return;
-    }
+    if (!raw) return;
+
+    println(prompt + raw);   // echo what was typed
 
     if (cmd === 'help') {
-      responses.help.forEach(l => print(l));
+      responses.help.forEach(println);
     } else if (cmd === 'si' || cmd === 'super' || cmd === 'superintelligence') {
-      responses.si.forEach(l => print(l));
+      responses.si.forEach(println);
     } else if (cmd === 'clear') {
-      RETRO.cols = 68;
-      RETRO.rows = 20;
-      clear(term);
       boot();
       return;
     } else if (cmd === 'exit' || cmd === 'bye' || cmd === 'quit') {
-      print('Connection closed.');
-      print('The super intelligence can have you back.');
+      println('Connection closed.');
+      println('The super intelligence can have you back.');
       status(term, 'OFFLINE');
       return;
     } else {
-      print('SI: ' + chatReplies[Math.floor(Math.random() * chatReplies.length)]);
+      println('SI: ' + chatReplies[Math.floor(Math.random() * chatReplies.length)]);
     }
 
-    print('');
-    write(term, prompt);
+    println('');
   }
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      print(buffer);
       handle(buffer);
       buffer = '';
+      redraw();
     } else if (e.key === 'Backspace') {
       e.preventDefault();
       if (buffer.length) {
         buffer = buffer.slice(0, -1);
-        const lines = term.screen.textContent.split('\n');
-        lines[lines.length - 1] = prompt + buffer;
-        term.screen.textContent = lines.join('\n');
-        term.cursor.style.left = `${(prompt + buffer).length}ch`;
+        redraw();
       }
     } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
       buffer += e.key;
-      write(term, e.key, false);
+      redraw();
     }
   });
 
