@@ -3,17 +3,13 @@
     { "title": "🏠 Home", "url": "/" },
     { "title": "📝 Blog", "url": "/blog/" },
     {
-      "title": "📜 Articles",
+      "title": "📚 Content",
       "dropdown": [
         { "title": "✨ Highlights", "url": "/highlights/" },
         { "separator": true },
-        { "title": "😡 Rants", "url": "/rants/" },
-        { "title": "🤮 Politics", "url": "/politics/" },
-        { "title": "📜 History", "url": "/history/" },
-        { "title": "💻 Tech", "url": "/tech/" },
-        { "title": "📈 Business", "url": "/business/" },
-        { "title": "✝️ Religion", "url": "/religion/" },
-        { "title": "😂 Jokes", "url": "/jokes/" }
+        { "title": "⚡ Shorts", "url": "/shorts/" },
+        { "title": "🎥 Videos", "url": "/videos/" },
+        { "title": "📜 Articles", "url": "/articles/" }
       ]
     },
     {
