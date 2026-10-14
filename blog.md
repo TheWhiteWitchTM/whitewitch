@@ -10,4 +10,10 @@ permalink: /blog/
 
 The stuff that isn’t politics, history, or a rant. Games, tools, and the occasional experiment. Same rules: no paid posts, no quiet sponsors, and no pretending the data doesn’t matter.
 
-{% include post-list.html collection=site.blog %}
+<div class="post-list">
+{% for post in site.posts %}
+  {% if post.path contains "_posts/blog/" %}
+    {% include post-card.html post=post %}
+  {% endif %}
+{% endfor %}
+</div>
