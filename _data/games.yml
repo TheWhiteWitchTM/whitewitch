@@ -1,0 +1,15 @@
+- title: "🚀 Galaxy Hunt"
+  url: /games/galaxy-hunt/
+  description: "Retro space shooter."
+
+- title: "🏓 Pong"
+  url: /games/pong/
+  description: "Classic terminal Pong. First to 5 wins."
+
+- title: "🗡️ Rogue"
+  url: /games/rogue/
+  description: "Old-school dungeon crawler."
+
+- title: "🐍 Snake"
+  url: /games/snake/
+  description: "The classic snake game."
