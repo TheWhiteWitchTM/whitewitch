@@ -8,7 +8,11 @@ image: /games/hack/hack.jpg
 
 # 🗡️ Hack
 
-<div id="game"></div>
+<div id="game">
+  <div id="loading" style="color:#39ff14; font-family:monospace; padding:1rem;">
+    Loading Hack...
+  </div>
+</div>
 
 <script src="{{ '/assets/js/components.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/terminal.js' | relative_url }}"></script>
