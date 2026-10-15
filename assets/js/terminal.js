@@ -1,4 +1,4 @@
-// terminal.js — pure ANSI display buffer
+// terminal.js — efficient incremental ANSI terminal
 class Terminal {
   constructor(options = {}) {
     this.cols = options.cols || 80;
@@ -44,9 +44,25 @@ class Terminal {
     this.screen.style.cssText = 'width:100%;height:100%;overflow:hidden;';
     this.wrap.appendChild(this.screen);
 
-    this.buffer = Array.from({ length: this.rows }, () =>
-      Array.from({ length: this.cols }, () => ({ ch: ' ', fg: 2, bg: 0, bright: false }))
-    );
+    // Persistent DOM cells
+    this.cellEls = [];
+    this.buffer = [];
+    for (let y = 0; y < this.rows; y++) {
+      const row = [];
+      const rowEls = [];
+      const rowDiv = document.createElement('div');
+      rowDiv.style.whiteSpace = 'pre';
+      for (let x = 0; x < this.cols; x++) {
+        const span = document.createElement('span');
+        span.textContent = ' ';
+        rowDiv.appendChild(span);
+        rowEls.push(span);
+        row.push({ ch: ' ', fg: 2, bg: 0, bright: false, dirty: true });
+      }
+      this.screen.appendChild(rowDiv);
+      this.cellEls.push(rowEls);
+      this.buffer.push(row);
+    }
 
     this.cx = 0;
     this.cy = 0;
@@ -57,20 +73,30 @@ class Terminal {
 
     this._blink = setInterval(() => {
       this.cursorOn = !this.cursorOn;
+      this.markDirty(this.cx, this.cy);
       this.render();
     }, 530);
 
     this.render();
   }
 
+  markDirty(x, y) {
+    if (y >= 0 && y < this.rows && x >= 0 && x < this.cols) {
+      this.buffer[y][x].dirty = true;
+    }
+  }
+
   put(ch, x = this.cx, y = this.cy) {
     if (x < 0 || x >= this.cols || y < 0 || y >= this.rows) return;
-    this.buffer[y][x] = {
-      ch: ch || ' ',
-      fg: this.fgIdx,
-      bg: this.bgIdx,
-      bright: this.bright
-    };
+    const cell = this.buffer[y][x];
+    const newCh = ch || ' ';
+    if (cell.ch !== newCh || cell.fg !== this.fgIdx || cell.bg !== this.bgIdx || cell.bright !== this.bright) {
+      cell.ch = newCh;
+      cell.fg = this.fgIdx;
+      cell.bg = this.bgIdx;
+      cell.bright = this.bright;
+      cell.dirty = true;
+    }
   }
 
   write(text) {
@@ -100,9 +126,7 @@ class Terminal {
     if (this.autoRender) this.render();
   }
 
-  writeln(text = '') {
-    this.write(text + '\n');
-  }
+  writeln(text = '') { this.write(text + '\n'); }
 
   writeAt(x, y, text) {
     this.moveTo(x, y);
@@ -113,7 +137,14 @@ class Terminal {
     for (let yy = y; yy < y + h && yy < this.rows; yy++) {
       for (let xx = x; xx < x + w && xx < this.cols; xx++) {
         if (yy >= 0 && xx >= 0) {
-          this.buffer[yy][xx] = { ch, fg, bg, bright: this.bright };
+          const cell = this.buffer[yy][xx];
+          if (cell.ch !== ch || cell.fg !== fg || cell.bg !== bg) {
+            cell.ch = ch;
+            cell.fg = fg;
+            cell.bg = bg;
+            cell.bright = this.bright;
+            cell.dirty = true;
+          }
         }
       }
     }
@@ -126,44 +157,70 @@ class Terminal {
   }
 
   moveTo(x, y) {
+    this.markDirty(this.cx, this.cy);
     this.cx = Math.max(0, Math.min(this.cols - 1, x));
     this.cy = Math.max(0, Math.min(this.rows - 1, y));
+    this.markDirty(this.cx, this.cy);
   }
 
   home() { this.moveTo(0, 0); }
 
   clear() {
-    this.buffer = Array.from({ length: this.rows }, () =>
-      Array.from({ length: this.cols }, () => ({ ch: ' ', fg: 2, bg: 0, bright: false }))
-    );
+    for (let y = 0; y < this.rows; y++) {
+      for (let x = 0; x < this.cols; x++) {
+        const cell = this.buffer[y][x];
+        cell.ch = ' ';
+        cell.fg = 2;
+        cell.bg = 0;
+        cell.bright = false;
+        cell.dirty = true;
+      }
+    }
     this.home();
     if (this.autoRender) this.render();
   }
 
   clearLine() {
     for (let x = this.cx; x < this.cols; x++) {
-      this.buffer[this.cy][x] = { ch: ' ', fg: this.fgIdx, bg: this.bgIdx, bright: this.bright };
+      const cell = this.buffer[this.cy][x];
+      cell.ch = ' ';
+      cell.fg = this.fgIdx;
+      cell.bg = this.bgIdx;
+      cell.bright = this.bright;
+      cell.dirty = true;
     }
     if (this.autoRender) this.render();
   }
 
   scroll() {
     this.buffer.shift();
-    this.buffer.push(Array.from({ length: this.cols }, () => ({ ch: ' ', fg: 2, bg: 0, bright: false })));
+    this.cellEls.shift();
+    const newRow = [];
+    const newEls = [];
+    const rowDiv = document.createElement('div');
+    rowDiv.style.whiteSpace = 'pre';
+    for (let x = 0; x < this.cols; x++) {
+      const span = document.createElement('span');
+      span.textContent = ' ';
+      rowDiv.appendChild(span);
+      newEls.push(span);
+      newRow.push({ ch: ' ', fg: 2, bg: 0, bright: false, dirty: true });
+    }
+    this.screen.appendChild(rowDiv);
+    this.buffer.push(newRow);
+    this.cellEls.push(newEls);
     if (this.cy > 0) this.cy--;
   }
 
-  hideCursor() { this.cursorOn = false; this.render(); }
-  showCursor() { this.cursorOn = true; this.render(); }
+  hideCursor() { this.cursorOn = false; this.markDirty(this.cx, this.cy); this.render(); }
+  showCursor() { this.cursorOn = true; this.markDirty(this.cx, this.cy); this.render(); }
 
   setHideMouse(hide) {
     this.hideMouse = !!hide;
     this.wrap.style.cursor = this.hideMouse ? 'none' : 'auto';
   }
 
-  toggleHideMouse() {
-    this.setHideMouse(!this.hideMouse);
-  }
+  toggleHideMouse() { this.setHideMouse(!this.hideMouse); }
 
   focus() { this.wrap.focus(); }
 
@@ -222,19 +279,21 @@ class Terminal {
   }
 
   render() {
-    let html = '';
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.cols; x++) {
         const cell = this.buffer[y][x];
+        if (!cell.dirty && !(this.cursorOn && y === this.cy && x === this.cx)) continue;
+        const el = this.cellEls[y][x];
         const isCursor = this.cursorOn && y === this.cy && x === this.cx;
         const ch = isCursor ? '█' : (cell.ch || ' ');
         const fgColor = this.colors[cell.bright ? Math.min(cell.fg + 8, 15) : cell.fg] || this.fg;
         const bgColor = this.colors[cell.bg] || this.bg;
-        html += `<span style="color:${fgColor};background:${bgColor}">${ch.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</span>`;
+        if (el.textContent !== ch) el.textContent = ch;
+        if (el.style.color !== fgColor) el.style.color = fgColor;
+        if (el.style.background !== bgColor) el.style.background = bgColor;
+        cell.dirty = false;
       }
-      if (y < this.rows - 1) html += '\n';
     }
-    this.screen.innerHTML = html;
   }
 
   destroy() {
