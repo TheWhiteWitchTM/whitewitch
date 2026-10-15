@@ -1,4 +1,4 @@
-// terminal.js — pure 80x24 ANSI display buffer (no keyboard handling)
+// terminal.js — pure ANSI display buffer
 class Terminal {
   constructor(options = {}) {
     this.cols = options.cols || 80;
@@ -8,6 +8,7 @@ class Terminal {
     this.fg = options.fg || '#39ff14';
     this.bg = options.bg || '#000000';
     this.border = options.border || '#39ff14';
+    this.hideMouse = options.hideMouse !== undefined ? options.hideMouse : true;
 
     this.colors = [
       '#000000','#aa0000','#00aa00','#aa5500',
@@ -35,6 +36,7 @@ class Terminal {
       position: relative;
       box-sizing: border-box;
       outline: none;
+      cursor: ${this.hideMouse ? 'none' : 'auto'};
     `;
 
     this.screen = document.createElement('div');
@@ -60,7 +62,6 @@ class Terminal {
     this.render();
   }
 
-  // ---- Drawing ----
   put(ch, x = this.cx, y = this.cy) {
     if (x < 0 || x >= this.cols || y < 0 || y >= this.rows) return;
     this.buffer[y][x] = {
@@ -123,7 +124,6 @@ class Terminal {
     return this.buffer[y][x];
   }
 
-  // ---- Cursor & screen ----
   moveTo(x, y) {
     this.cx = Math.max(0, Math.min(this.cols - 1, x));
     this.cy = Math.max(0, Math.min(this.rows - 1, y));
@@ -154,6 +154,16 @@ class Terminal {
 
   hideCursor() { this.cursorOn = false; this.render(); }
   showCursor() { this.cursorOn = true; this.render(); }
+
+  setHideMouse(hide) {
+    this.hideMouse = !!hide;
+    this.wrap.style.cursor = this.hideMouse ? 'none' : 'auto';
+  }
+
+  toggleHideMouse() {
+    this.setHideMouse(!this.hideMouse);
+  }
+
   focus() { this.wrap.focus(); }
 
   onKey(handler) {
@@ -161,13 +171,11 @@ class Terminal {
     return () => this.wrap.removeEventListener('keydown', handler);
   }
 
-  // ---- Color ----
   setFg(n) { this.fgIdx = n & 15; }
   setBg(n) { this.bgIdx = n & 15; }
   setBright(b) { this.bright = !!b; }
   resetAttr() { this.fgIdx = 2; this.bgIdx = 0; this.bright = false; }
 
-  // ---- ANSI ----
   writeAnsi(text) {
     let i = 0;
     while (i < text.length) {
