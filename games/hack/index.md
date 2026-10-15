@@ -3,7 +3,7 @@ layout: default
 title: Hack
 description: A close terminal homage to the original Hack roguelike.
 permalink: /games/hack/
-image: /games/hack/banner.jpg
+image: /games/hack/hack.jpg
 ---
 
 # 🗡️ Hack
