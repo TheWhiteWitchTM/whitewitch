@@ -29,8 +29,8 @@ class Level {
       this.stairsUp = { x: r.x + 1, y: r.y + 1 };
       const r2 = this.rooms[this.rooms.length - 1];
       this.stairsDown = { x: r2.x + r2.w - 2, y: r2.y + r2.h - 2 };
-      this.tiles[this.stairsUp.y][this.stairsUp.x] = '<';
-      this.tiles[this.stairsDown.y][this.stairsDown.x] = '>';
+      this.tiles[this.stairsUp.y][this.stairsUp.x] = '⬆️';
+      this.tiles[this.stairsDown.y][this.stairsDown.x] = '⬇️';
     }
     this.placeMonsters();
     this.placeItems();
@@ -39,7 +39,7 @@ class Level {
   carveRoom(x, y, w, h) {
     for (let yy = y; yy < y + h; yy++) {
       for (let xx = x; xx < x + w; xx++) {
-        this.tiles[yy][xx] = '.';
+        this.tiles[yy][xx] = '·';
       }
     }
   }
@@ -50,11 +50,11 @@ class Level {
     let x2 = b.x + Math.floor(b.w / 2);
     let y2 = b.y + Math.floor(b.h / 2);
     while (x1 !== x2) {
-      this.tiles[y1][x1] = '.';
+      this.tiles[y1][x1] = '·';
       x1 += x1 < x2 ? 1 : -1;
     }
     while (y1 !== y2) {
-      this.tiles[y1][x1] = '.';
+      this.tiles[y1][x1] = '·';
       y1 += y1 < y2 ? 1 : -1;
     }
   }
@@ -78,7 +78,7 @@ class Level {
     for (let tries = 0; tries < 80; tries++) {
       const x = 1 + Math.floor(Math.random() * (this.width - 2));
       const y = 1 + Math.floor(Math.random() * (this.height - 2));
-      if (this.tiles[y][x] === '.') return { x, y };
+      if (this.tiles[y][x] === '·') return { x, y };
     }
     return null;
   }
@@ -86,7 +86,7 @@ class Level {
   isWalkable(x, y) {
     if (x < 0 || y < 0 || x >= this.width || y >= this.height) return false;
     const t = this.tiles[y][x];
-    return t === '.' || t === '<' || t === '>';
+    return t === '·' || t === '⬆️' || t === '⬇️';
   }
 
   getMonsterAt(x, y) {
