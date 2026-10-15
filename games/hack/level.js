@@ -25,18 +25,19 @@ class Level {
       this.connect(this.rooms[i - 1], this.rooms[i]);
     }
 
-    // Clean excess solid walls
-    for (let y = 1; y < this.height - 1; y++) {
-      for (let x = 1; x < this.width - 1; x++) {
-        if (this.tiles[y][x] === '#') {
-          let neighbors = 0;
-          for (let dy = -1; dy <= 1; dy++) {
-            for (let dx = -1; dx <= 1; dx++) {
-              if (dx === 0 && dy === 0) continue;
-              if (this.tiles[y + dy][x + dx] === '#') neighbors++;
+    // Aggressive cleanup
+    for (let pass = 0; pass < 2; pass++) {
+      for (let y = 1; y < this.height - 1; y++) {
+        for (let x = 1; x < this.width - 1; x++) {
+          if (this.tiles[y][x] === '#') {
+            let open = 0;
+            for (let dy = -1; dy <= 1; dy++) {
+              for (let dx = -1; dx <= 1; dx++) {
+                if (this.tiles[y + dy][x + dx] !== '#') open++;
+              }
             }
+            if (open >= 2) this.tiles[y][x] = '·';
           }
-          if (neighbors < 5) this.tiles[y][x] = '·';
         }
       }
     }
