@@ -18,21 +18,24 @@ useEffect(() => {
   term.wrap.tabIndex = 0;
   term.focus();
 
-  let level, player, depth = 1, messages = [], gameOver = false;
+  let level, player, depth = 1, messages = [], gameOver = false, won = false;
+  let state = 'intro'; // intro | play | dead | win
 
+  let audioCtx = null;
   function beep(freq = 440, duration = 0.06) {
     try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
       osc.type = 'square';
       osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0.04, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
       osc.connect(gain);
-      gain.connect(ctx.destination);
+      gain.connect(audioCtx.destination);
       osc.start();
-      osc.stop(ctx.currentTime + duration);
+      osc.stop(audioCtx.currentTime + duration);
     } catch (e) {}
   }
 
@@ -41,9 +44,56 @@ useEffect(() => {
     if (messages.length > 3) messages.shift();
   }
 
+  function showIntro() {
+    term.clear();
+    term.setFg(10);
+    term.writeAt(10, 2, '╦ ╦╔═╗╔═╗╦╔═');
+    term.writeAt(10, 3, '╠═╣╠═╣║  ╠╩╗');
+    term.writeAt(10, 4, '╩ ╩╩ ╩╚═╝╩ ╩');
+    term.setFg(2);
+    term.writeAt(8, 7, 'A terminal homage to the original');
+    term.writeAt(12, 8, 'Descend. Fight. Survive.');
+    term.setFg(11);
+    term.writeAt(14, 12, 'Press ENTER to begin');
+    term.setFg(8);
+    term.writeAt(16, 16, 'WASD / hjkl to move');
+    term.render();
+    beep(440, 0.15);
+  }
+
+  function showDead() {
+    term.clear();
+    term.setFg(1);
+    term.writeAt(12, 3, '╔══════════════╗');
+    term.writeAt(12, 4, '║  YOU DIED    ║');
+    term.writeAt(12, 5, '╚══════════════╝');
+    term.setFg(8);
+    term.writeAt(10, 8, 'The dungeon claims another.');
+    term.setFg(10);
+    term.writeAt(12, 12, 'Press R to restart');
+    term.render();
+    beep(80, 0.4);
+  }
+
+  function showWin() {
+    term.clear();
+    term.setFg(11);
+    term.writeAt(10, 3, '╔════════════════╗');
+    term.writeAt(10, 4, '║   YOU WIN!     ║');
+    term.writeAt(10, 5, '╚════════════════╝');
+    term.setFg(10);
+    term.writeAt(8, 8, 'You have the Amulet of Yendor!');
+    term.setFg(2);
+    term.writeAt(12, 12, 'Press R to play again');
+    term.render();
+    beep(600, 0.3);
+  }
+
   function newGame() {
     depth = 1;
     gameOver = false;
+    won = false;
+    state = 'play';
     level = new Level(depth);
     const r = level.rooms[0];
     const start = r ? { x: r.x + 2, y: r.y + 2 } : (level.randomFloor() || { x: 2, y: 2 });
@@ -55,6 +105,7 @@ useEffect(() => {
   }
 
   function draw() {
+    if (state !== 'play') return;
     term.clear();
     for (let y = 0; y < level.height; y++) {
       for (let x = 0; x < level.width; x++) {
@@ -92,13 +143,13 @@ useEffect(() => {
   }
 
   function playerMove(dx, dy) {
-    if (gameOver) return;
+    if (state !== 'play' || gameOver) return;
     const nx = player.x + dx;
     const ny = player.y + dy;
     const mon = level.getMonsterAt(nx, ny);
     if (mon) {
       const dmg = player.attack(mon);
-      msg(`You hit the ${mon.emoji} ${mon.name} for ${dmg}.`);
+      msg(`You hit the ${mon.emoji || ''} ${mon.name} for ${dmg}.`);
       beep(200, 0.05);
       if (mon.hp <= 0) {
         msg(`You kill the ${mon.name}!`);
@@ -114,6 +165,12 @@ useEffect(() => {
         msg(player.pickup(item));
         level.items = level.items.filter(i => i !== item);
         beep(600, 0.07);
+        if (item.type === 'amulet') {
+          won = true;
+          state = 'win';
+          showWin();
+          return;
+        }
       }
       if (level.tiles[ny][nx] === '⬇️') {
         depth++;
@@ -142,8 +199,9 @@ useEffect(() => {
     });
     if (player.hp <= 0) {
       gameOver = true;
-      msg('You die... Press R to restart.');
-      beep(60, 0.4);
+      state = 'dead';
+      showDead();
+      return;
     }
     draw();
   }
@@ -151,7 +209,7 @@ useEffect(() => {
   function showHelp() {
     messages = [
       'WASD to move (QEZC diagonals) or hjkl',
-      'i = inventory   ? = help   r = restart when dead'
+      'i = inventory   ? = help   r = restart'
     ];
     draw();
   }
@@ -160,8 +218,15 @@ useEffect(() => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (gameOver) {
-      if (e.key === 'r' || e.key === 'R') newGame();
+    if (state === 'intro') {
+      if (e.key === 'Enter') newGame();
+      return;
+    }
+    if (state === 'dead' || state === 'win') {
+      if (e.key === 'r' || e.key === 'R') {
+        state = 'intro';
+        showIntro();
+      }
       return;
     }
 
@@ -186,7 +251,7 @@ useEffect(() => {
   term.onKey(handleKey);
   term.wrap.addEventListener('click', () => term.focus());
 
-  newGame();
+  showIntro();
 
   return () => {
     term.destroy();
