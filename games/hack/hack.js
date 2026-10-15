@@ -19,7 +19,7 @@ useEffect(() => {
   term.focus();
 
   let level, player, depth = 1, messages = [], gameOver = false, won = false;
-  let state = 'intro'; // intro | play | dead | win
+  let state = 'intro';
 
   let audioCtx = null;
   function beep(freq = 440, duration = 0.06) {
@@ -112,11 +112,11 @@ useEffect(() => {
         term.moveTo(x, y);
         const t = level.tiles[y][x];
         if (t === '#') {
-          term.setFg(7);          // light grey
+          term.setFg(7);
           term.write('█');
         } else {
-          term.setFg(2);          // green floor
-          term.write(t || ' ');
+          term.setFg(2);
+          term.write(t || '·');
         }
       }
     }
@@ -229,8 +229,7 @@ useEffect(() => {
     }
     if (state === 'dead' || state === 'win') {
       if (e.key === 'r' || e.key === 'R') {
-        state = 'intro';
-        showIntro();
+        newGame();          // restart straight into play
       }
       return;
     }
