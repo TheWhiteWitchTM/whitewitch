@@ -60,7 +60,6 @@ class Terminal {
     this.render();
   }
 
-  // ---- Drawing ----
   put(ch, x = this.cx, y = this.cy) {
     if (x < 0 || x >= this.cols || y < 0 || y >= this.rows) return;
     this.buffer[y][x] = {
@@ -72,7 +71,9 @@ class Terminal {
   }
 
   write(text) {
-    for (const ch of text) {
+    // Force every grapheme (including emoji) into a single cell
+    const chars = [...text]; // splits on code points; good enough for most emoji
+    for (const ch of chars) {
       if (ch === '\n') {
         this.cx = 0;
         this.cy++;
@@ -101,7 +102,6 @@ class Terminal {
     this.write(text + '\n');
   }
 
-  // ---- Cursor & screen ----
   moveTo(x, y) {
     this.cx = Math.max(0, Math.min(this.cols - 1, x));
     this.cy = Math.max(0, Math.min(this.rows - 1, y));
@@ -130,13 +130,11 @@ class Terminal {
     if (this.cy > 0) this.cy--;
   }
 
-  // ---- Color ----
   setFg(n) { this.fgIdx = n & 15; }
   setBg(n) { this.bgIdx = n & 15; }
   setBright(b) { this.bright = !!b; }
   resetAttr() { this.fgIdx = 2; this.bgIdx = 0; this.bright = false; }
 
-  // ---- ANSI ----
   writeAnsi(text) {
     let i = 0;
     while (i < text.length) {
