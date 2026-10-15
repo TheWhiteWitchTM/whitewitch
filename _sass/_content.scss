@@ -249,3 +249,14 @@
   width: 100% !important;
   max-width: 100% !important;
 }
+
+#game {
+  max-width: 100%;
+  overflow-x: auto;
+
+  .terminal {
+    max-width: 100%;
+    width: auto !important;
+    box-sizing: border-box;
+  }
+}
