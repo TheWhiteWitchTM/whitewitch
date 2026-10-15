@@ -13,9 +13,9 @@ class Level {
   }
 
   generate() {
-    for (let i = 0; i < 4 + Math.floor(Math.random() * 2); i++) {
-      const w = 6 + Math.floor(Math.random() * 6);
-      const h = 4 + Math.floor(Math.random() * 3);
+    for (let i = 0; i < 5 + Math.floor(Math.random() * 3); i++) {
+      const w = 7 + Math.floor(Math.random() * 7);
+      const h = 5 + Math.floor(Math.random() * 4);
       const x = 1 + Math.floor(Math.random() * (this.width - w - 2));
       const y = 1 + Math.floor(Math.random() * (this.height - h - 2));
       this.carveRoom(x, y, w, h);
@@ -24,6 +24,23 @@ class Level {
     for (let i = 1; i < this.rooms.length; i++) {
       this.connect(this.rooms[i - 1], this.rooms[i]);
     }
+
+    // Clean excess solid walls
+    for (let y = 1; y < this.height - 1; y++) {
+      for (let x = 1; x < this.width - 1; x++) {
+        if (this.tiles[y][x] === '#') {
+          let neighbors = 0;
+          for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+              if (dx === 0 && dy === 0) continue;
+              if (this.tiles[y + dy][x + dx] === '#') neighbors++;
+            }
+          }
+          if (neighbors < 5) this.tiles[y][x] = '·';
+        }
+      }
+    }
+
     if (this.rooms.length) {
       const r = this.rooms[0];
       this.stairsUp = { x: r.x + 1, y: r.y + 1 };
