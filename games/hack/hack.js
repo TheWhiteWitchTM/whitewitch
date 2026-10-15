@@ -111,8 +111,13 @@ useEffect(() => {
       for (let x = 0; x < level.width; x++) {
         term.moveTo(x, y);
         const t = level.tiles[y][x];
-        term.setFg(t === '#' ? 8 : 2);
-        term.write(t || ' ');
+        if (t === '#') {
+          term.setFg(7);          // light grey
+          term.write('█');
+        } else {
+          term.setFg(2);          // green floor
+          term.write(t || ' ');
+        }
       }
     }
     level.items.forEach(item => {
