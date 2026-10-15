@@ -90,7 +90,7 @@ class Terminal {
   put(ch, x = this.cx, y = this.cy) {
     if (x < 0 || x >= this.cols || y < 0 || y >= this.rows) return;
     const cell = this.buffer[y][x];
-    const newCh = (ch && ch.length) ? ch[0] : ' '; // force single cell
+    const newCh = (ch && ch.length) ? [...ch][0] : ' ';
     cell.ch = newCh;
     cell.fg = this.fgIdx;
     cell.bg = this.bgIdx;
@@ -196,7 +196,6 @@ class Terminal {
   }
 
   scroll() {
-    // simple full mark dirty on scroll for safety
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.cols; x++) this.buffer[y][x].dirty = true;
     }
@@ -295,7 +294,8 @@ class Terminal {
         const el = this.cellEls[y][x];
         const isCursor = this.cursorOn && y === this.cy && x === this.cx;
         const ch = isCursor ? '█' : (cell.ch || ' ');
-        const fgColor = this.colors[cell.bright ? Math.min(cell.fg + 8, 15) : cell.fg] || this.fg;
+        const isEmoji = ch.length > 1 || (ch.codePointAt(0) > 0xFFFF);
+        const fgColor = isEmoji ? '' : (this.colors[cell.bright ? Math.min(cell.fg + 8, 15) : cell.fg] || this.fg);
         const bgColor = this.colors[cell.bg] || this.bg;
         el.textContent = ch;
         el.style.color = fgColor;
