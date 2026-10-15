@@ -44,7 +44,6 @@ class Terminal {
     this.screen.style.cssText = 'width:100%;height:100%;overflow:hidden;';
     this.wrap.appendChild(this.screen);
 
-    // Persistent DOM cells
     this.cellEls = [];
     this.buffer = [];
     for (let y = 0; y < this.rows; y++) {
@@ -66,6 +65,8 @@ class Terminal {
 
     this.cx = 0;
     this.cy = 0;
+    this.prevCx = 0;
+    this.prevCy = 0;
     this.fgIdx = 2;
     this.bgIdx = 0;
     this.bright = false;
@@ -110,8 +111,10 @@ class Terminal {
         this.cx = 0;
       } else if (ch === '\b') {
         if (this.cx > 0) {
+          this.markDirty(this.cx, this.cy);
           this.cx--;
           this.put(' ');
+          this.markDirty(this.cx, this.cy);
         }
       } else {
         if (this.cx >= this.cols) {
@@ -158,6 +161,8 @@ class Terminal {
 
   moveTo(x, y) {
     this.markDirty(this.cx, this.cy);
+    this.prevCx = this.cx;
+    this.prevCy = this.cy;
     this.cx = Math.max(0, Math.min(this.cols - 1, x));
     this.cy = Math.max(0, Math.min(this.rows - 1, y));
     this.markDirty(this.cx, this.cy);
@@ -176,7 +181,8 @@ class Terminal {
         cell.dirty = true;
       }
     }
-    this.home();
+    this.cx = 0;
+    this.cy = 0;
     if (this.autoRender) this.render();
   }
 
@@ -258,16 +264,15 @@ class Terminal {
             else if (n >= 100 && n <= 107) this.bgIdx = n - 100;
           }
         } else if (cmd === 'H' || cmd === 'f') {
-          this.cy = Math.max(0, Math.min(this.rows - 1, (nums[0] || 1) - 1));
-          this.cx = Math.max(0, Math.min(this.cols - 1, (nums[1] || 1) - 1));
+          this.moveTo((nums[1] || 1) - 1, (nums[0] || 1) - 1);
         } else if (cmd === 'J' && (nums[0] === 2 || nums[0] === 0)) {
           this.clear();
         } else if (cmd === 'K') {
           this.clearLine();
-        } else if (cmd === 'A') this.cy = Math.max(0, this.cy - (nums[0] || 1));
-        else if (cmd === 'B') this.cy = Math.min(this.rows - 1, this.cy + (nums[0] || 1));
-        else if (cmd === 'C') this.cx = Math.min(this.cols - 1, this.cx + (nums[0] || 1));
-        else if (cmd === 'D') this.cx = Math.max(0, this.cx - (nums[0] || 1));
+        } else if (cmd === 'A') this.moveTo(this.cx, this.cy - (nums[0] || 1));
+        else if (cmd === 'B') this.moveTo(this.cx, this.cy + (nums[0] || 1));
+        else if (cmd === 'C') this.moveTo(this.cx + (nums[0] || 1), this.cy);
+        else if (cmd === 'D') this.moveTo(this.cx - (nums[0] || 1), this.cy);
 
         i = j + 1;
       } else {
@@ -279,10 +284,14 @@ class Terminal {
   }
 
   render() {
+    // Always clean previous cursor position
+    this.markDirty(this.prevCx, this.prevCy);
+    this.markDirty(this.cx, this.cy);
+
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.cols; x++) {
         const cell = this.buffer[y][x];
-        if (!cell.dirty && !(this.cursorOn && y === this.cy && x === this.cx)) continue;
+        if (!cell.dirty) continue;
         const el = this.cellEls[y][x];
         const isCursor = this.cursorOn && y === this.cy && x === this.cx;
         const ch = isCursor ? '█' : (cell.ch || ' ');
@@ -290,10 +299,12 @@ class Terminal {
         const bgColor = this.colors[cell.bg] || this.bg;
         if (el.textContent !== ch) el.textContent = ch;
         if (el.style.color !== fgColor) el.style.color = fgColor;
-        if (el.style.background !== bgColor) el.style.background = bgColor;
+        if (el.style.backgroundColor !== bgColor) el.style.backgroundColor = bgColor;
         cell.dirty = false;
       }
     }
+    this.prevCx = this.cx;
+    this.prevCy = this.cy;
   }
 
   destroy() {
