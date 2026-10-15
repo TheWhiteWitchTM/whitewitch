@@ -1,102 +1,64 @@
-class Level {
-  constructor(depth, width = 60, height = 18) {
-    this.depth = depth;
-    this.width = width;
-    this.height = height;
-    this.tiles = Array.from({ length: height }, () => Array(width).fill('#'));
-    this.rooms = [];
-    this.monsters = [];
-    this.items = [];
-    this.stairsDown = null;
-    this.stairsUp = null;
-    this.generate();
+  function newGame() {
+    try {
+      depth = 1;
+      gameOver = false;
+      level = new Level(depth);
+      // Always start inside the first room on a floor tile
+      const r = level.rooms[0];
+      const start = r ? { x: r.x + 2, y: r.y + 2 } : (level.randomFloor() || { x: 2, y: 2 });
+      player = new Player(start.x, start.y);
+      messages = ['Use WASD to move. Type ? for help.'];
+      beep(520, 0.1);
+      draw();
+      term.wrap.focus();
+    } catch (err) {
+      console.error(err);
+      messages = ['Error: ' + err.message];
+      draw();
+    }
   }
 
-  generate() {
-    for (let i = 0; i < 5 + Math.floor(Math.random() * 3); i++) {
-      const w = 5 + Math.floor(Math.random() * 7);
-      const h = 4 + Math.floor(Math.random() * 4);
-      const x = 1 + Math.floor(Math.random() * (this.width - w - 2));
-      const y = 1 + Math.floor(Math.random() * (this.height - h - 2));
-      this.carveRoom(x, y, w, h);
-      this.rooms.push({ x, y, w, h });
-    }
-    for (let i = 1; i < this.rooms.length; i++) {
-      this.connect(this.rooms[i - 1], this.rooms[i]);
-    }
-    if (this.rooms.length) {
-      const r = this.rooms[0];
-      this.stairsUp = { x: r.x + 1, y: r.y + 1 };
-      const r2 = this.rooms[this.rooms.length - 1];
-      this.stairsDown = { x: r2.x + r2.w - 2, y: r2.y + r2.h - 2 };
-      this.tiles[this.stairsUp.y][this.stairsUp.x] = '⬆️';
-      this.tiles[this.stairsDown.y][this.stairsDown.x] = '⬇️';
-    }
-    this.placeMonsters();
-    this.placeItems();
-  }
-
-  carveRoom(x, y, w, h) {
-    for (let yy = y; yy < y + h; yy++) {
-      for (let xx = x; xx < x + w; xx++) {
-        this.tiles[yy][xx] = '·';
+  function draw() {
+    try {
+      term.clear();
+      // Draw map
+      for (let y = 0; y < level.height; y++) {
+        for (let x = 0; x < level.width; x++) {
+          term.moveTo(x, y);
+          const t = level.tiles[y][x];
+          term.setFg(t === '#' ? 8 : 2);
+          term.write(t || ' ');
+        }
       }
+      // Draw items
+      level.items.forEach(item => {
+        term.moveTo(item.x, item.y);
+        term.setFg(11);
+        term.write(item.ch || '?');
+      });
+      // Draw monsters
+      level.monsters.forEach(mon => {
+        if (mon.hp > 0) {
+          term.moveTo(mon.x, mon.y);
+          term.setFg(mon.color || 1);
+          term.write(mon.ch || 'M');
+        }
+      });
+      // Draw player last so it is always visible
+      term.moveTo(player.x, player.y);
+      term.setFg(10);
+      term.setBright(true);
+      term.write('@');
+      term.resetAttr();
+
+      // Status
+      term.moveTo(0, level.height);
+      term.setFg(10);
+      term.write(`Dlvl:${depth}  HP:${player.hp}/${player.maxHp}  Gold:${player.gold}  @ ${player.x},${player.y}`);
+      term.moveTo(0, level.height + 1);
+      term.setFg(7);
+      term.write((messages.join(' | ') || '').slice(0, 70));
+    } catch (err) {
+      console.error(err);
     }
   }
-
-  connect(a, b) {
-    let x1 = a.x + Math.floor(a.w / 2);
-    let y1 = a.y + Math.floor(a.h / 2);
-    let x2 = b.x + Math.floor(b.w / 2);
-    let y2 = b.y + Math.floor(b.h / 2);
-    while (x1 !== x2) {
-      this.tiles[y1][x1] = '·';
-      x1 += x1 < x2 ? 1 : -1;
-    }
-    while (y1 !== y2) {
-      this.tiles[y1][x1] = '·';
-      y1 += y1 < y2 ? 1 : -1;
-    }
-  }
-
-  placeMonsters() {
-    const types = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'];
-    for (let i = 0; i < 3 + this.depth; i++) {
-      const pos = this.randomFloor();
-      if (pos) {
-        const letter = types[Math.floor(Math.random() * types.length)];
-        this.monsters.push(new Monster(letter, pos.x, pos.y, this.depth));
-      }
-    }
-  }
-
-  placeItems() {
-    for (let i = 0; i < 2 + Math.floor(this.depth / 2); i++) {
-      const pos = this.randomFloor();
-      if (pos) this.items.push(new Item(pos.x, pos.y, this.depth));
-    }
-  }
-
-  randomFloor() {
-    for (let tries = 0; tries < 100; tries++) {
-      const x = 1 + Math.floor(Math.random() * (this.width - 2));
-      const y = 1 + Math.floor(Math.random() * (this.height - 2));
-      if (this.tiles[y][x] === '·') return { x, y };
-    }
-    return null;
-  }
-
-  isWalkable(x, y) {
-    if (x < 0 || y < 0 || x >= this.width || y >= this.height) return false;
-    const t = this.tiles[y][x];
-    return t === '·' || t === '⬆️' || t === '⬇️';
-  }
-
-  getMonsterAt(x, y) {
-    return this.monsters.find(m => m.x === x && m.y === y && m.hp > 0);
-  }
-
-  getItemAt(x, y) {
-    return this.items.find(i => i.x === x && i.y === y);
-  }
-}
