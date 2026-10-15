@@ -23,6 +23,7 @@
         { "title": "🏴‍☠️ Pirate Adventure", "url": "/games/pirate/" },
         { "separator": true },
         { "title": "🚀 Galaxy Hunt", "url": "/games/galaxy-hunt/" },
+        { "title": "🗡️ Hack", "url": "/games/hack/" },
         { "title": "🏓 Pong", "url": "/games/pong/" },
         { "title": "🗡️ Rogue", "url": "/games/rogue/" },
         { "title": "🐍 Snake", "url": "/games/snake/" }
