@@ -13,8 +13,26 @@ useEffect(() => {
 
   let level, player, depth = 1, messages = [], gameOver = false;
 
-  function print(text) { term.writeln(text); }
-  function msg(text) { messages.push(text); if (messages.length > 3) messages.shift(); }
+  function beep(freq = 440, duration = 0.06) {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'square';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.04, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + duration);
+    } catch (e) {}
+  }
+
+  function msg(text) {
+    messages.push(text);
+    if (messages.length > 3) messages.shift();
+  }
 
   function newGame() {
     depth = 1;
@@ -22,13 +40,13 @@ useEffect(() => {
     level = new Level(depth);
     const start = level.stairsUp || level.randomFloor();
     player = new Player(start.x, start.y);
-    messages = ['Welcome to Hack!'];
+    messages = ['Welcome to Hack! Type ? for help.'];
+    beep(520, 0.1);
     draw();
   }
 
   function draw() {
     term.clear();
-    // Map
     for (let y = 0; y < level.height; y++) {
       for (let x = 0; x < level.width; x++) {
         term.moveTo(x, y);
@@ -36,10 +54,11 @@ useEffect(() => {
         const item = level.getItemAt(x, y);
         if (x === player.x && y === player.y) {
           term.setFg(10);
-          term.write('@');
+          term.setBright(true);
+          term.write('🧙');
         } else if (mon) {
           term.setFg(mon.color);
-          term.write(mon.ch);
+          term.write(mon.emoji);
         } else if (item) {
           term.setFg(11);
           term.write(item.ch);
@@ -48,17 +67,15 @@ useEffect(() => {
           term.setFg(t === '#' ? 8 : 2);
           term.write(t);
         }
+        term.resetAttr();
       }
     }
-    // Status
     term.moveTo(0, level.height);
-    term.resetAttr();
     term.setFg(10);
-    term.write(`Dlvl:${depth} HP:${player.hp}/${player.maxHp} Str:${player.str} Gold:${player.gold}`);
-    // Messages
+    term.write(`Dlvl:${depth}  HP:${player.hp}/${player.maxHp}  Gold:${player.gold}`);
     term.moveTo(0, level.height + 1);
     term.setFg(7);
-    term.write(messages.join(' | ').slice(0, 79));
+    term.write(messages.join(' | ').slice(0, 70));
   }
 
   function playerMove(dx, dy) {
@@ -68,34 +85,41 @@ useEffect(() => {
     const mon = level.getMonsterAt(nx, ny);
     if (mon) {
       const dmg = player.attack(mon);
-      msg(`You hit the ${mon.name} for ${dmg}.`);
+      msg(`You hit the ${mon.emoji} ${mon.name} for ${dmg}.`);
+      beep(200, 0.05);
       if (mon.hp <= 0) {
         msg(`You kill the ${mon.name}!`);
+        beep(300, 0.08);
         level.monsters = level.monsters.filter(m => m !== mon);
       }
     } else if (level.isWalkable(nx, ny)) {
       player.x = nx;
       player.y = ny;
+      beep(140, 0.03);
       const item = level.getItemAt(nx, ny);
       if (item) {
         msg(player.pickup(item));
         level.items = level.items.filter(i => i !== item);
+        beep(600, 0.07);
       }
-      if (level.tiles[ny][nx] === '>' ) {
+      if (level.tiles[ny][nx] === '⬇️') {
         depth++;
         level = new Level(depth);
         const s = level.stairsUp || level.randomFloor();
         player.x = s.x; player.y = s.y;
         msg(`You descend to level ${depth}.`);
-      } else if (level.tiles[ny][nx] === '<' && depth > 1) {
+        beep(180, 0.12);
+      } else if (level.tiles[ny][nx] === '⬆️' && depth > 1) {
         depth--;
         level = new Level(depth);
         const s = level.stairsDown || level.randomFloor();
         player.x = s.x; player.y = s.y;
         msg(`You ascend to level ${depth}.`);
+        beep(220, 0.12);
       }
+    } else {
+      beep(80, 0.04);
     }
-    // Monsters act
     level.monsters.forEach(m => {
       const res = m.act(level, player);
       if (res) msg(res);
@@ -103,7 +127,16 @@ useEffect(() => {
     if (player.hp <= 0) {
       gameOver = true;
       msg('You die...');
+      beep(60, 0.4);
     }
+    draw();
+  }
+
+  function showHelp() {
+    messages = [
+      'Arrows / hjkl move, yubn diagonals',
+      'i = inventory, ? = this help, r = restart'
+    ];
     draw();
   }
 
@@ -124,8 +157,7 @@ useEffect(() => {
       msg('Inventory: ' + (player.inventory.map(i => i.name).join(', ') || 'empty'));
       draw();
     } else if (e.key === '?') {
-      msg('hjkl/arrows move, i inventory, r restart');
-      draw();
+      showHelp();
     }
   }
 
