@@ -1,4 +1,7 @@
 useEffect(() => {
+  const loading = document.getElementById('loading');
+  if (loading) loading.remove();
+
   const gameEl = document.getElementById('game');
   if (!gameEl) return;
 
@@ -55,7 +58,7 @@ useEffect(() => {
         if (x === player.x && y === player.y) {
           term.setFg(10);
           term.setBright(true);
-          term.write('🧙');
+          term.write('@');
         } else if (mon) {
           term.setFg(mon.color);
           term.write(mon.emoji);
