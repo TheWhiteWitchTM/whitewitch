@@ -12,4 +12,4 @@ image: /games/galaxy-hunt/banner.jpg
 
 <script src="{{ '/assets/js/components.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/terminal.js' | relative_url }}"></script>
-<script src="{{ '/games/galaxy-hunt/galaxy-hunt.js' | relative_url }}"></script>
+<script src="{{ '/games/galaxy-hunt/galaxy-hunt.js' | relative_url }}"></script>**
