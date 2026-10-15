@@ -1,5 +1,21 @@
-// terminal.js — reliable incremental terminal (compare-and-update)
+/**
+ * Lightweight VT100-style terminal emulator.
+ * Compare-and-update rendering, natural emoji colors, optional focus hint.
+ */
 class Terminal {
+  /**
+   * @param {object} [options]
+   * @param {number} [options.cols=80]
+   * @param {number} [options.rows=24]
+   * @param {string} [options.font]
+   * @param {string} [options.fontSize]
+   * @param {string} [options.fg='#39ff14']
+   * @param {string} [options.bg='#000000']
+   * @param {string} [options.border='#39ff14']
+   * @param {boolean} [options.hideMouse=true]
+   * @param {boolean} [options.autoRender=true]
+   * @param {boolean} [options.focusHint=true] - Show "click to continue" on blur
+   */
   constructor(options = {}) {
     this.cols = options.cols || 80;
     this.rows = options.rows || 24;
@@ -10,6 +26,7 @@ class Terminal {
     this.border = options.border || '#39ff14';
     this.hideMouse = options.hideMouse !== undefined ? options.hideMouse : true;
     this.autoRender = options.autoRender !== undefined ? options.autoRender : true;
+    this.focusHint = options.focusHint !== undefined ? options.focusHint : true;
 
     this.colors = [
       '#000000','#aa0000','#00aa00','#aa5500',
@@ -46,7 +63,7 @@ class Terminal {
 
     this.cellEls = [];
     this.buffer = [];
-    this.displayed = []; // what is currently on screen
+    this.displayed = [];
     for (let y = 0; y < this.rows; y++) {
       const row = [];
       const dispRow = [];
@@ -73,6 +90,24 @@ class Terminal {
     this.bgIdx = 0;
     this.bright = false;
     this.cursorOn = true;
+    this._focused = false;
+    this._hintShown = false;
+
+    this.wrap.addEventListener('focus', () => {
+      this._focused = true;
+      if (this._hintShown) {
+        this._hintShown = false;
+        this.render();
+      }
+    });
+    this.wrap.addEventListener('blur', () => {
+      this._focused = false;
+      if (this.focusHint) {
+        this._hintShown = true;
+        this.render();
+      }
+    });
+    this.wrap.addEventListener('click', () => this.focus());
 
     this._blink = setInterval(() => {
       this.cursorOn = !this.cursorOn;
@@ -82,6 +117,7 @@ class Terminal {
     this.render();
   }
 
+  /** Write a single character at position (defaults to cursor). */
   put(ch, x = this.cx, y = this.cy) {
     if (x < 0 || x >= this.cols || y < 0 || y >= this.rows) return;
     const cell = this.buffer[y][x];
@@ -91,6 +127,7 @@ class Terminal {
     cell.bright = this.bright;
   }
 
+  /** Write text, handling \n \r \b and wrapping. */
   write(text) {
     const chars = [...text];
     for (const ch of chars) {
@@ -118,13 +155,16 @@ class Terminal {
     if (this.autoRender) this.render();
   }
 
+  /** Write text followed by newline. */
   writeln(text = '') { this.write(text + '\n'); }
 
+  /** Move cursor then write. */
   writeAt(x, y, text) {
     this.moveTo(x, y);
     this.write(text);
   }
 
+  /** Fill a rectangle. */
   fill(x, y, w, h, ch = ' ', fg = this.fgIdx, bg = this.bgIdx) {
     for (let yy = Math.max(0, y); yy < Math.min(this.rows, y + h); yy++) {
       for (let xx = Math.max(0, x); xx < Math.min(this.cols, x + w); xx++) {
@@ -138,18 +178,22 @@ class Terminal {
     if (this.autoRender) this.render();
   }
 
+  /** Read a cell. */
   getChar(x, y) {
     if (x < 0 || y < 0 || x >= this.cols || y >= this.rows) return null;
     return this.buffer[y][x];
   }
 
+  /** Move cursor (clamped). */
   moveTo(x, y) {
     this.cx = Math.max(0, Math.min(this.cols - 1, Math.floor(x)));
     this.cy = Math.max(0, Math.min(this.rows - 1, Math.floor(y)));
   }
 
+  /** Cursor to 0,0. */
   home() { this.moveTo(0, 0); }
 
+  /** Clear entire screen. */
   clear() {
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.cols; x++) {
@@ -165,6 +209,7 @@ class Terminal {
     if (this.autoRender) this.render();
   }
 
+  /** Clear from cursor to end of line. */
   clearLine() {
     for (let x = this.cx; x < this.cols; x++) {
       const cell = this.buffer[this.cy][x];
@@ -176,6 +221,7 @@ class Terminal {
     if (this.autoRender) this.render();
   }
 
+  /** Scroll up one line. */
   scroll() {
     this.buffer.shift();
     this.displayed.shift();
@@ -200,28 +246,56 @@ class Terminal {
     if (this.cy > 0) this.cy--;
   }
 
+  /** Hide the block cursor. */
   hideCursor() { this.cursorOn = false; this.render(); }
+
+  /** Show the block cursor. */
   showCursor() { this.cursorOn = true; this.render(); }
 
+  /** Hide or show the mouse cursor over the terminal. */
   setHideMouse(hide) {
     this.hideMouse = !!hide;
     this.wrap.style.cursor = this.hideMouse ? 'none' : 'auto';
   }
 
+  /** Toggle mouse cursor visibility. */
   toggleHideMouse() { this.setHideMouse(!this.hideMouse); }
 
+  /** Focus the terminal. */
   focus() { this.wrap.focus(); }
 
+  /**
+   * Register a key handler. Automatically prevents default on arrows and common game keys.
+   * @param {function} handler
+   * @returns {function} unbind function
+   */
   onKey(handler) {
-    this.wrap.addEventListener('keydown', handler);
-    return () => this.wrap.removeEventListener('keydown', handler);
+    const wrapped = (e) => {
+      const k = e.key;
+      if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Tab'].includes(k) ||
+          (e.ctrlKey && ['r','R','f','F'].includes(k))) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      handler(e);
+    };
+    this.wrap.addEventListener('keydown', wrapped);
+    return () => this.wrap.removeEventListener('keydown', wrapped);
   }
 
+  /** Set foreground color index (0-15). */
   setFg(n) { this.fgIdx = n & 15; }
+
+  /** Set background color index (0-15). */
   setBg(n) { this.bgIdx = n & 15; }
+
+  /** Enable/disable bright attribute. */
   setBright(b) { this.bright = !!b; }
+
+  /** Reset colors and bright. */
   resetAttr() { this.fgIdx = 2; this.bgIdx = 0; this.bright = false; }
 
+  /** Parse and execute a subset of ANSI escape sequences. */
   writeAnsi(text) {
     let i = 0;
     while (i < text.length) {
@@ -265,32 +339,49 @@ class Terminal {
     if (this.autoRender) this.render();
   }
 
+  /** Render only cells that differ from what is currently displayed. */
   render() {
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.cols; x++) {
         const cell = this.buffer[y][x];
         const disp = this.displayed[y][x];
-        const isCursor = this.cursorOn && y === this.cy && x === this.cx;
-        const ch = isCursor ? '█' : (cell.ch || ' ');
-        const isEmoji = ch.length > 1 || (ch.codePointAt(0) > 0xFFFF);
-        const fg = isEmoji ? '' : (this.colors[cell.bright ? Math.min(cell.fg + 8, 15) : cell.fg] || this.fg);
-        const bg = this.colors[cell.bg] || this.bg;
+        const isCursor = this.cursorOn && y === this.cy && x === this.cx && this._focused;
+        let ch = isCursor ? '█' : (cell.ch || ' ');
+        let fgIdx = cell.fg;
+        let bgIdx = cell.bg;
+        let bright = cell.bright;
 
-        if (disp.ch !== ch || disp.fg !== cell.fg || disp.bg !== cell.bg || disp.bright !== cell.bright || disp.isCursor !== isCursor) {
+        // Focus hint overlay on bottom line
+        if (this._hintShown && y === this.rows - 1) {
+          const hint = ' [ click terminal to continue ] ';
+          const start = Math.floor((this.cols - hint.length) / 2);
+          if (x >= start && x < start + hint.length) {
+            ch = hint[x - start];
+            fgIdx = 11;
+            bright = true;
+          }
+        }
+
+        const isEmoji = ch.length > 1 || (ch.codePointAt(0) > 0xFFFF);
+        const fg = isEmoji ? '' : (this.colors[bright ? Math.min(fgIdx + 8, 15) : fgIdx] || this.fg);
+        const bg = this.colors[bgIdx] || this.bg;
+
+        if (disp.ch !== ch || disp.fg !== fgIdx || disp.bg !== bgIdx || disp.bright !== bright || disp.isCursor !== isCursor) {
           const el = this.cellEls[y][x];
           el.textContent = ch;
           el.style.color = fg;
           el.style.backgroundColor = bg;
           disp.ch = ch;
-          disp.fg = cell.fg;
-          disp.bg = cell.bg;
-          disp.bright = cell.bright;
+          disp.fg = fgIdx;
+          disp.bg = bgIdx;
+          disp.bright = bright;
           disp.isCursor = isCursor;
         }
       }
     }
   }
 
+  /** Clean up intervals and remove from DOM. */
   destroy() {
     clearInterval(this._blink);
     this.wrap.remove();
