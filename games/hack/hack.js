@@ -112,7 +112,7 @@ useEffect(() => {
         term.moveTo(x, y);
         const t = level.tiles[y][x];
         if (t === '#') {
-          term.setFg(7);
+          term.setFg(8);
           term.write('█');
         } else {
           term.setFg(2);
@@ -134,7 +134,7 @@ useEffect(() => {
     });
     term.moveTo(player.x, player.y);
     term.setFg(10);
-    term.setBright(true);
+    term.setBright(false);
     term.write('🧙');
     term.resetAttr();
 
@@ -229,7 +229,7 @@ useEffect(() => {
     }
     if (state === 'dead' || state === 'win') {
       if (e.key === 'r' || e.key === 'R') {
-        newGame();          // restart straight into play
+        newGame();
       }
       return;
     }
