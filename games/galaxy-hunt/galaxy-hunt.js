@@ -1,5 +1,5 @@
 // Galaxy Hunt — full Super Star Trek mechanics
-// Classic cursor prompt input (same vibe as Adventureland / Pirate)
+// Classic green cursor prompt (same vibe as Adventureland / Pirate)
 
 useEffect(() => {
   const gameEl = document.getElementById('game');
@@ -26,6 +26,8 @@ useEffect(() => {
     term.clear();
   }
   function prompt() {
+    term.resetAttr();
+    term.setFg(10);          // bright green
     term.write('> ');
   }
   function beep(freq = 440, duration = 0.08) {
@@ -155,6 +157,7 @@ useEffect(() => {
 
   function status() {
     printAnsi(`\x1b[1;36mStarship Status  (Stardate ${date.toFixed(1)})\x1b[0m`);
+    print('');   // <-- blank line after stardate
     print(`Energy: ${Math.floor(energy)}   Missiles: ${missiles}   Shields: ${Math.floor(shields)}`);
     print(`Quadrant ${quadX},${quadY}   Sector ${secX},${secY}`);
     print(`Raiders remaining: ${totalRaidersLeft()}   Time left: ${timeLeft}`);
@@ -449,6 +452,7 @@ useEffect(() => {
     } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault();
       inputBuffer += e.key;
+      term.setFg(10);          // bright green while typing
       term.write(e.key);
     }
   }
