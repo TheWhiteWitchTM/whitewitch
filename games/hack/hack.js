@@ -13,6 +13,7 @@ useEffect(() => {
   });
   gameEl.appendChild(term.wrap);
   term.wrap.tabIndex = 0;
+  term.wrap.focus();
 
   let level, player, depth = 1, messages = [], gameOver = false;
 
@@ -46,6 +47,7 @@ useEffect(() => {
     messages = ['Use WASD to move. Type ? for help.'];
     beep(520, 0.1);
     draw();
+    term.wrap.focus();
   }
 
   function draw() {
@@ -145,11 +147,12 @@ useEffect(() => {
   }
 
   function handleKey(e) {
+    // Block everything that could be typed into the terminal
+    e.preventDefault();
+    e.stopPropagation();
+
     if (gameOver) {
-      if (e.key === 'r' || e.key === 'R') {
-        e.preventDefault();
-        newGame();
-      }
+      if (e.key === 'r' || e.key === 'R') newGame();
       return;
     }
 
@@ -162,25 +165,23 @@ useEffect(() => {
     };
 
     if (map[key]) {
-      e.preventDefault();
-      e.stopPropagation();
       playerMove(...map[key]);
     } else if (key === 'i') {
-      e.preventDefault();
       msg('Inventory: ' + (player.inventory.map(i => i.name).join(', ') || 'empty'));
       draw();
     } else if (key === '?') {
-      e.preventDefault();
       showHelp();
     }
   }
 
-  document.addEventListener('keydown', handleKey);
+  // Listen only on the terminal and stop all default typing
+  term.wrap.addEventListener('keydown', handleKey);
+  term.wrap.addEventListener('click', () => term.wrap.focus());
 
   newGame();
 
   return () => {
-    document.removeEventListener('keydown', handleKey);
+    term.wrap.removeEventListener('keydown', handleKey);
     term.destroy();
   };
 });
