@@ -1,8 +1,8 @@
 // terminal.js — pure 80x24 ANSI display buffer (no keyboard handling)
 class Terminal {
   constructor(options = {}) {
-    this.cols = 80;
-    this.rows = 24;
+    this.cols = options.cols || 80;
+    this.rows = options.rows || 24;
     this.font = options.font || '"Courier New", Courier, monospace';
     this.fontSize = options.fontSize || '15px';
     this.fg = options.fg || '#39ff14';
@@ -60,6 +60,7 @@ class Terminal {
     this.render();
   }
 
+  // ---- Drawing ----
   put(ch, x = this.cx, y = this.cy) {
     if (x < 0 || x >= this.cols || y < 0 || y >= this.rows) return;
     this.buffer[y][x] = {
@@ -71,8 +72,7 @@ class Terminal {
   }
 
   write(text) {
-    // Force every grapheme (including emoji) into a single cell
-    const chars = [...text]; // splits on code points; good enough for most emoji
+    const chars = [...text];
     for (const ch of chars) {
       if (ch === '\n') {
         this.cx = 0;
@@ -102,6 +102,28 @@ class Terminal {
     this.write(text + '\n');
   }
 
+  writeAt(x, y, text) {
+    this.moveTo(x, y);
+    this.write(text);
+  }
+
+  fill(x, y, w, h, ch = ' ', fg = this.fgIdx, bg = this.bgIdx) {
+    for (let yy = y; yy < y + h && yy < this.rows; yy++) {
+      for (let xx = x; xx < x + w && xx < this.cols; xx++) {
+        if (yy >= 0 && xx >= 0) {
+          this.buffer[yy][xx] = { ch, fg, bg, bright: this.bright };
+        }
+      }
+    }
+    this.render();
+  }
+
+  getChar(x, y) {
+    if (x < 0 || y < 0 || x >= this.cols || y >= this.rows) return null;
+    return this.buffer[y][x];
+  }
+
+  // ---- Cursor & screen ----
   moveTo(x, y) {
     this.cx = Math.max(0, Math.min(this.cols - 1, x));
     this.cy = Math.max(0, Math.min(this.rows - 1, y));
@@ -130,11 +152,22 @@ class Terminal {
     if (this.cy > 0) this.cy--;
   }
 
+  hideCursor() { this.cursorOn = false; this.render(); }
+  showCursor() { this.cursorOn = true; this.render(); }
+  focus() { this.wrap.focus(); }
+
+  onKey(handler) {
+    this.wrap.addEventListener('keydown', handler);
+    return () => this.wrap.removeEventListener('keydown', handler);
+  }
+
+  // ---- Color ----
   setFg(n) { this.fgIdx = n & 15; }
   setBg(n) { this.bgIdx = n & 15; }
   setBright(b) { this.bright = !!b; }
   resetAttr() { this.fgIdx = 2; this.bgIdx = 0; this.bright = false; }
 
+  // ---- ANSI ----
   writeAnsi(text) {
     let i = 0;
     while (i < text.length) {
