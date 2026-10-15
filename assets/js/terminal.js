@@ -9,6 +9,7 @@ class Terminal {
     this.bg = options.bg || '#000000';
     this.border = options.border || '#39ff14';
     this.hideMouse = options.hideMouse !== undefined ? options.hideMouse : true;
+    this.autoRender = options.autoRender !== undefined ? options.autoRender : true;
 
     this.colors = [
       '#000000','#aa0000','#00aa00','#aa5500',
@@ -96,7 +97,7 @@ class Terminal {
         this.cx++;
       }
     }
-    this.render();
+    if (this.autoRender) this.render();
   }
 
   writeln(text = '') {
@@ -116,7 +117,7 @@ class Terminal {
         }
       }
     }
-    this.render();
+    if (this.autoRender) this.render();
   }
 
   getChar(x, y) {
@@ -136,14 +137,14 @@ class Terminal {
       Array.from({ length: this.cols }, () => ({ ch: ' ', fg: 2, bg: 0, bright: false }))
     );
     this.home();
-    this.render();
+    if (this.autoRender) this.render();
   }
 
   clearLine() {
     for (let x = this.cx; x < this.cols; x++) {
       this.buffer[this.cy][x] = { ch: ' ', fg: this.fgIdx, bg: this.bgIdx, bright: this.bright };
     }
-    this.render();
+    if (this.autoRender) this.render();
   }
 
   scroll() {
@@ -217,6 +218,7 @@ class Terminal {
         i++;
       }
     }
+    if (this.autoRender) this.render();
   }
 
   render() {
