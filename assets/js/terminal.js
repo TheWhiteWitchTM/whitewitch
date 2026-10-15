@@ -1,4 +1,4 @@
-// terminal.js — efficient incremental ANSI terminal
+// terminal.js — efficient + defensive incremental ANSI terminal
 class Terminal {
   constructor(options = {}) {
     this.cols = options.cols || 80;
@@ -90,31 +90,30 @@ class Terminal {
   put(ch, x = this.cx, y = this.cy) {
     if (x < 0 || x >= this.cols || y < 0 || y >= this.rows) return;
     const cell = this.buffer[y][x];
-    const newCh = ch || ' ';
-    if (cell.ch !== newCh || cell.fg !== this.fgIdx || cell.bg !== this.bgIdx || cell.bright !== this.bright) {
-      cell.ch = newCh;
-      cell.fg = this.fgIdx;
-      cell.bg = this.bgIdx;
-      cell.bright = this.bright;
-      cell.dirty = true;
-    }
+    const newCh = (ch && ch.length) ? ch[0] : ' '; // force single cell
+    cell.ch = newCh;
+    cell.fg = this.fgIdx;
+    cell.bg = this.bgIdx;
+    cell.bright = this.bright;
+    cell.dirty = true;
   }
 
   write(text) {
     const chars = [...text];
     for (const ch of chars) {
       if (ch === '\n') {
+        this.markDirty(this.cx, this.cy);
         this.cx = 0;
         this.cy++;
         if (this.cy >= this.rows) this.scroll();
       } else if (ch === '\r') {
+        this.markDirty(this.cx, this.cy);
         this.cx = 0;
       } else if (ch === '\b') {
         if (this.cx > 0) {
           this.markDirty(this.cx, this.cy);
           this.cx--;
           this.put(' ');
-          this.markDirty(this.cx, this.cy);
         }
       } else {
         if (this.cx >= this.cols) {
@@ -137,18 +136,14 @@ class Terminal {
   }
 
   fill(x, y, w, h, ch = ' ', fg = this.fgIdx, bg = this.bgIdx) {
-    for (let yy = y; yy < y + h && yy < this.rows; yy++) {
-      for (let xx = x; xx < x + w && xx < this.cols; xx++) {
-        if (yy >= 0 && xx >= 0) {
-          const cell = this.buffer[yy][xx];
-          if (cell.ch !== ch || cell.fg !== fg || cell.bg !== bg) {
-            cell.ch = ch;
-            cell.fg = fg;
-            cell.bg = bg;
-            cell.bright = this.bright;
-            cell.dirty = true;
-          }
-        }
+    for (let yy = Math.max(0, y); yy < y + h && yy < this.rows; yy++) {
+      for (let xx = Math.max(0, x); xx < x + w && xx < this.cols; xx++) {
+        const cell = this.buffer[yy][xx];
+        cell.ch = ch || ' ';
+        cell.fg = fg;
+        cell.bg = bg;
+        cell.bright = this.bright;
+        cell.dirty = true;
       }
     }
     if (this.autoRender) this.render();
@@ -163,8 +158,8 @@ class Terminal {
     this.markDirty(this.cx, this.cy);
     this.prevCx = this.cx;
     this.prevCy = this.cy;
-    this.cx = Math.max(0, Math.min(this.cols - 1, x));
-    this.cy = Math.max(0, Math.min(this.rows - 1, y));
+    this.cx = Math.max(0, Math.min(this.cols - 1, Math.floor(x)));
+    this.cy = Math.max(0, Math.min(this.rows - 1, Math.floor(y)));
     this.markDirty(this.cx, this.cy);
   }
 
@@ -183,6 +178,8 @@ class Terminal {
     }
     this.cx = 0;
     this.cy = 0;
+    this.prevCx = 0;
+    this.prevCy = 0;
     if (this.autoRender) this.render();
   }
 
@@ -199,6 +196,10 @@ class Terminal {
   }
 
   scroll() {
+    // simple full mark dirty on scroll for safety
+    for (let y = 0; y < this.rows; y++) {
+      for (let x = 0; x < this.cols; x++) this.buffer[y][x].dirty = true;
+    }
     this.buffer.shift();
     this.cellEls.shift();
     const newRow = [];
@@ -284,7 +285,6 @@ class Terminal {
   }
 
   render() {
-    // Always clean previous cursor position
     this.markDirty(this.prevCx, this.prevCy);
     this.markDirty(this.cx, this.cy);
 
@@ -297,9 +297,9 @@ class Terminal {
         const ch = isCursor ? '█' : (cell.ch || ' ');
         const fgColor = this.colors[cell.bright ? Math.min(cell.fg + 8, 15) : cell.fg] || this.fg;
         const bgColor = this.colors[cell.bg] || this.bg;
-        if (el.textContent !== ch) el.textContent = ch;
-        if (el.style.color !== fgColor) el.style.color = fgColor;
-        if (el.style.backgroundColor !== bgColor) el.style.backgroundColor = bgColor;
+        el.textContent = ch;
+        el.style.color = fgColor;
+        el.style.backgroundColor = bgColor;
         cell.dirty = false;
       }
     }
