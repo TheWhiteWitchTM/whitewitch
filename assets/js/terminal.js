@@ -5,7 +5,7 @@ class Terminal {
     this.rows = 24;
     this.font = options.font || '"Courier New", Courier, monospace';
     this.fontSize = options.fontSize || '15px';
-    this.fg = options.fg || '#cccccc';
+    this.fg = options.fg || '#39ff14';
     this.bg = options.bg || '#000000';
     this.border = options.border || '#39ff14';
 
@@ -42,12 +42,12 @@ class Terminal {
     this.wrap.appendChild(this.screen);
 
     this.buffer = Array.from({ length: this.rows }, () =>
-      Array.from({ length: this.cols }, () => ({ ch: ' ', fg: 7, bg: 0, bright: false }))
+      Array.from({ length: this.cols }, () => ({ ch: ' ', fg: 2, bg: 0, bright: false }))
     );
 
     this.cx = 0;
     this.cy = 0;
-    this.fgIdx = 7;
+    this.fgIdx = 2;
     this.bgIdx = 0;
     this.bright = false;
     this.cursorOn = true;
@@ -111,7 +111,7 @@ class Terminal {
 
   clear() {
     this.buffer = Array.from({ length: this.rows }, () =>
-      Array.from({ length: this.cols }, () => ({ ch: ' ', fg: 7, bg: 0, bright: false }))
+      Array.from({ length: this.cols }, () => ({ ch: ' ', fg: 2, bg: 0, bright: false }))
     );
     this.home();
     this.render();
@@ -126,7 +126,7 @@ class Terminal {
 
   scroll() {
     this.buffer.shift();
-    this.buffer.push(Array.from({ length: this.cols }, () => ({ ch: ' ', fg: 7, bg: 0, bright: false })));
+    this.buffer.push(Array.from({ length: this.cols }, () => ({ ch: ' ', fg: 2, bg: 0, bright: false })));
     if (this.cy > 0) this.cy--;
   }
 
@@ -134,7 +134,7 @@ class Terminal {
   setFg(n) { this.fgIdx = n & 15; }
   setBg(n) { this.bgIdx = n & 15; }
   setBright(b) { this.bright = !!b; }
-  resetAttr() { this.fgIdx = 7; this.bgIdx = 0; this.bright = false; }
+  resetAttr() { this.fgIdx = 2; this.bgIdx = 0; this.bright = false; }
 
   // ---- ANSI ----
   writeAnsi(text) {
@@ -200,8 +200,4 @@ class Terminal {
     clearInterval(this._blink);
     this.wrap.remove();
   }
-}
-
-function createTerminal(options) {
-  return new Terminal(options);
 }
