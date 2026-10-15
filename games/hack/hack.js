@@ -9,6 +9,7 @@ useEffect(() => {
     border: '#39ff14'
   });
   gameEl.appendChild(term.wrap);
+  term.wrap.tabIndex = 0;
   term.wrap.focus();
 
   let level, player, depth = 1, messages = [], gameOver = false;
@@ -40,9 +41,10 @@ useEffect(() => {
     level = new Level(depth);
     const start = level.stairsUp || level.randomFloor();
     player = new Player(start.x, start.y);
-    messages = ['Welcome to Hack! Type ? for help.'];
+    messages = ['Click the terminal, then use arrow keys. Type ? for help.'];
     beep(520, 0.1);
     draw();
+    term.wrap.focus();
   }
 
   function draw() {
@@ -119,6 +121,7 @@ useEffect(() => {
       }
     } else {
       beep(80, 0.04);
+      msg('You cannot go that way.');
     }
     level.monsters.forEach(m => {
       const res = m.act(level, player);
@@ -134,15 +137,18 @@ useEffect(() => {
 
   function showHelp() {
     messages = [
-      'Arrows / hjkl move, yubn diagonals',
-      'i = inventory, ? = this help, r = restart'
+      'Arrow keys or hjkl to move (yubn diagonals)',
+      'i = inventory   ? = help   r = restart when dead'
     ];
     draw();
   }
 
-  function onKey(e) {
+  function handleKey(e) {
     if (gameOver) {
-      if (e.key === 'r' || e.key === 'R') newGame();
+      if (e.key === 'r' || e.key === 'R') {
+        e.preventDefault();
+        newGame();
+      }
       return;
     }
     const map = {
@@ -152,20 +158,30 @@ useEffect(() => {
     };
     if (map[e.key]) {
       e.preventDefault();
+      e.stopPropagation();
       playerMove(...map[e.key]);
     } else if (e.key === 'i') {
+      e.preventDefault();
       msg('Inventory: ' + (player.inventory.map(i => i.name).join(', ') || 'empty'));
       draw();
     } else if (e.key === '?') {
+      e.preventDefault();
       showHelp();
     }
   }
 
-  term.wrap.addEventListener('keydown', onKey);
+  // Listen on both so arrow keys always work
+  term.wrap.addEventListener('keydown', handleKey);
+  document.addEventListener('keydown', handleKey);
+
+  // Click anywhere on the terminal to refocus
+  term.wrap.addEventListener('click', () => term.wrap.focus());
+
   newGame();
 
   return () => {
-    term.wrap.removeEventListener('keydown', onKey);
+    term.wrap.removeEventListener('keydown', handleKey);
+    document.removeEventListener('keydown', handleKey);
     term.destroy();
   };
 });
