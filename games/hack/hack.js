@@ -1,30 +1,16 @@
 useEffect(() => {
-  const loading = document.getElementById('loading');
-  if (loading) loading.textContent = 'Starting...';
-
   const gameEl = document.getElementById('game');
-  if (!gameEl) {
-    document.body.insertAdjacentHTML('beforeend', '<p style="color:red">No #game element</p>');
-    return;
-  }
+  if (!gameEl) return;
 
-  let term;
-  try {
-    term = new Terminal({
-      fontSize: '16px',
-      fg: '#39ff14',
-      bg: '#000000',
-      border: '#39ff14',
-      cols: 40,
-      rows: 12
-    });
-    gameEl.innerHTML = '';
-    gameEl.appendChild(term.wrap);
-    term.wrap.focus();
-  } catch (e) {
-    gameEl.innerHTML = '<p style="color:red">Terminal failed: ' + e.message + '</p>';
-    return;
-  }
+  const term = new Terminal({
+    fontSize: '16px',
+    cols: 40,
+    rows: 12,
+    autoRender: false   // <-- important
+  });
+  gameEl.innerHTML = '';
+  gameEl.appendChild(term.wrap);
+  term.wrap.focus();
 
   let px = 5, py = 5;
 
@@ -50,6 +36,7 @@ useEffect(() => {
     term.moveTo(0, 10);
     term.setFg(10);
     term.write('WASD to move   @ at ' + px + ',' + py);
+    term.render();   // <-- only once per frame
   }
 
   function onKey(e) {
@@ -64,6 +51,4 @@ useEffect(() => {
 
   term.wrap.addEventListener('keydown', onKey);
   draw();
-
-  if (loading) loading.remove();
 });
