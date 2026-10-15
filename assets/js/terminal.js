@@ -1,4 +1,4 @@
-// terminal.js — efficient + defensive incremental ANSI terminal
+// terminal.js — reliable incremental terminal (compare-and-update)
 class Terminal {
   constructor(options = {}) {
     this.cols = options.cols || 80;
@@ -46,8 +46,10 @@ class Terminal {
 
     this.cellEls = [];
     this.buffer = [];
+    this.displayed = []; // what is currently on screen
     for (let y = 0; y < this.rows; y++) {
       const row = [];
+      const dispRow = [];
       const rowEls = [];
       const rowDiv = document.createElement('div');
       rowDiv.style.whiteSpace = 'pre';
@@ -56,17 +58,17 @@ class Terminal {
         span.textContent = ' ';
         rowDiv.appendChild(span);
         rowEls.push(span);
-        row.push({ ch: ' ', fg: 2, bg: 0, bright: false, dirty: true });
+        row.push({ ch: ' ', fg: 2, bg: 0, bright: false });
+        dispRow.push({ ch: ' ', fg: 2, bg: 0, bright: false, isCursor: false });
       }
       this.screen.appendChild(rowDiv);
       this.cellEls.push(rowEls);
       this.buffer.push(row);
+      this.displayed.push(dispRow);
     }
 
     this.cx = 0;
     this.cy = 0;
-    this.prevCx = 0;
-    this.prevCy = 0;
     this.fgIdx = 2;
     this.bgIdx = 0;
     this.bright = false;
@@ -74,44 +76,32 @@ class Terminal {
 
     this._blink = setInterval(() => {
       this.cursorOn = !this.cursorOn;
-      this.markDirty(this.cx, this.cy);
       this.render();
     }, 530);
 
     this.render();
   }
 
-  markDirty(x, y) {
-    if (y >= 0 && y < this.rows && x >= 0 && x < this.cols) {
-      this.buffer[y][x].dirty = true;
-    }
-  }
-
   put(ch, x = this.cx, y = this.cy) {
     if (x < 0 || x >= this.cols || y < 0 || y >= this.rows) return;
     const cell = this.buffer[y][x];
-    const newCh = (ch && ch.length) ? [...ch][0] : ' ';
-    cell.ch = newCh;
+    cell.ch = (ch && [...ch][0]) || ' ';
     cell.fg = this.fgIdx;
     cell.bg = this.bgIdx;
     cell.bright = this.bright;
-    cell.dirty = true;
   }
 
   write(text) {
     const chars = [...text];
     for (const ch of chars) {
       if (ch === '\n') {
-        this.markDirty(this.cx, this.cy);
         this.cx = 0;
         this.cy++;
         if (this.cy >= this.rows) this.scroll();
       } else if (ch === '\r') {
-        this.markDirty(this.cx, this.cy);
         this.cx = 0;
       } else if (ch === '\b') {
         if (this.cx > 0) {
-          this.markDirty(this.cx, this.cy);
           this.cx--;
           this.put(' ');
         }
@@ -136,14 +126,13 @@ class Terminal {
   }
 
   fill(x, y, w, h, ch = ' ', fg = this.fgIdx, bg = this.bgIdx) {
-    for (let yy = Math.max(0, y); yy < y + h && yy < this.rows; yy++) {
-      for (let xx = Math.max(0, x); xx < x + w && xx < this.cols; xx++) {
+    for (let yy = Math.max(0, y); yy < Math.min(this.rows, y + h); yy++) {
+      for (let xx = Math.max(0, x); xx < Math.min(this.cols, x + w); xx++) {
         const cell = this.buffer[yy][xx];
         cell.ch = ch || ' ';
         cell.fg = fg;
         cell.bg = bg;
         cell.bright = this.bright;
-        cell.dirty = true;
       }
     }
     if (this.autoRender) this.render();
@@ -155,12 +144,8 @@ class Terminal {
   }
 
   moveTo(x, y) {
-    this.markDirty(this.cx, this.cy);
-    this.prevCx = this.cx;
-    this.prevCy = this.cy;
     this.cx = Math.max(0, Math.min(this.cols - 1, Math.floor(x)));
     this.cy = Math.max(0, Math.min(this.rows - 1, Math.floor(y)));
-    this.markDirty(this.cx, this.cy);
   }
 
   home() { this.moveTo(0, 0); }
@@ -173,13 +158,10 @@ class Terminal {
         cell.fg = 2;
         cell.bg = 0;
         cell.bright = false;
-        cell.dirty = true;
       }
     }
     this.cx = 0;
     this.cy = 0;
-    this.prevCx = 0;
-    this.prevCy = 0;
     if (this.autoRender) this.render();
   }
 
@@ -190,18 +172,16 @@ class Terminal {
       cell.fg = this.fgIdx;
       cell.bg = this.bgIdx;
       cell.bright = this.bright;
-      cell.dirty = true;
     }
     if (this.autoRender) this.render();
   }
 
   scroll() {
-    for (let y = 0; y < this.rows; y++) {
-      for (let x = 0; x < this.cols; x++) this.buffer[y][x].dirty = true;
-    }
     this.buffer.shift();
+    this.displayed.shift();
     this.cellEls.shift();
     const newRow = [];
+    const newDisp = [];
     const newEls = [];
     const rowDiv = document.createElement('div');
     rowDiv.style.whiteSpace = 'pre';
@@ -210,16 +190,18 @@ class Terminal {
       span.textContent = ' ';
       rowDiv.appendChild(span);
       newEls.push(span);
-      newRow.push({ ch: ' ', fg: 2, bg: 0, bright: false, dirty: true });
+      newRow.push({ ch: ' ', fg: 2, bg: 0, bright: false });
+      newDisp.push({ ch: ' ', fg: 2, bg: 0, bright: false, isCursor: false });
     }
     this.screen.appendChild(rowDiv);
     this.buffer.push(newRow);
+    this.displayed.push(newDisp);
     this.cellEls.push(newEls);
     if (this.cy > 0) this.cy--;
   }
 
-  hideCursor() { this.cursorOn = false; this.markDirty(this.cx, this.cy); this.render(); }
-  showCursor() { this.cursorOn = true; this.markDirty(this.cx, this.cy); this.render(); }
+  hideCursor() { this.cursorOn = false; this.render(); }
+  showCursor() { this.cursorOn = true; this.render(); }
 
   setHideMouse(hide) {
     this.hideMouse = !!hide;
@@ -284,27 +266,29 @@ class Terminal {
   }
 
   render() {
-    this.markDirty(this.prevCx, this.prevCy);
-    this.markDirty(this.cx, this.cy);
-
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.cols; x++) {
         const cell = this.buffer[y][x];
-        if (!cell.dirty) continue;
-        const el = this.cellEls[y][x];
+        const disp = this.displayed[y][x];
         const isCursor = this.cursorOn && y === this.cy && x === this.cx;
         const ch = isCursor ? '█' : (cell.ch || ' ');
         const isEmoji = ch.length > 1 || (ch.codePointAt(0) > 0xFFFF);
-        const fgColor = isEmoji ? '' : (this.colors[cell.bright ? Math.min(cell.fg + 8, 15) : cell.fg] || this.fg);
-        const bgColor = this.colors[cell.bg] || this.bg;
-        el.textContent = ch;
-        el.style.color = fgColor;
-        el.style.backgroundColor = bgColor;
-        cell.dirty = false;
+        const fg = isEmoji ? '' : (this.colors[cell.bright ? Math.min(cell.fg + 8, 15) : cell.fg] || this.fg);
+        const bg = this.colors[cell.bg] || this.bg;
+
+        if (disp.ch !== ch || disp.fg !== cell.fg || disp.bg !== cell.bg || disp.bright !== cell.bright || disp.isCursor !== isCursor) {
+          const el = this.cellEls[y][x];
+          el.textContent = ch;
+          el.style.color = fg;
+          el.style.backgroundColor = bg;
+          disp.ch = ch;
+          disp.fg = cell.fg;
+          disp.bg = cell.bg;
+          disp.bright = cell.bright;
+          disp.isCursor = isCursor;
+        }
       }
     }
-    this.prevCx = this.cx;
-    this.prevCy = this.cy;
   }
 
   destroy() {
