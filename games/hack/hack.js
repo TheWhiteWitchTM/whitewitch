@@ -122,21 +122,19 @@ useEffect(() => {
     }
     level.items.forEach(item => {
       term.moveTo(item.x, item.y);
-      term.setFg(11);
+      term.resetAttr();
       term.write(item.ch || '?');
     });
     level.monsters.forEach(mon => {
       if (mon.hp > 0) {
         term.moveTo(mon.x, mon.y);
-        term.setFg(mon.color || 1);
+        term.resetAttr();
         term.write(mon.emoji || mon.ch);
       }
     });
     term.moveTo(player.x, player.y);
-    term.setFg(10);
-    term.setBright(false);
-    term.write('🧙');
     term.resetAttr();
+    term.write('🧙');
 
     term.moveTo(0, level.height);
     term.setFg(10);
