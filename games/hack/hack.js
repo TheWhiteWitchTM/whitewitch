@@ -10,7 +10,6 @@ useEffect(() => {
   });
   gameEl.appendChild(term.wrap);
   term.wrap.tabIndex = 0;
-  term.wrap.focus();
 
   let level, player, depth = 1, messages = [], gameOver = false;
 
@@ -41,10 +40,9 @@ useEffect(() => {
     level = new Level(depth);
     const start = level.stairsUp || level.randomFloor();
     player = new Player(start.x, start.y);
-    messages = ['Click the terminal, then use arrow keys. Type ? for help.'];
+    messages = ['Use WASD to move. Type ? for help.'];
     beep(520, 0.1);
     draw();
-    term.wrap.focus();
   }
 
   function draw() {
@@ -129,7 +127,7 @@ useEffect(() => {
     });
     if (player.hp <= 0) {
       gameOver = true;
-      msg('You die...');
+      msg('You die... Press R to restart.');
       beep(60, 0.4);
     }
     draw();
@@ -137,7 +135,7 @@ useEffect(() => {
 
   function showHelp() {
     messages = [
-      'Arrow keys or hjkl to move (yubn diagonals)',
+      'WASD to move (QEZC diagonals) or hjkl',
       'i = inventory   ? = help   r = restart when dead'
     ];
     draw();
@@ -151,36 +149,34 @@ useEffect(() => {
       }
       return;
     }
+
+    const key = e.key.toLowerCase();
     const map = {
-      ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1],
+      a: [-1, 0], d: [1, 0], w: [0, -1], s: [0, 1],
+      q: [-1, -1], e: [1, -1], z: [-1, 1], c: [1, 1],
       h: [-1, 0], l: [1, 0], k: [0, -1], j: [0, 1],
       y: [-1, -1], u: [1, -1], b: [-1, 1], n: [1, 1]
     };
-    if (map[e.key]) {
+
+    if (map[key]) {
       e.preventDefault();
       e.stopPropagation();
-      playerMove(...map[e.key]);
-    } else if (e.key === 'i') {
+      playerMove(...map[key]);
+    } else if (key === 'i') {
       e.preventDefault();
       msg('Inventory: ' + (player.inventory.map(i => i.name).join(', ') || 'empty'));
       draw();
-    } else if (e.key === '?') {
+    } else if (key === '?') {
       e.preventDefault();
       showHelp();
     }
   }
 
-  // Listen on both so arrow keys always work
-  term.wrap.addEventListener('keydown', handleKey);
   document.addEventListener('keydown', handleKey);
-
-  // Click anywhere on the terminal to refocus
-  term.wrap.addEventListener('click', () => term.wrap.focus());
 
   newGame();
 
   return () => {
-    term.wrap.removeEventListener('keydown', handleKey);
     document.removeEventListener('keydown', handleKey);
     term.destroy();
   };
