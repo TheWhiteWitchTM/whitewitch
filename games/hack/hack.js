@@ -9,7 +9,9 @@ useEffect(() => {
     fontSize: '14px',
     fg: '#39ff14',
     bg: '#0a140a',
-    border: '#39ff14'
+    border: '#39ff14',
+    cols: 60,
+    rows: 20
   });
   gameEl.appendChild(term.wrap);
   term.wrap.tabIndex = 0;
@@ -43,7 +45,8 @@ useEffect(() => {
       depth = 1;
       gameOver = false;
       level = new Level(depth);
-      const start = level.stairsUp || level.randomFloor();
+      const r = level.rooms[0];
+      const start = r ? { x: r.x + 2, y: r.y + 2 } : (level.randomFloor() || { x: 2, y: 2 });
       player = new Player(start.x, start.y);
       messages = ['Use WASD to move. Type ? for help.'];
       beep(520, 0.1);
@@ -51,7 +54,7 @@ useEffect(() => {
       term.wrap.focus();
     } catch (err) {
       console.error(err);
-      messages = ['Error starting game: ' + err.message];
+      messages = ['Error: ' + err.message];
       draw();
     }
   }
@@ -62,29 +65,32 @@ useEffect(() => {
       for (let y = 0; y < level.height; y++) {
         for (let x = 0; x < level.width; x++) {
           term.moveTo(x, y);
-          const mon = level.getMonsterAt(x, y);
-          const item = level.getItemAt(x, y);
-          if (x === player.x && y === player.y) {
-            term.setFg(10);
-            term.setBright(true);
-            term.write('@');
-          } else if (mon) {
-            term.setFg(mon.color || 1);
-            term.write(mon.ch || mon.letter || 'M');
-          } else if (item) {
-            term.setFg(11);
-            term.write(item.ch || '?');
-          } else {
-            const t = level.tiles[y][x];
-            term.setFg(t === '#' ? 8 : 2);
-            term.write(t || ' ');
-          }
-          term.resetAttr();
+          const t = level.tiles[y][x];
+          term.setFg(t === '#' ? 8 : 2);
+          term.write(t || ' ');
         }
       }
+      level.items.forEach(item => {
+        term.moveTo(item.x, item.y);
+        term.setFg(11);
+        term.write(item.ch || '?');
+      });
+      level.monsters.forEach(mon => {
+        if (mon.hp > 0) {
+          term.moveTo(mon.x, mon.y);
+          term.setFg(mon.color || 1);
+          term.write(mon.ch || 'M');
+        }
+      });
+      term.moveTo(player.x, player.y);
+      term.setFg(10);
+      term.setBright(true);
+      term.write('@');
+      term.resetAttr();
+
       term.moveTo(0, level.height);
       term.setFg(10);
-      term.write(`Dlvl:${depth}  HP:${player.hp}/${player.maxHp}  Gold:${player.gold}`);
+      term.write(`Dlvl:${depth}  HP:${player.hp}/${player.maxHp}  Gold:${player.gold}  @ ${player.x},${player.y}`);
       term.moveTo(0, level.height + 1);
       term.setFg(7);
       term.write((messages.join(' | ') || '').slice(0, 70));
@@ -118,17 +124,19 @@ useEffect(() => {
           level.items = level.items.filter(i => i !== item);
           beep(600, 0.07);
         }
-        if (level.tiles[ny][nx] === '>' || level.tiles[ny][nx] === '>') {
+        if (level.tiles[ny][nx] === '>') {
           depth++;
           level = new Level(depth);
-          const s = level.stairsUp || level.randomFloor();
+          const r = level.rooms[0];
+          const s = r ? { x: r.x + 2, y: r.y + 2 } : level.randomFloor();
           player.x = s.x; player.y = s.y;
           msg(`You descend to level ${depth}.`);
           beep(180, 0.12);
-        } else if ((level.tiles[ny][nx] === '<' || level.tiles[ny][nx] === '<') && depth > 1) {
+        } else if (level.tiles[ny][nx] === '<' && depth > 1) {
           depth--;
           level = new Level(depth);
-          const s = level.stairsDown || level.randomFloor();
+          const r = level.rooms[level.rooms.length - 1];
+          const s = r ? { x: r.x + 2, y: r.y + 2 } : level.randomFloor();
           player.x = s.x; player.y = s.y;
           msg(`You ascend to level ${depth}.`);
           beep(220, 0.12);
