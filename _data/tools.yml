@@ -1,0 +1,19 @@
+- title: "🧙‍♀️ Emoji Wizard"
+  url: /tools/emoji-builder/
+  description: "Search, browse, and assemble emojis (witch + white, witch + frog, etc.)."
+
+- title: "🏳️ Flags Wizard"
+  url: /tools/flags-builder/
+  description: "Country name or code → flag, then chain them together."
+
+- title: "🔮 Favicon Wizard"
+  url: /tools/favicon-wizard/
+  description: "Text or emoji → SVG favicon + ready <link> tag."
+
+- title: "🖼️ Transparency Wizard"
+  url: /tools/transparency-wizard/
+  description: "Drop an image, kill the background or dial opacity, download PNG. All local."
+
+- title: "📲 App Icon Wizard"
+  url: /tools/icon-wizard/
+  description: "Drop an image. Get iOS and web-app icon sizes, a manifest, and a zip. All local."

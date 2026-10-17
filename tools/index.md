@@ -6,7 +6,7 @@ description: Tiny client-side wizards. Zero tracking, zero cookies, zero account
 
 # 🛠️ Tools
 
-Four tiny wizards. All run in your browser. Nothing leaves the tab.
+Five tiny wizards. All run in your browser. Nothing leaves the tab.
 
 {% for tool in site.data.tools %}
 ## {{ tool.title }}
@@ -17,3 +17,5 @@ Four tiny wizards. All run in your browser. Nothing leaves the tab.
 
 ---
 {% endfor %}
+
+[Changes]({{ '/tools/changes/' | relative_url }})

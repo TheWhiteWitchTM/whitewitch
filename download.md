@@ -7,6 +7,8 @@ permalink: /downloads/
 
 # 📥 Downloads
 
+The browser games moved. They play on [Emoji Games](https://thewhitewitchtm.github.io/emojigames/). The Play link in the menu goes there.
+
 Nothing here yet.
 
 Not because I forgot.  

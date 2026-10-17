@@ -3,6 +3,8 @@ layout: default
 title: Blog
 description: Games, tools, and whatever else doesn’t fit the other collections. Still facts first.
 image: /assets/images/blog.jpg
+image_width: 1200
+image_height: 630
 permalink: /blog/
 ---
 

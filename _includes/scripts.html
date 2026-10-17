@@ -29,3 +29,13 @@
     });
   }
 </script>
+<script>
+  if ('serviceWorker' in navigator) {
+    var scope = '{{ "/" | relative_url }}';
+    if (scope.slice(-1) !== '/') scope += '/';
+    navigator.serviceWorker.register('{{ "/sw.js" | relative_url }}', {
+      scope: scope,
+      updateViaCache: 'none'
+    }).catch(function () {});
+  }
+</script>

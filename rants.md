@@ -3,6 +3,8 @@ layout: default
 title: Rants
 description: Things that make me angry. Short, blunt, and not interested in your feelings about it.
 image: /assets/images/rants.jpg
+image_width: 1200
+image_height: 630
 permalink: /rants/
 ---
 

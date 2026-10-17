@@ -16,19 +16,7 @@
         { "title": "📥 Downloads", "url": "/downloads/" }
       ]
     },
-    {
-      "title": "🕹️ Play",
-      "dropdown": [
-        { "title": "🌲 Adventureland", "url": "/games/adventureland/" },
-        { "title": "🏴‍☠️ Pirate Adventure", "url": "/games/pirate/" },
-        { "separator": true },
-        { "title": "🚀 Galaxy Hunt", "url": "/games/galaxy-hunt/" },
-        { "title": "🗡️ Hack", "url": "/games/hack/" },
-        { "title": "🏓 Pong", "url": "/games/pong/" },
-        { "title": "🗡️ Rogue", "url": "/games/rogue/" },
-        { "title": "🐍 Snake", "url": "/games/snake/" }
-      ]
-    },
+    { "title": "🕹️ Play", "url": "https://thewhitewitchtm.github.io/emojigames/" },
     {
       "title": "🛠️ Tools",
       "dropdown": [
@@ -36,7 +24,8 @@
         { "title": "🏳️ Flags Wizard", "url": "/tools/flags-builder/" },
         { "separator": true },
         { "title": "🔮 Favicon Wizard", "url": "/tools/favicon-wizard/" },
-        { "title": "🖼️ Transparency Wizard", "url": "/tools/transparency-wizard/" }
+        { "title": "🖼️ Transparency Wizard", "url": "/tools/transparency-wizard/" },
+        { "title": "📲 App Icon Wizard", "url": "/tools/icon-wizard/" }
       ]
     },
     { "title": "🔮 About", "url": "/about/" }
