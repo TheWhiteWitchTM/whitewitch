@@ -18,4 +18,4 @@ Five tiny wizards. All run in your browser. Nothing leaves the tab.
 ---
 {% endfor %}
 
-[Changes]({{ '/tools/changes/' | relative_url }})
+[Changes]({{ '/changes/' | relative_url }})

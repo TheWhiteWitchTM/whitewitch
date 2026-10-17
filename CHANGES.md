@@ -2,7 +2,7 @@
 layout: default
 title: Tools changelog
 description: What changed in the tools, the Play link, previews, and install-as-app.
-permalink: /tools/changes/
+permalink: /changes/
 ---
 
 # Changes
