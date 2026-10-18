@@ -10,6 +10,7 @@ permalink: /changes/
 ## 2026-10-18
 
 - **Play** opens [Emoji Games](https://thewhitewitchtm.github.io/emojigames/) in a new tab. This site stays where it was.
+- **Open as app.** Chrome and Edge show an install bar when the site can be installed. The button opens the browser’s install prompt. iPhone and iPad get the Add to Home Screen hint instead. Dismiss it and it stays dismissed on that browser.
 
 ## 2026-10-17
 
