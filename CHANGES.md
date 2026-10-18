@@ -7,6 +7,10 @@ permalink: /changes/
 
 # Changes
 
+## 2026-10-18
+
+- **Play** opens [Emoji Games](https://thewhitewitchtm.github.io/emojigames/) in a new tab. This site stays where it was.
+
 ## 2026-10-17
 
 - **Play** leaves this site. The menu item opens [Emoji Games](https://thewhitewitchtm.github.io/emojigames/). Old `/games/` addresses redirect to the same games over there.

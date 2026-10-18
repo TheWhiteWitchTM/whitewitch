@@ -69,7 +69,7 @@
         {% else %}
           <li>
             {% if item.url contains '://' %}
-              <a href="{{ item.url }}">{{ item.title }}</a>
+              <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
             {% else %}
               <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
             {% endif %}
