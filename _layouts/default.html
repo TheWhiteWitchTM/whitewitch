@@ -7,9 +7,11 @@
     {% include nav.html %}
 
     <main class="page-frame">
+      {% unless page.hide_sides %}
       <div class="side-image left">
         <img src="{{ '/assets/images/mira.jpg' | relative_url }}" alt="Mira">
       </div>
+      {% endunless %}
 
       <div class="content-area home-content markdown-body">
         {{ content }}
@@ -19,9 +21,11 @@
         {% endif %}
       </div>
 
+      {% unless page.hide_sides %}
       <div class="side-image right">
         <img src="{{ '/assets/images/witch.jpg' | relative_url }}" alt="Witch">
       </div>
+      {% endunless %}
     </main>
 
     {% include footer.html %}

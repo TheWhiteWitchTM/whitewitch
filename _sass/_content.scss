@@ -130,9 +130,71 @@
   font-style: italic;
 }
 
-.markdown-body img[width="100%"] {
+.markdown-body img[width="100%"],
+.markdown-body img.project-banner {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 0 1.4rem;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.repo-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0.4rem 0 0.8rem;
+}
+
+.markdown-body a.repo-link {
+  display: block;
+  padding: 0.85rem 1rem 0.8rem;
+  border: 1px solid #3a2a4a;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #16121c 0%, #100e14 100%);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  text-decoration: none;
+  border-bottom: 1px solid #3a2a4a !important;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.markdown-body a.repo-link .repo-kicker {
+  display: block;
+  color: #9a8aaa;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+}
+
+.markdown-body a.repo-link .repo-name {
+  display: block;
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.markdown-body a.repo-link .repo-url {
+  display: block;
+  margin-top: 0.15rem;
+  color: #c9a6ff;
+  font-size: 0.92rem;
+}
+
+.markdown-body a.repo-link:hover {
+  border-color: #c9a6ff !important;
+  background: #1c1526;
+}
+
+.markdown-body a.repo-link:hover .repo-url {
+  color: #e8d5ff;
+}
+
+.markdown-body a.repo-link:focus-visible {
+  outline: 2px solid #c9a6ff;
+  outline-offset: 2px;
 }
 
 /* Force readable content width */

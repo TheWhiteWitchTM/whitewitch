@@ -18,6 +18,27 @@
   .side-image.left { order: 1; margin-top: 0; }
   .content-area { order: 2; }
   .side-image.right { order: 3; }
+
+  /* width: 100% is content-box, so the column padding was spilling off the screen. */
+  .page-frame .content-area,
+  .page-frame .home-content {
+    align-self: stretch;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .markdown-body pre,
+  .markdown-body img,
+  .markdown-body .repo-row,
+  .markdown-body a.repo-link {
+    max-width: 100%;
+  }
+
+  .markdown-body .repo-url {
+    overflow-wrap: anywhere;
+  }
 }
 
 @media (max-width: 600px) {
