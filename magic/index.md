@@ -1,7 +1,7 @@
 ---
 layout: default
 title: MAGIC
-description: "MAGIC mixes Lua and BASIC and compiles to JavaScript. Pictures, terminals, games. Alpha. MIT. No account."
+description: "MAGIC mixes Lua and BASIC and compiles to JavaScript. Pictures, terminals, games. RETRO MAGIC is the 8-bit compiler. Alpha. MIT. No account."
 image: /assets/images/magic.jpg
 image_width: 1200
 image_height: 630
@@ -45,6 +45,12 @@ requestAnimationFrame(frame)
 MIT. No account. No share-to-unlock. No quiet sponsor hiding in the footer.
 
 The short course, if you want to read before you clone, is [on the language site](https://thewhitewitchtm.github.io/MAGIC/). The repo is still the copy that can change under you. The editor, if you want a window that starts black, is [MAGIC Studio]({{ '/magic/studio/' | relative_url }}). The smaller desk, with the big Run button, is [MAGIC Apprentice]({{ '/magic/apprentice/' | relative_url }}).
+
+## Two compilers
+
+This page is MAGIC. It compiles to JavaScript. Pictures, a terminal, 3D, a UI kit, sound, hex boards, games, and an Electron window.
+
+[RETRO MAGIC]({{ '/magic/retro/' | relative_url }}) is the other compiler. A script still looks like MAGIC. The output is BASIC and assembly for the Commodore 64, the Apple II, and the TI-99/4A. `@3d` stays here. It does not fit those machines. The window for that one is [RETRO Studio]({{ '/magic/retro/studio/' | relative_url }}).
 
 ## Three repos
 

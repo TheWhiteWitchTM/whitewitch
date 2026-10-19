@@ -1,7 +1,7 @@
 ---
 layout: default
 title: MAGIC Studio
-description: "MAGIC Studio is the dark window for MAGIC. Editor, run console, terminal. It starts black. Local if you want it. Alpha. No account."
+description: "MAGIC Studio is the dark window for MAGIC, the language that compiles to JavaScript. Editor, run console, terminal. It starts black. RETRO Studio is the 8-bit window. Alpha. No account."
 image: /assets/images/studio.jpg
 image_width: 1200
 image_height: 630
@@ -36,7 +36,7 @@ npm install
 npm start
 ```
 
-`bin/magic-studio` does the same thing and picks up the tools on PATH. Open a folder, or make one from the welcome screen. If the [MAGIC]({{ '/magic/' | relative_url }}) repo is sitting next to this one, the examples button can find the samples. The smaller desk, with the big Run button, is [MAGIC Apprentice]({{ '/magic/apprentice/' | relative_url }}).
+`bin/magic-studio` does the same thing and picks up the tools on PATH. Open a folder, or make one from the welcome screen. If the [MAGIC]({{ '/magic/' | relative_url }}) repo is sitting next to this one, the examples button can find the samples. The smaller desk, with the big Run button, is [MAGIC Apprentice]({{ '/magic/apprentice/' | relative_url }}). The window for the C64, the Apple II, and the TI-99/4A is [RETRO Studio]({{ '/magic/retro/studio/' | relative_url }}). This one runs the JavaScript compiler.
 
 ## Three repos
 

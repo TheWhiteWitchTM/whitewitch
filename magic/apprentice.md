@@ -1,7 +1,7 @@
 ---
 layout: default
 title: MAGIC Apprentice
-description: "MAGIC Apprentice is the small desk for MAGIC. A big Run button, plain errors, a helper that stays on the machine. Ages 8 to 16. Alpha. No account."
+description: "MAGIC Apprentice is the small desk for MAGIC, the language that compiles to JavaScript. A big Run button, plain errors, a helper that stays on the machine. Ages 8 to 16. Alpha. No account."
 image: /assets/images/apprentice.jpg
 image_width: 1200
 image_height: 630
@@ -49,7 +49,7 @@ npm start
 
 `bin/magic-apprentice` does the same thing and picks up nvm when it is installed. The first launch opens Hello, world and a three-step tour. Skip it if you want. Help → Tutorial brings it back.
 
-The window that starts black, for when the big Run button is no longer the point, is [MAGIC Studio]({{ '/magic/studio/' | relative_url }}).
+The window that starts black, for when the big Run button is no longer the point, is [MAGIC Studio]({{ '/magic/studio/' | relative_url }}). [RETRO MAGIC]({{ '/magic/retro/' | relative_url }}) is the 8-bit compiler. It has its own window. This desk stays on the JavaScript one.
 
 MIT. No account. Alpha, so the desk can still move.
 

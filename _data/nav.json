@@ -19,9 +19,12 @@
     {
       "title": "🪄 MAGIC",
       "dropdown": [
-        { "title": "🪄 Language", "url": "/magic/" },
+        { "title": "🪄 MAGIC", "url": "/magic/" },
         { "title": "🖥️ Studio", "url": "/magic/studio/" },
-        { "title": "📘 Apprentice", "url": "/magic/apprentice/" }
+        { "title": "📘 Apprentice", "url": "/magic/apprentice/" },
+        { "separator": true },
+        { "title": "🕹️ RETRO MAGIC", "url": "/magic/retro/" },
+        { "title": "🖥️ RETRO Studio", "url": "/magic/retro/studio/" }
       ]
     },
     { "title": "🕹️ Play", "url": "https://thewhitewitchtm.github.io/emojigames/" },
