@@ -44,10 +44,10 @@ requestAnimationFrame(frame)
 
 MIT. No account. No share-to-unlock. No quiet sponsor hiding in the footer.
 
-The short course, if you want to read before you clone, is [on the language site](https://thewhitewitchtm.github.io/MAGIC/). The repo is still the copy that can change under you. The editor, if you want a window that starts black, is [MAGIC Studio]({{ '/magic/studio/' | relative_url }}).
+The short course, if you want to read before you clone, is [on the language site](https://thewhitewitchtm.github.io/MAGIC/). The repo is still the copy that can change under you. The editor, if you want a window that starts black, is [MAGIC Studio]({{ '/magic/studio/' | relative_url }}). The smaller desk, with the big Run button, is [MAGIC Apprentice]({{ '/magic/apprentice/' | relative_url }}).
 
-## Both repos
+## Three repos
 
-The language and the window. Roots. Not a signup form with a trailer.
+The language, the window, and the smaller desk. Roots. Not a signup form with a trailer.
 
 {% include repo-links.html %}

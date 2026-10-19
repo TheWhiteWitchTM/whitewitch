@@ -20,7 +20,8 @@
       "title": "🪄 MAGIC",
       "dropdown": [
         { "title": "🪄 Language", "url": "/magic/" },
-        { "title": "🖥️ Studio", "url": "/magic/studio/" }
+        { "title": "🖥️ Studio", "url": "/magic/studio/" },
+        { "title": "📘 Apprentice", "url": "/magic/apprentice/" }
       ]
     },
     { "title": "🕹️ Play", "url": "https://thewhitewitchtm.github.io/emojigames/" },

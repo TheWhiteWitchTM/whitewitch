@@ -36,10 +36,10 @@ npm install
 npm start
 ```
 
-`bin/magic-studio` does the same thing and picks up the tools on PATH. Open a folder, or make one from the welcome screen. If the [MAGIC]({{ '/magic/' | relative_url }}) repo is sitting next to this one, the examples button can find the samples.
+`bin/magic-studio` does the same thing and picks up the tools on PATH. Open a folder, or make one from the welcome screen. If the [MAGIC]({{ '/magic/' | relative_url }}) repo is sitting next to this one, the examples button can find the samples. The smaller desk, with the big Run button, is [MAGIC Apprentice]({{ '/magic/apprentice/' | relative_url }}).
 
-## Both repos
+## Three repos
 
-The window and the language. Roots. Clone them. Argue with the code if it deserves it.
+The window, the language, and the smaller desk. Roots. Clone them. Argue with the code if it deserves it.
 
 {% include repo-links.html %}

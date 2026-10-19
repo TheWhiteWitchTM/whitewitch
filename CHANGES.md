@@ -9,7 +9,7 @@ permalink: /changes/
 
 ## 2026-10-19
 
-- **MAGIC** sits in the menu after Content. [Language](https://thewhitewitchtm.github.io/whitewitch/magic/) and [Studio](https://thewhitewitchtm.github.io/whitewitch/magic/studio/) are real pages now. Each one links the repo roots: [MAGIC](https://github.com/TheWhiteWitchTM/MAGIC) and [MAGIC Studio](https://github.com/TheWhiteWitchTM/MAGIC-Studio).
+- **MAGIC** sits in the menu after Content. [Language](https://thewhitewitchtm.github.io/whitewitch/magic/), [Studio](https://thewhitewitchtm.github.io/whitewitch/magic/studio/), and [Apprentice](https://thewhitewitchtm.github.io/whitewitch/magic/apprentice/) are real pages now. Each one links the repo roots: [MAGIC](https://github.com/TheWhiteWitchTM/MAGIC), [MAGIC Studio](https://github.com/TheWhiteWitchTM/MAGIC-Studio), and [MAGIC Apprentice](https://github.com/TheWhiteWitchTM/MAGIC-Apprentice).
 
 ## 2026-10-18
 
