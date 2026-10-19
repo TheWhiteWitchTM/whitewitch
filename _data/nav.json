@@ -19,6 +19,8 @@
     {
       "title": "🪄 MAGIC",
       "dropdown": [
+        { "title": "✨ MAGIC Overview", "url": "/magic/overview/" },
+        { "separator": true },
         { "title": "🪄 MAGIC", "url": "/magic/" },
         { "title": "🖥️ MAGIC Studio", "url": "/magic/studio/" },
         { "title": "📘 MAGIC Apprentice", "url": "/magic/apprentice/" },
