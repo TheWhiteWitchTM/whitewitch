@@ -9,7 +9,7 @@ permalink: /magic/retro/studio/
 hide_sides: true
 ---
 
-<img class="project-banner" src="{{ '/assets/images/retro-studio.jpg' | relative_url }}" alt="Retro Studio. BASIC, assembly, yours." width="100%">
+<img class="project-banner" src="{{ '/assets/images/retro-studio.jpg' | relative_url }}" alt="RETRO Studio. BASIC, assembly, yours." width="100%">
 
 # 🖥️ RETRO Studio
 

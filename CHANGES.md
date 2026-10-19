@@ -9,8 +9,8 @@ permalink: /changes/
 
 ## 2026-10-19
 
-- **MAGIC** sits in the menu after Content. [MAGIC](https://thewhitewitchtm.github.io/whitewitch/magic/), [Studio](https://thewhitewitchtm.github.io/whitewitch/magic/studio/), and [Apprentice](https://thewhitewitchtm.github.io/whitewitch/magic/apprentice/) are real pages now. Each one links the repo roots: [MAGIC](https://github.com/TheWhiteWitchTM/MAGIC), [MAGIC Studio](https://github.com/TheWhiteWitchTM/MAGIC-Studio), and [MAGIC Apprentice](https://github.com/TheWhiteWitchTM/MAGIC-Apprentice).
-- **RETRO MAGIC** sits under that menu, after a separator. [RETRO MAGIC](https://thewhitewitchtm.github.io/whitewitch/magic/retro/) writes BASIC and assembly for the C64, the Apple II, and the TI-99/4A. [RETRO Studio](https://thewhitewitchtm.github.io/whitewitch/magic/retro/studio/) is its window. The menu says MAGIC and RETRO MAGIC, so the two compilers are not one item. Repos: [RETRO-MAGIC](https://github.com/TheWhiteWitchTM/RETRO-MAGIC) and [RETRO-Studio](https://github.com/TheWhiteWitchTM/RETRO-Studio).
+- **MAGIC** sits in the menu after Content. The items read [MAGIC](https://thewhitewitchtm.github.io/whitewitch/magic/), [MAGIC Studio](https://thewhitewitchtm.github.io/whitewitch/magic/studio/), and [MAGIC Apprentice](https://thewhitewitchtm.github.io/whitewitch/magic/apprentice/). A separator comes next. Under it: [RETRO MAGIC](https://thewhitewitchtm.github.io/whitewitch/magic/retro/) and [RETRO Studio](https://thewhitewitchtm.github.io/whitewitch/magic/retro/studio/). The two compilers are not one menu item. Repos: [MAGIC](https://github.com/TheWhiteWitchTM/MAGIC), [MAGIC Studio](https://github.com/TheWhiteWitchTM/MAGIC-Studio), [MAGIC Apprentice](https://github.com/TheWhiteWitchTM/MAGIC-Apprentice), [RETRO-MAGIC](https://github.com/TheWhiteWitchTM/RETRO-MAGIC), and [RETRO-Studio](https://github.com/TheWhiteWitchTM/RETRO-Studio).
+- **Blog.** [I Wrote BASIC for Three Dead Machines So the Feed Could Wait](https://thewhitewitchtm.github.io/whitewitch/blog/2026-10-19-retro-magic.html). RETRO MAGIC and RETRO Studio, in the usual tone.
 
 ## 2026-10-18
 

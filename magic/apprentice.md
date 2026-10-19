@@ -9,11 +9,11 @@ permalink: /magic/apprentice/
 hide_sides: true
 ---
 
-<img class="project-banner" src="{{ '/assets/images/apprentice.jpg' | relative_url }}" alt="Apprentice. Paper, night, yours." width="100%">
+<img class="project-banner" src="{{ '/assets/images/apprentice.jpg' | relative_url }}" alt="MAGIC Apprentice. Paper, night, yours." width="100%">
 
 # 📘 MAGIC Apprentice
 
-Studio is a workshop. Apprentice is the desk you get first.
+MAGIC Studio is a workshop. MAGIC Apprentice is the desk you get first.
 
 It's an Electron app for [MAGIC]({{ '/magic/' | relative_url }}), for ages 8 to 16. It feels like a small BASIC. A program on the page, a big Run button, and a sentence when something is wrong. Hello, world prints in the box. A picture or a game opens a play window. The arrow keys move the cat. Close the window when you have seen it, or press Stop.
 
@@ -31,7 +31,7 @@ Projects live in the app's library. Show folder, in Advanced, opens that library
 
 ## The helper
 
-The helper is optional. It uses Ollama on this computer, at `127.0.0.1:11434`, and nowhere else. Explain and Ask send the open program to that local model. The helper is told it cannot edit files. If a reply contains a program, Apprentice shows it and waits. Use this code asks again before the editor changes. Nothing is saved until you press Save.
+The helper is optional. It uses Ollama on this computer, at `127.0.0.1:11434`, and nowhere else. Explain and Ask send the open program to that local model. The helper is told it cannot edit files. If a reply contains a program, MAGIC Apprentice shows it and waits. Use this code asks again before the editor changes. Nothing is saved until you press Save.
 
 Without Ollama, the column still explains `print`, `@canvas`, `@terminal`, `@games`, loops, and sprites from the program in front of you.
 

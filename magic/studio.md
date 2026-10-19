@@ -9,7 +9,7 @@ permalink: /magic/studio/
 hide_sides: true
 ---
 
-<img class="project-banner" src="{{ '/assets/images/studio.jpg' | relative_url }}" alt="Studio. Black, local, yours." width="100%">
+<img class="project-banner" src="{{ '/assets/images/studio.jpg' | relative_url }}" alt="MAGIC Studio. Black, local, yours." width="100%">
 
 # 🖥️ MAGIC Studio
 
