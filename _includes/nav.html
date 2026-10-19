@@ -58,9 +58,13 @@
                   {% endif %}
 
                   <li>
-                    <a href="{{ sub.url | relative_url }}">
-                      {{ sub.title }}{% if count > 0 %} ({{ count }}){% endif %}{% if is_new %} New{% endif %}
-                    </a>
+                    {% if sub.url contains '://' %}
+                      <a href="{{ sub.url }}" target="_blank" rel="noopener noreferrer">{{ sub.title }}</a>
+                    {% else %}
+                      <a href="{{ sub.url | relative_url }}">
+                        {{ sub.title }}{% if count > 0 %} ({{ count }}){% endif %}{% if is_new %} New{% endif %}
+                      </a>
+                    {% endif %}
                   </li>
                 {% endif %}
               {% endfor %}
