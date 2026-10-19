@@ -19,8 +19,8 @@
     {
       "title": "🪄 MAGIC",
       "dropdown": [
-        { "title": "🪄 MAGIC", "url": "https://thewhitewitchtm.github.io/MAGIC/" },
-        { "title": "🖥️ MAGIC Studio", "url": "https://github.com/TheWhiteWitchTM/MAGIC-Studio" }
+        { "title": "🪄 Language", "url": "https://thewhitewitchtm.github.io/MAGIC/" },
+        { "title": "🖥️ Studio", "url": "https://github.com/TheWhiteWitchTM/MAGIC-Studio" }
       ]
     },
     { "title": "🕹️ Play", "url": "https://thewhitewitchtm.github.io/emojigames/" },

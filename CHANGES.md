@@ -9,7 +9,7 @@ permalink: /changes/
 
 ## 2026-10-19
 
-- **MAGIC** sits in the menu after Content. [MAGIC](https://thewhitewitchtm.github.io/MAGIC/) is the language. [MAGIC Studio](https://github.com/TheWhiteWitchTM/MAGIC-Studio) is the window.
+- **MAGIC** sits in the menu after Content. It opens two links: [Language](https://thewhitewitchtm.github.io/MAGIC/) and [Studio](https://github.com/TheWhiteWitchTM/MAGIC-Studio).
 
 ## 2026-10-18
 
