@@ -1,4 +1,25 @@
 /* Responsive */
+@media (max-width: 1180px) {
+  .site-nav {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+    gap: 0.45rem;
+  }
+
+  .site-nav > ul {
+    gap: 0.2rem;
+  }
+
+  .site-nav a {
+    padding: 0.2rem 0.3rem;
+  }
+
+  .site-nav a.coffee {
+    font-size: 0.84rem;
+    padding: 0.32em 0.6em;
+  }
+}
+
 @media (max-width: 900px) {
   .page-frame {
     flex-direction: column;
@@ -78,9 +99,14 @@
   padding: 0.25rem 0.5rem;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 840px) {
+  body {
+    padding-top: 5.5rem;
+  }
+
   .nav-toggle {
     display: block;
+    order: 0;
     margin-right: auto;          /* forces it left */
     font-size: 1.8rem;
     padding: 0.4rem 0.6rem;
@@ -94,8 +120,16 @@
     padding: 0.6rem 1rem;
   }
 
+  .site-nav a.coffee {
+    order: 1;
+    font-size: 0.82rem;
+    padding: 0.34em 0.6em;
+  }
+
   .site-nav > ul {
     display: none;
+    order: 2;
+    flex: 1 0 100%;
     flex-direction: column;
     gap: 0.25rem;
     padding: 0.75rem 0 1rem;
