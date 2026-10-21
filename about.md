@@ -17,6 +17,7 @@ permalink: /about/
 **🇺🇦 Ukraine:** war file, not a costume  
 **🇺🇸🇩🇪 Politics:** US and German, because both passports are real  
 **📙 Tone:** sarcasm, dark humor, questionable jokes  
+**🌤️ LibreSky:** the Bluesky client. Edit, voice, video, and chat. The password stays with Bluesky.  
 **👍🏼 Likes:** music, culture, facts, debates  
 **👎🏼 Dislikes:** propaganda, sloppy claims, tyranny  
 **🚫 Soft stuff stays out**

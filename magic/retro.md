@@ -54,8 +54,14 @@ The JavaScript language, with 3D and an Electron window, is [MAGIC]({{ '/magic/'
 
 MIT. No account. Alpha. It can still change.
 
-## Two repos
+## The breadbox toolchain
 
-The 8-bit compiler, and the window that runs it. Roots. Clone them.
+RETRO MAGIC writes the listing. [RETRO-Toolchain](https://github.com/TheWhiteWitchTM/RETRO-Toolchain) is the other door. A 6510 assembler, and C, Pascal, and BASIC compilers. JavaScript, no packages, one PRG out the other side. `examples/invaders.c` is Space Invaders. A and D move the cannon. Space fires. On this machine `c64 -autostart` is VICE.
+
+The Apple II and the TI-99 get the same shape of toolbox after the C64 has had two passes.
+
+## Three repos
+
+The 8-bit compiler, the window, and the C64 toolchain. Roots. Clone them.
 
 {% include retro-links.html %}

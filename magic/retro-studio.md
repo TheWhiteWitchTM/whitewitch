@@ -36,8 +36,8 @@ npm start
 
 MIT. No account. Alpha, so the window can still move.
 
-## Two repos
+## Three repos
 
-The window, and the 8-bit compiler. Roots. Clone them.
+The window, the 8-bit compiler, and the C64 toolchain. Roots. Clone them.
 
 {% include retro-links.html %}

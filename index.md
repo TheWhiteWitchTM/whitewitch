@@ -1,7 +1,7 @@
 ---
 layout: home
 title: The White Witch™
-description: Politics and social events. Facts & data first. I want you smarter, not recruited.
+description: Politics and social events, facts first. LibreSky is the Bluesky client. Emoji games, MAGIC, and the old machines sit beside the long pages.
 ---
 
 <div class="intro">
@@ -17,6 +17,10 @@ description: Politics and social events. Facts & data first. I want you smarter,
   <p align="center">
     🎥 Resuming YouTube videos in November.<br>
     Same energy, more receipts, and zero interest in your feelings about the data.
+  </p>
+  <p align="center">
+    🌤️ <a href="https://thewhitewitchtm.github.io/LibreSky/">LibreSky</a> is the Bluesky client. Edit, voice, video, and chat. The password stays with Bluesky.<br>
+    🕹️ The games are on <a href="https://thewhitewitchtm.github.io/emojigames/">Emoji Games</a>. 🪄 <a href="{{ '/magic/' | relative_url }}">MAGIC</a> is the language.
   </p>
 </div>
 

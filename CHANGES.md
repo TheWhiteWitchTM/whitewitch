@@ -7,6 +7,11 @@ permalink: /changes/
 
 # Changes
 
+## 2026-10-21
+
+- **LibreSky.** The long site was still introducing itself as politics only. The front page, the menu, the footer, the about page, and the head tags now name [LibreSky](https://thewhitewitchtm.github.io/LibreSky/), the Bluesky client. Edit, voice, video, and chat. The password stays with Bluesky.
+- **Blog.** [The Breadbox Has a Compiler Now](https://thewhitewitchtm.github.io/whitewitch/blog/2026-10-21-c64-toolchain.html). Assembler, C, Pascal, BASIC, and Space Invaders. The repo is [RETRO-Toolchain](https://github.com/TheWhiteWitchTM/RETRO-Toolchain).
+
 ## 2026-10-19
 
 - **MAGIC Overview** is the first item in the MAGIC menu. [MAGIC Overview](https://thewhitewitchtm.github.io/whitewitch/magic/overview/) is the short map: the goal, the five pages, and the five repos.

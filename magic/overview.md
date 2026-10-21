@@ -39,6 +39,6 @@ The language, the window, and the smaller desk. Roots. Clone them.
 
 {% include repo-links.html %}
 
-The 8-bit compiler, and its window.
+The 8-bit compiler, its window, and the C64 toolchain.
 
 {% include retro-links.html %}

@@ -1,0 +1,25 @@
+# The White Witch™
+
+> Politics and social events, facts first. LibreSky is the Bluesky client. Emoji games, MAGIC, and RETRO for the C64, the Apple II, and the TI-99/4A. No paid posts.
+
+## LibreSky
+
+- [LibreSky](https://thewhitewitchtm.github.io/LibreSky/): Bluesky client. Edit, voice, video, and chat. The password stays with Bluesky.
+- [LibreSky Corporate](https://thewhitewitchtm.github.io/corporate/): self-hosted, small enough for a Pi. Coming soon.
+- [LibreSky source](https://github.com/TheWhiteWitchTM/LibreSky)
+
+## This site
+
+- [Home](https://thewhitewitchtm.github.io/whitewitch/)
+- [Blog](https://thewhitewitchtm.github.io/whitewitch/blog/)
+- [MAGIC](https://thewhitewitchtm.github.io/whitewitch/magic/)
+- [RETRO MAGIC](https://thewhitewitchtm.github.io/whitewitch/magic/retro/)
+- [Emoji Games](https://thewhitewitchtm.github.io/emojigames/)
+- [Feed](https://thewhitewitchtm.github.io/whitewitch/feed.xml)
+
+## Elsewhere
+
+- [GitHub](https://github.com/TheWhiteWitchTM)
+- [Bluesky](https://bsky.app/profile/thewhitewitchtm.sociallydead.me)
+- [X](https://x.com/TheWhiteWitchTM)
+- [YouTube](https://youtube.com/@TheWhiteWitchTM)
