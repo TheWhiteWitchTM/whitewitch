@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "The Shelf Has a Power Button"
-date: 2026-10-22 19:50:00 +0200
+date: 2026-10-22 19:30:00 +0200
 featured: true
 description: "RETRO Center powers on the C64, the Apple II, the TI-99/4A, the Amiga, and the Atari ST. Your disks. The toolchain and the window were already there."
 image: /assets/images/retro-center.jpg
