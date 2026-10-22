@@ -50,7 +50,7 @@ npx retro asm run examples/add.a99 --cpu 9900
 
 Text is 40×25 on the C64, 40×24 on the Apple II, and 32×24 on the TI-99/4A. The C64 has 8 VIC-II sprites. The TI-99/4A has 32 TMS9918 sprites. The Apple II plots the emoji in lo-res.
 
-The JavaScript language, with 3D and an Electron window, is [MAGIC]({{ '/magic/' | relative_url }}). The dark window for these three machines is [RETRO Studio]({{ '/magic/retro/studio/' | relative_url }}).
+The JavaScript language, with 3D and an Electron window, is [MAGIC]({{ '/magic/' | relative_url }}). The dark window for these three machines is [RETRO Studio]({{ '/magic/retro/studio/' | relative_url }}). The shelf that powers the emulator on is [RETRO Center]({{ '/magic/retro/center/' | relative_url }}).
 
 MIT. No account. Alpha. It can still change.
 
@@ -58,10 +58,10 @@ MIT. No account. Alpha. It can still change.
 
 RETRO MAGIC writes the listing. [RETRO-Toolchain](https://github.com/TheWhiteWitchTM/RETRO-Toolchain) is the other door. A 6510 assembler, and C, Pascal, and BASIC compilers. JavaScript, no packages, one PRG out the other side. `examples/invaders.c` is Space Invaders. A and D move the cannon. Space fires. On this machine `c64 -autostart` is VICE.
 
-The Apple II and the TI-99 get the same shape of toolbox after the C64 has had two passes.
+The Apple II and the TI-99 get the same shape of toolbox after the C64 has had two passes. The page for that toolbox is [RETRO Toolchain]({{ '/magic/retro/toolchain/' | relative_url }}).
 
-## Three repos
+## Four repos
 
-The 8-bit compiler, the window, and the C64 toolchain. Roots. Clone them.
+The 8-bit compiler, the window, the C64 toolchain, and the shelf. Roots. Clone them.
 
 {% include retro-links.html %}

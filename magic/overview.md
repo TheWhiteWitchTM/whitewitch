@@ -17,7 +17,7 @@ The goal is a language a person can read on a Tuesday. One script. A picture, a 
 
 MAGIC mixes Lua and BASIC, and it compiles to JavaScript. A newline ends a statement. `end` closes the block. `@canvas` is a picture. `@terminal` is a grid of text. Games, sound, and 3D are modules you turn on when you want them.
 
-[RETRO MAGIC]({{ '/magic/retro/' | relative_url }}) is the same kind of script, aimed at three old machines. The Commodore 64, the Apple II, and the TI-99/4A. It writes BASIC and assembly. `@3d` stays with MAGIC. Those machines do not have it.
+[RETRO MAGIC]({{ '/magic/retro/' | relative_url }}) is the same kind of script, aimed at three old machines. The Commodore 64, the Apple II, and the TI-99/4A. It writes BASIC and assembly. `@3d` stays with MAGIC. Those machines do not have it. [RETRO Toolchain]({{ '/magic/retro/toolchain/' | relative_url }}) is the C64 assembler and the C, Pascal, and BASIC compilers. [RETRO Center]({{ '/magic/retro/center/' | relative_url }}) is the shelf. Power on, or drop a disk you own. The Amiga and the Atari ST live there too.
 
 Two windows, and one smaller desk.
 
@@ -39,6 +39,6 @@ The language, the window, and the smaller desk. Roots. Clone them.
 
 {% include repo-links.html %}
 
-The 8-bit compiler, its window, and the C64 toolchain.
+The 8-bit compiler, its window, the C64 toolchain, and the shelf.
 
 {% include retro-links.html %}

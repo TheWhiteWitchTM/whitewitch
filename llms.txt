@@ -14,6 +14,9 @@
 - [Blog](https://thewhitewitchtm.github.io/whitewitch/blog/)
 - [MAGIC](https://thewhitewitchtm.github.io/whitewitch/magic/)
 - [RETRO MAGIC](https://thewhitewitchtm.github.io/whitewitch/magic/retro/)
+- [RETRO Studio](https://thewhitewitchtm.github.io/whitewitch/magic/retro/studio/)
+- [RETRO Toolchain](https://thewhitewitchtm.github.io/whitewitch/magic/retro/toolchain/)
+- [RETRO Center](https://thewhitewitchtm.github.io/whitewitch/magic/retro/center/)
 - [Emoji Games](https://thewhitewitchtm.github.io/emojigames/)
 - [Feed](https://thewhitewitchtm.github.io/whitewitch/feed.xml)
 

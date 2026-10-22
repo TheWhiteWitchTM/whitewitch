@@ -50,7 +50,7 @@ The short course, if you want to read before you clone, is [on the language site
 
 This page is MAGIC. It compiles to JavaScript. Pictures, a terminal, 3D, a UI kit, sound, hex boards, games, and an Electron window.
 
-[RETRO MAGIC]({{ '/magic/retro/' | relative_url }}) is the other compiler. A script still looks like MAGIC. The output is BASIC and assembly for the Commodore 64, the Apple II, and the TI-99/4A. `@3d` stays here. It does not fit those machines. The window for that one is [RETRO Studio]({{ '/magic/retro/studio/' | relative_url }}).
+[RETRO MAGIC]({{ '/magic/retro/' | relative_url }}) is the other compiler. A script still looks like MAGIC. The output is BASIC and assembly for the Commodore 64, the Apple II, and the TI-99/4A. `@3d` stays here. It does not fit those machines. The window for that one is [RETRO Studio]({{ '/magic/retro/studio/' | relative_url }}). The C64 toolchain is [RETRO Toolchain]({{ '/magic/retro/toolchain/' | relative_url }}). The shelf that powers the emulator on is [RETRO Center]({{ '/magic/retro/center/' | relative_url }}).
 
 ## Three repos
 

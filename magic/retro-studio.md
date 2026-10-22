@@ -25,6 +25,8 @@ The Listing tab shows the BASIC or the assembly the compiler wrote. Edit listing
 
 The terminal is a pipe. Each line runs in `bash`. There is no PTY, so a full-screen program will not work. There is no Ask panel. That panel lives on MAGIC Studio.
 
+The shelf that boots the machine, instead of showing the listing, is [RETRO Center]({{ '/magic/retro/center/' | relative_url }}). The C64 compilers are [RETRO Toolchain]({{ '/magic/retro/toolchain/' | relative_url }}).
+
 ## Start
 
 ```
@@ -36,8 +38,8 @@ npm start
 
 MIT. No account. Alpha, so the window can still move.
 
-## Three repos
+## Four repos
 
-The window, the 8-bit compiler, and the C64 toolchain. Roots. Clone them.
+The window, the 8-bit compiler, the C64 toolchain, and the shelf. Roots. Clone them.
 
 {% include retro-links.html %}

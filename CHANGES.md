@@ -7,6 +7,12 @@ permalink: /changes/
 
 # Changes
 
+## 2026-10-22
+
+- **RETRO Center.** A Qt shelf for the C64, the Apple II, the TI-99/4A, the Amiga, and the Atari ST. Power on starts the emulator. Classics on the shelf are cards. The page is [RETRO Center](https://thewhitewitchtm.github.io/whitewitch/magic/retro/center/). The repo is [RETRO-Center](https://github.com/TheWhiteWitchTM/RETRO-Center).
+- **Retro menu.** [RETRO Toolchain](https://thewhitewitchtm.github.io/whitewitch/magic/retro/toolchain/) and [RETRO Center](https://thewhitewitchtm.github.io/whitewitch/magic/retro/center/) sit with RETRO MAGIC and RETRO Studio. The toolchain had a repo and a blog post. It has a page now.
+- **Blog.** [The Shelf Has a Power Button](https://thewhitewitchtm.github.io/whitewitch/blog/2026-10-22-retro-center.html).
+
 ## 2026-10-21
 
 - **LibreSky.** The long site was still introducing itself as politics only. The front page, the menu, the footer, the about page, and the head tags now name [LibreSky](https://thewhitewitchtm.github.io/LibreSky/), the Bluesky client. Edit, voice, video, and chat. The password stays with Bluesky.
