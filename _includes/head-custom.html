@@ -46,7 +46,14 @@
 <meta name="description" content="{{ page.description | default: site.description | escape }}">
 <meta name="keywords" content="{{ page.keywords | default: site.keywords | escape }}">
 <meta name="author" content="The White Witch">
-<link rel="author" href="{{ '/' | absolute_url }}">
+<link rel="author" href="https://thewhitewitchtm.github.io/">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+<link rel="describedby" href="{{ '/llms.txt' | absolute_url }}" type="text/plain" title="Site summary">
+{% if page.url == "/404.html" %}
+<meta name="robots" content="noindex">
+{% else %}
+<meta name="robots" content="index, follow, max-image-preview:large">
+{% endif %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -73,8 +80,12 @@
         "https://youtube.com/@TheWhiteWitchTM",
         "https://bsky.app/profile/thewhitewitchtm.sociallydead.me",
         "https://thewhitewitchtm.github.io/",
+        "https://thewhitewitchtm.github.io/mira/",
+        "https://thewhitewitchtm.github.io/emojigames/",
+        "https://thewhitewitchtm.github.io/sociallydead/",
         "https://thewhitewitchtm.github.io/LibreSky/",
-        "https://thewhitewitchtm.github.io/emojigames/"
+        "https://thewhitewitchtm.github.io/whitewitch/magic/",
+        "https://thewhitewitchtm.github.io/whitewitch/magic/retro/"
       ]
     },
     {

@@ -1,5 +1,17 @@
 <p align="center">
-  <img src="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg" width="100%" />
+  <a href="https://thewhitewitchtm.github.io/whitewitch/">
+    <img src="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg" width="100%" alt="The White Witch. Politics and social events, facts first." />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://thewhitewitchtm.github.io/whitewitch/"><strong>thewhitewitchtm.github.io/whitewitch</strong></a><br>
+  <a href="https://thewhitewitchtm.github.io/">The card</a> ·
+  <a href="https://thewhitewitchtm.github.io/mira/">Mira's World</a> ·
+  <a href="https://thewhitewitchtm.github.io/emojigames/">Emoji Games</a> ·
+  <a href="https://thewhitewitchtm.github.io/whitewitch/magic/">MAGIC</a> ·
+  <a href="https://thewhitewitchtm.github.io/whitewitch/magic/retro/">RETRO MAGIC</a> ·
+  <a href="https://thewhitewitchtm.github.io/sociallydead/">SociallyDead</a>
 </p>
 
 ---

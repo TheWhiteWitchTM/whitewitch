@@ -18,6 +18,9 @@
 - [RETRO Toolchain](https://thewhitewitchtm.github.io/whitewitch/magic/retro/toolchain/)
 - [RETRO Center](https://thewhitewitchtm.github.io/whitewitch/magic/retro/center/)
 - [Emoji Games](https://thewhitewitchtm.github.io/emojigames/)
+- [Mira's World](https://thewhitewitchtm.github.io/mira/)
+- [SociallyDead](https://thewhitewitchtm.github.io/sociallydead/): a directory of social media.
+- [The card](https://thewhitewitchtm.github.io/)
 - [Feed](https://thewhitewitchtm.github.io/whitewitch/feed.xml)
 
 ## Elsewhere
