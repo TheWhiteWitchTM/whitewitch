@@ -116,9 +116,27 @@
     padding: 0.45rem 0.85rem;
   }
 
-  .site-nav a.coffee {
+  .site-nav .ua-wrap {
     order: 1;
     margin-left: auto;
+  }
+
+  .ua-mark {
+    width: 32px;
+    height: 22px;
+    border-radius: 5px;
+  }
+
+  .ua-door {
+    left: auto;
+    right: 0;
+    margin: 0;
+    transform-origin: right top;
+  }
+
+  .site-nav a.coffee {
+    order: 2;
+    margin-left: 0.45rem;
     font-size: 0.82rem;
     padding: 0.34em 0.6em;
   }
@@ -178,6 +196,11 @@
 
   .dropdown-menu.open {
     display: block;
+  }
+
+  .dropdown-menu.is-wide {
+    column-count: 1;
+    min-width: 0;
   }
 
   .dropdown-menu a {

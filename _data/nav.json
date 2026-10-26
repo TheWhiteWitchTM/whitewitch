@@ -4,6 +4,7 @@
     { "title": "📝 Blog", "url": "/blog/" },
     {
       "title": "📚 Content",
+      "wide": true,
       "dropdown": [
         { "title": "✨ Highlights", "url": "/highlights/" },
         { "separator": true },
@@ -18,6 +19,7 @@
     },
     {
       "title": "🪄 MAGIC",
+      "wide": true,
       "dropdown": [
         { "title": "✨ MAGIC Overview", "url": "/magic/overview/" },
         { "separator": true },

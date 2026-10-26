@@ -7,6 +7,10 @@ permalink: /changes/
 
 # Changes
 
+## 2026-10-26
+
+- **I support Ukraine.** A flag sits in the header, just before Buy me a coffee. Click it and the door swings open. The page is [I support Ukraine](/ukraine/). Content and MAGIC open in two columns.
+
 ## 2026-10-22
 
 - **RETRO Center.** A Qt shelf for the C64, the Apple II, the TI-99/4A, the Amiga, and the Atari ST. Power on starts the emulator. Classics on the shelf are cards. The page is [RETRO Center](https://thewhitewitchtm.github.io/whitewitch/magic/retro/center/). The repo is [RETRO-Center](https://github.com/TheWhiteWitchTM/RETRO-Center).

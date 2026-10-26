@@ -6,7 +6,7 @@
         {% if item.dropdown %}
           <li class="dropdown">
             <a href="#" class="dropdown-toggle">{{ item.title }}</a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu{% if item.wide %} is-wide{% endif %}">
               {% for sub in item.dropdown %}
                 {% if sub.separator %}
                   <li class="dropdown-separator"></li>
@@ -81,6 +81,7 @@
         {% endif %}
       {% endfor %}
     </ul>
+    {% include ukraine.html %}
     <a class="coffee" href="https://www.paypal.com/ncp/payment/4P85EQRES3RGU" target="_blank" rel="noopener noreferrer">☕ Buy me a coffee</a>
   </nav>
 </header>
