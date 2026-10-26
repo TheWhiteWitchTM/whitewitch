@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://thewhitewitchtm.github.io/whitewitch/">
-    <img src="https://pbs.twimg.com/media/HUNMWkbWUAE7b5d.jpg" width="100%" alt="The White Witch. Politics and social events, facts first." />
+    <img src="assets/images/banner.jpg" width="100%" alt="Mira, red hair in a ponytail, black jacket, pointing. The White Witch." />
   </a>
 </p>
 
@@ -19,7 +19,7 @@
 <br>
 
 <p align="center">
-  <img src="https://pbs.twimg.com/profile_images/2011039741165043712/OFvsOiEe.jpg" width="150" style="border-radius: 50%; margin-top: -40px; border: 4px solid #000;" />
+  <img src="assets/icons/apple-touch-icon.png" width="150" alt="Mira" style="border-radius: 50%; margin-top: -40px; border: 4px solid #000;" />
 </p>
 
 <h1 align="center">🧙‍♀️ The White Witch™✨</h1>

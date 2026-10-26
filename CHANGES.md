@@ -9,6 +9,7 @@ permalink: /changes/
 
 ## 2026-10-26
 
+- **Portrait, Apple icons, preview, OG.** The home banner, the Apple touch icon, the home-screen icons, `preview.jpg`, and `og.jpg` are cropped from `assets/images/mira.jpg`. The banner is a file on this site. It no longer points at a Twitter image.
 - **I support Ukraine.** A flag sits in the header, just before Buy me a coffee. Click it and the door swings open. The page is [I support Ukraine](/ukraine/). Content and MAGIC open in two columns.
 
 ## 2026-10-22
