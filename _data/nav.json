@@ -4,7 +4,6 @@
     { "title": "📝 Blog", "url": "/blog/" },
     {
       "title": "📚 Content",
-      "wide": true,
       "dropdown": [
         { "title": "✨ Highlights", "url": "/highlights/" },
         { "separator": true },
@@ -13,22 +12,6 @@
         { "title": "📜 Articles", "url": "/articles/" },
         { "separator": true },
         { "title": "😡 Rants", "url": "/rants/" }
-      ]
-    },
-    {
-      "title": "🪄 MAGIC",
-      "wide": true,
-      "dropdown": [
-        { "title": "✨ MAGIC Overview", "url": "/magic/overview/" },
-        { "separator": true },
-        { "title": "🪄 MAGIC", "url": "/magic/" },
-        { "title": "🖥️ MAGIC Studio", "url": "/magic/studio/" },
-        { "title": "📘 MAGIC Apprentice", "url": "/magic/apprentice/" },
-        { "separator": true },
-        { "title": "🕹️ RETRO MAGIC", "url": "/magic/retro/" },
-        { "title": "🖥️ RETRO Studio", "url": "/magic/retro/studio/" },
-        { "title": "🛠️ RETRO Toolchain", "url": "/magic/retro/toolchain/" },
-        { "title": "🗄️ RETRO Center", "url": "/magic/retro/center/" }
       ]
     },
     { "title": "🕹️ Play", "url": "https://thewhitewitchtm.github.io/emojigames/" },

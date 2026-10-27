@@ -9,7 +9,7 @@ permalink: /changes/
 
 ## 2026-10-27
 
-- **Menu.** MAGIC and Tools are back on this site. Downloads is off the Content menu. The page is still at [/downloads/](/downloads/).
+- **Menu.** MAGIC is off this menu again. Content opens straight down: Highlights, a separator, then the rest. Tools stay. Downloads stays off the Content menu. The page is still at [/downloads/](/downloads/).
 - **Counts.** Blog, Highlights, Articles, Rants, Shorts, and Videos each show a count. An empty shelf shows (0). The same number is on the page title.
 - **Writing.** The articles and the school rant were marked `highlight`, and the Highlights page was looking for `highlights`, so that shelf was empty and the front page never listed them. They show on the front page and under Highlights again.
 
