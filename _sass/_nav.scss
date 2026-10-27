@@ -32,8 +32,13 @@
   flex-wrap: wrap;
 }
 
-.site-nav .ua-wrap {
+.site-nav .mira-wrap {
   margin-left: auto;
+  flex: none;
+}
+
+.site-nav .ua-wrap {
+  margin-left: 0.45rem;
   flex: none;
 }
 
@@ -350,5 +355,193 @@
 
 .site-nav .ua-item:hover {
   background: rgba(0, 91, 187, 0.45);
+  color: #f4f7fb !important;
+}
+
+.mira-wrap {
+  position: relative;
+  flex: none;
+}
+
+.mira-mark {
+  position: relative;
+  z-index: 4;
+  display: block;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #111;
+  overflow: hidden;
+  box-shadow: 0 0 0 1.5px #c9a6ff;
+  cursor: pointer;
+}
+
+.mira-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.mira-mark:hover {
+  filter: brightness(1.08);
+}
+
+.mira-mark[aria-expanded="true"] {
+  box-shadow: 0 0 0 2px #c9a6ff;
+}
+
+.mira-door {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 80;
+  width: 232px;
+  margin: 0 0 0 -116px;
+  transform: rotate(-16deg);
+  transform-origin: center top;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mira-wrap.is-open .mira-door {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mira-wrap.is-open .mira-door {
+    animation: ua-door-swing 0.8s cubic-bezier(0.2, 0.85, 0.2, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mira-wrap.is-open .mira-door {
+    transform: none;
+  }
+}
+
+.mira-door-string {
+  display: block;
+  width: 2px;
+  height: 14px;
+  margin: 0 auto;
+  border-radius: 1px;
+  background: linear-gradient(#c9a6ff, #c4492c);
+}
+
+.mira-door-card {
+  display: block;
+  padding: 8px 10px 12px;
+  border: 1px solid rgba(201, 166, 255, 0.55);
+  border-radius: 10px 10px 18px 18px;
+  background: linear-gradient(#1a1224, #0b0b0d);
+  color: #f4f7fb;
+  text-align: center;
+  font-family: Palatino, "Palatino Linotype", Georgia, serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.15;
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.35);
+}
+
+.mira-door-card::before {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 2px auto 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, transparent 4px, #c9a6ff 5px 7px, #1a1224 8px);
+  box-shadow: 0 0 0 1px rgba(201, 166, 255, 0.45);
+}
+
+.mira-door-kicker {
+  display: block;
+  color: #c9a6ff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-indent: 0.32em;
+  text-transform: uppercase;
+}
+
+.mira-door-card strong {
+  display: block;
+  margin: 1px 0 6px;
+  font-size: 22px;
+  font-style: italic;
+  letter-spacing: 0.12em;
+}
+
+.mira-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0 0 2px;
+}
+
+.mira-pair figure { margin: 0; }
+
+.mira-pair img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(201, 166, 255, 0.65), 0 6px 12px rgba(0, 0, 0, 0.35);
+}
+
+.mira-pair .is-hat img {
+  object-position: center 42%;
+}
+
+.mira-pair figcaption {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mira-pair .is-person figcaption { color: #f0d2dc; }
+.mira-pair .is-hat figcaption { color: #c9a6ff; }
+
+.mira-door-note {
+  display: block;
+  margin-top: 6px;
+  color: #ddd4ea;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.site-nav .mira-item {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 6px 8px;
+  border: 1px solid rgba(201, 166, 255, 0.55);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #f4f7fb !important;
+  font-family: Palatino, "Palatino Linotype", Georgia, serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.site-nav .mira-item:hover {
+  background: rgba(201, 166, 255, 0.22);
   color: #f4f7fb !important;
 }

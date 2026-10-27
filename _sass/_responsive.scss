@@ -116,9 +116,29 @@
     padding: 0.45rem 0.85rem;
   }
 
-  .site-nav .ua-wrap {
+  .site-nav .mira-wrap {
     order: 1;
     margin-left: auto;
+  }
+
+  .mira-mark {
+    width: 30px;
+    height: 30px;
+  }
+
+  .mira-door {
+    position: fixed;
+    top: 4.25rem;
+    right: 0.65rem;
+    left: auto;
+    width: min(232px, calc(100vw - 1.3rem));
+    margin: 0;
+    transform-origin: right top;
+  }
+
+  .site-nav .ua-wrap {
+    order: 2;
+    margin-left: 0.4rem;
   }
 
   .ua-mark {
@@ -135,7 +155,7 @@
   }
 
   .site-nav a.coffee {
-    order: 2;
+    order: 3;
     margin-left: 0.45rem;
     font-size: 0.82rem;
     padding: 0.34em 0.6em;

@@ -6,12 +6,23 @@
   const uaMark = document.getElementById('ua-mark');
   const uaMenu = document.getElementById('ua-menu');
   const uaWrap = uaMark ? uaMark.parentElement : null;
+  const miraMark = document.getElementById('mira-mark');
+  const miraMenu = document.getElementById('mira-menu');
+  const miraWrap = miraMark ? miraMark.parentElement : null;
 
-  function setUkraine(open) {
-    if (!uaWrap || !uaMark || !uaMenu) return;
-    uaWrap.classList.toggle('is-open', open);
-    uaMark.setAttribute('aria-expanded', open ? 'true' : 'false');
-    uaMenu.setAttribute('aria-hidden', open ? 'false' : 'true');
+  function setDoor(wrap, mark, menu, open) {
+    if (!wrap || !mark || !menu) return;
+    wrap.classList.toggle('is-open', open);
+    mark.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+  }
+
+  function setUkraine(open) { setDoor(uaWrap, uaMark, uaMenu, open); }
+  function setMira(open) { setDoor(miraWrap, miraMark, miraMenu, open); }
+
+  function closeDoors() {
+    setUkraine(false);
+    setMira(false);
   }
 
   document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
@@ -20,7 +31,7 @@
       const menu = this.nextElementSibling;
       const isOpen = menu.classList.contains('open');
       document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
-      setUkraine(false);
+      closeDoors();
       if (!isOpen) menu.classList.add('open');
     });
   });
@@ -31,7 +42,19 @@
       e.stopPropagation();
       const open = uaWrap.classList.contains('is-open');
       document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
+      setMira(false);
       setUkraine(!open);
+    });
+  }
+
+  if (miraMark) {
+    miraMark.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const open = miraWrap.classList.contains('is-open');
+      document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
+      setUkraine(false);
+      setMira(!open);
     });
   }
 
@@ -40,10 +63,11 @@
       document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
     }
     if (!e.target.closest('.ua-wrap')) setUkraine(false);
+    if (!e.target.closest('.mira-wrap')) setMira(false);
   });
 
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') setUkraine(false);
+    if (e.key === 'Escape') closeDoors();
   });
 
   // Hamburger
@@ -53,7 +77,7 @@
     navToggle.addEventListener('click', () => {
       const isOpen = navMenu.classList.toggle('open');
       navToggle.setAttribute('aria-expanded', isOpen);
-      if (isOpen) setUkraine(false);
+      if (isOpen) closeDoors();
     });
   }
 </script>

@@ -9,6 +9,8 @@ permalink: /changes/
 
 ## 2026-10-27
 
+- **Blog.** [The Witch and I Are Getting Divorced](/blog/2026-10-27-the-witch-and-i-are-getting-divorced.html). The political room and the person who writes the code are taking separate doors. Sarcasm stays shared.
+- **Mira.** A round portrait sits in the header, just before the Ukraine flag. Click it and a card swings open. Mira is the person behind the White Witch. The hat is the job. About and Mira's World are on the card.
 - **Menu.** MAGIC is off this menu again. Content opens straight down: Highlights, a separator, then the rest. Tools stay. Downloads stays off the Content menu. The page is still at [/downloads/](/downloads/).
 - **Counts.** Blog, Highlights, Articles, Rants, Shorts, and Videos each show a count. An empty shelf shows (0). The same number is on the page title.
 - **Writing.** The articles and the school rant were marked `highlight`, and the Highlights page was looking for `highlights`, so that shelf was empty and the front page never listed them. They show on the front page and under Highlights again.

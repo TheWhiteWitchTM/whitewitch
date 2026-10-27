@@ -1,0 +1,25 @@
+<div class="mira-wrap">
+  <button type="button" class="mira-mark" id="mira-mark" aria-expanded="false" aria-haspopup="menu" aria-controls="mira-menu" aria-label="Mira, the person behind the White Witch">
+    <img src="{{ '/assets/images/mira-avatar.jpg' | relative_url }}" alt="" width="512" height="512">
+  </button>
+  <div class="mira-door" id="mira-menu" role="menu" aria-label="Mira" aria-hidden="true">
+    <span class="mira-door-string" aria-hidden="true"></span>
+    <div class="mira-door-card">
+      <span class="mira-door-kicker">Person</span>
+      <strong>MIRA</strong>
+      <div class="mira-pair">
+        <figure class="is-person">
+          <img src="{{ '/assets/images/mira-avatar.jpg' | relative_url }}" alt="Mira" width="512" height="512">
+          <figcaption>The person</figcaption>
+        </figure>
+        <figure class="is-hat">
+          <img src="{{ '/assets/images/witch.jpg' | relative_url }}" alt="The White Witch" width="512" height="512">
+          <figcaption>The hat</figcaption>
+        </figure>
+      </div>
+      <span class="mira-door-note">The person behind the White Witch. The hat is the job.</span>
+      <a class="mira-item" role="menuitem" href="{{ '/about/' | relative_url }}">About Mira</a>
+      <a class="mira-item" role="menuitem" href="https://thewhitewitchtm.github.io/mira/" target="_blank" rel="noopener">Mira's World</a>
+    </div>
+  </div>
+</div>
