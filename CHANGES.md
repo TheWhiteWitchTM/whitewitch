@@ -9,7 +9,7 @@ permalink: /changes/
 
 ## 2026-10-26
 
-- **Banner.** The home banner is the White Witch banner again: the title, Mira, and the witch. The Apple icon, the home-screen icons, `preview.jpg`, and `og.jpg` are the witch set again. The Ukraine flag stays.
+- **Banner.** The home banner is the White Witch banner again: Mira on the left, the title, the witch on the right. The picture address carries the build id, so a reload cannot keep the Mira-only file. The banner fits the window, so the witch is not cut off the right edge. The Apple icon, the home-screen icons, `preview.jpg`, and `og.jpg` are the witch set again. The Ukraine flag stays.
 - **I support Ukraine.** A flag sits in the header, just before Buy me a coffee. Click it and the door swings open. The page is [I support Ukraine](/ukraine/). Content and MAGIC open in two columns.
 
 ## 2026-10-22
