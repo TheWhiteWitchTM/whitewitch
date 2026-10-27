@@ -7,6 +7,11 @@ permalink: /changes/
 
 # Changes
 
+## 2026-10-27
+
+- **Menu.** MAGIC and Tools are off this site. Both live on [Mira's World](https://thewhitewitchtm.github.io/mira/). That link sits in the menu after Content.
+- **Writing.** The articles and the school rant were marked `highlight`, and the Highlights page was looking for `highlights`, so that shelf was empty and the front page never listed them. They show on the front page and under Highlights again. Rants in the Content menu shows its count.
+
 ## 2026-10-26
 
 - **Banner.** The home banner is the White Witch banner again: Mira on the left, the title, the witch on the right. The picture address carries the build id, so a reload cannot keep the Mira-only file. The banner fits the window, so the witch is not cut off the right edge. The Apple icon, the home-screen icons, `preview.jpg`, and `og.jpg` are the witch set again. The Ukraine flag stays.

@@ -2,6 +2,7 @@
 layout: default
 title: "A Child Was Stabbed to Death at School"
 date: 2026-10-13
+highlight: true
 description: "On 6 October 2026 a 15-year-old entered a middle school in Istanbul in uniform and stabbed eight children. One of them died."
 tags: [rants, crime]
 ---

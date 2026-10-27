@@ -8,7 +8,7 @@ permalink: /highlights/
 {% assign highlights = "" | split: "" %}
 {% for collection in site.collections %}
   {% for post in collection.docs %}
-    {% if post.highlights %}
+    {% if post.highlight or post.highlights %}
       {% assign highlights = highlights | push: post %}
     {% endif %}
   {% endfor %}
