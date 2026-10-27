@@ -12,14 +12,38 @@
         { "title": "🎥 Videos", "url": "/videos/" },
         { "title": "📜 Articles", "url": "/articles/" },
         { "separator": true },
-        { "title": "😡 Rants", "url": "/rants/" },
-        { "separator": true },
-        { "title": "📥 Downloads", "url": "/downloads/" }
+        { "title": "😡 Rants", "url": "/rants/" }
       ]
     },
-    { "title": "🧪 Mira", "url": "https://thewhitewitchtm.github.io/mira/" },
+    {
+      "title": "🪄 MAGIC",
+      "wide": true,
+      "dropdown": [
+        { "title": "✨ MAGIC Overview", "url": "/magic/overview/" },
+        { "separator": true },
+        { "title": "🪄 MAGIC", "url": "/magic/" },
+        { "title": "🖥️ MAGIC Studio", "url": "/magic/studio/" },
+        { "title": "📘 MAGIC Apprentice", "url": "/magic/apprentice/" },
+        { "separator": true },
+        { "title": "🕹️ RETRO MAGIC", "url": "/magic/retro/" },
+        { "title": "🖥️ RETRO Studio", "url": "/magic/retro/studio/" },
+        { "title": "🛠️ RETRO Toolchain", "url": "/magic/retro/toolchain/" },
+        { "title": "🗄️ RETRO Center", "url": "/magic/retro/center/" }
+      ]
+    },
     { "title": "🕹️ Play", "url": "https://thewhitewitchtm.github.io/emojigames/" },
     { "title": "🌤️ LibreSky", "url": "https://thewhitewitchtm.github.io/LibreSky/" },
+    {
+      "title": "🛠️ Tools",
+      "dropdown": [
+        { "title": "🧙‍♀️ Emoji Wizard", "url": "/tools/emoji-builder/" },
+        { "title": "🏳️ Flags Wizard", "url": "/tools/flags-builder/" },
+        { "separator": true },
+        { "title": "🔮 Favicon Wizard", "url": "/tools/favicon-wizard/" },
+        { "title": "🖼️ Transparency Wizard", "url": "/tools/transparency-wizard/" },
+        { "title": "📲 App Icon Wizard", "url": "/tools/icon-wizard/" }
+      ]
+    },
     { "title": "🔮 About", "url": "/about/" }
   ]
 }

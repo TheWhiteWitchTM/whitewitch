@@ -9,6 +9,8 @@
   <a href="https://thewhitewitchtm.github.io/">The card</a> ·
   <a href="https://thewhitewitchtm.github.io/mira/">Mira's World</a> ·
   <a href="https://thewhitewitchtm.github.io/emojigames/">Emoji Games</a> ·
+  <a href="https://thewhitewitchtm.github.io/whitewitch/magic/">MAGIC</a> ·
+  <a href="https://thewhitewitchtm.github.io/whitewitch/magic/retro/">RETRO MAGIC</a> ·
   <a href="https://thewhitewitchtm.github.io/sociallydead/">SociallyDead</a>
 </p>
 

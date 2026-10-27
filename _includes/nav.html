@@ -11,10 +11,12 @@
                 {% if sub.separator %}
                   <li class="dropdown-separator"></li>
                 {% else %}
+                  {% assign counted = false %}
                   {% assign count = 0 %}
                   {% assign newest = nil %}
 
                   {% if sub.url contains '/highlights/' %}
+                    {% assign counted = true %}
                     {% assign highlights = "" | split: "" %}
                     {% for collection in site.collections %}
                       {% for post in collection.docs %}
@@ -28,26 +30,31 @@
                       {% assign newest = highlights | sort: "date" | reverse | first %}
                     {% endif %}
                   {% elsif sub.url contains '/blog/' %}
+                    {% assign counted = true %}
                     {% assign count = site.blog.size %}
                     {% if count > 0 %}
                       {% assign newest = site.blog | sort: 'date' | reverse | first %}
                     {% endif %}
                   {% elsif sub.url contains '/articles/' %}
+                    {% assign counted = true %}
                     {% assign count = site.articles.size %}
                     {% if count > 0 %}
                       {% assign newest = site.articles | sort: 'date' | reverse | first %}
                     {% endif %}
                   {% elsif sub.url contains '/videos/' %}
+                    {% assign counted = true %}
                     {% assign count = site.videos.size %}
                     {% if count > 0 %}
                       {% assign newest = site.videos | sort: 'date' | reverse | first %}
                     {% endif %}
                   {% elsif sub.url contains '/shorts/' %}
+                    {% assign counted = true %}
                     {% assign count = site.shorts.size %}
                     {% if count > 0 %}
                       {% assign newest = site.shorts | sort: 'date' | reverse | first %}
                     {% endif %}
                   {% elsif sub.url contains '/rants/' %}
+                    {% assign counted = true %}
                     {% assign count = site.rants.size %}
                     {% if count > 0 %}
                       {% assign newest = site.rants | sort: 'date' | reverse | first %}
@@ -67,7 +74,7 @@
                       <a href="{{ sub.url }}" target="_blank" rel="noopener noreferrer">{{ sub.title }}</a>
                     {% else %}
                       <a href="{{ sub.url | relative_url }}">
-                        {{ sub.title }}{% if count > 0 %} ({{ count }}){% endif %}{% if is_new %} New{% endif %}
+                        {{ sub.title }}{% if counted %} ({{ count }}){% endif %}{% if is_new %} New{% endif %}
                       </a>
                     {% endif %}
                   </li>
@@ -80,7 +87,24 @@
             {% if item.url contains '://' %}
               <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
             {% else %}
-              <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+              {% assign counted = false %}
+              {% assign count = 0 %}
+              {% assign newest = nil %}
+              {% if item.url contains '/blog/' %}
+                {% assign counted = true %}
+                {% assign count = site.blog.size %}
+                {% if count > 0 %}
+                  {% assign newest = site.blog | sort: 'date' | reverse | first %}
+                {% endif %}
+              {% endif %}
+              {% assign is_new = false %}
+              {% if newest and newest.date %}
+                {% assign now_sec = 'now' | date: '%s' %}
+                {% assign post_sec = newest.date | date: '%s' %}
+                {% assign days = now_sec | minus: post_sec | divided_by: 86400 %}
+                {% if days <= 3 %}{% assign is_new = true %}{% endif %}
+              {% endif %}
+              <a href="{{ item.url | relative_url }}">{{ item.title }}{% if counted %} ({{ count }}){% endif %}{% if is_new %} New{% endif %}</a>
             {% endif %}
           </li>
         {% endif %}

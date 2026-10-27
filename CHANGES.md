@@ -9,8 +9,9 @@ permalink: /changes/
 
 ## 2026-10-27
 
-- **Menu.** MAGIC and Tools are off this site. Both live on [Mira's World](https://thewhitewitchtm.github.io/mira/). That link sits in the menu after Content.
-- **Writing.** The articles and the school rant were marked `highlight`, and the Highlights page was looking for `highlights`, so that shelf was empty and the front page never listed them. They show on the front page and under Highlights again. Rants in the Content menu shows its count.
+- **Menu.** MAGIC and Tools are back on this site. Downloads is off the Content menu. The page is still at [/downloads/](/downloads/).
+- **Counts.** Blog, Highlights, Articles, Rants, Shorts, and Videos each show a count. An empty shelf shows (0). The same number is on the page title.
+- **Writing.** The articles and the school rant were marked `highlight`, and the Highlights page was looking for `highlights`, so that shelf was empty and the front page never listed them. They show on the front page and under Highlights again.
 
 ## 2026-10-26
 

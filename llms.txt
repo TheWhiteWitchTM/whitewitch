@@ -1,6 +1,6 @@
 # The White Witch™
 
-> Politics and social events, facts first. LibreSky is the Bluesky client. MAGIC, the old machines, and the tools are on Mira's World. No paid posts.
+> Politics and social events, facts first. LibreSky is the Bluesky client. Emoji games, MAGIC, and RETRO for the C64, the Apple II, and the TI-99/4A. No paid posts.
 
 ## LibreSky
 
@@ -14,8 +14,13 @@
 - [Blog](https://thewhitewitchtm.github.io/whitewitch/blog/)
 - [Articles](https://thewhitewitchtm.github.io/whitewitch/articles/)
 - [Rants](https://thewhitewitchtm.github.io/whitewitch/rants/)
+- [MAGIC](https://thewhitewitchtm.github.io/whitewitch/magic/)
+- [RETRO MAGIC](https://thewhitewitchtm.github.io/whitewitch/magic/retro/)
+- [RETRO Studio](https://thewhitewitchtm.github.io/whitewitch/magic/retro/studio/)
+- [RETRO Toolchain](https://thewhitewitchtm.github.io/whitewitch/magic/retro/toolchain/)
+- [RETRO Center](https://thewhitewitchtm.github.io/whitewitch/magic/retro/center/)
 - [Emoji Games](https://thewhitewitchtm.github.io/emojigames/)
-- [Mira's World](https://thewhitewitchtm.github.io/mira/): MAGIC, the old machines, and the tools.
+- [Mira's World](https://thewhitewitchtm.github.io/mira/)
 - [SociallyDead](https://thewhitewitchtm.github.io/sociallydead/): a directory of social media.
 - [The card](https://thewhitewitchtm.github.io/)
 - [Feed](https://thewhitewitchtm.github.io/whitewitch/feed.xml)
