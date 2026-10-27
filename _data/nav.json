@@ -16,17 +16,6 @@
     },
     { "title": "🕹️ Play", "url": "https://thewhitewitchtm.github.io/emojigames/" },
     { "title": "🌤️ LibreSky", "url": "https://thewhitewitchtm.github.io/LibreSky/" },
-    {
-      "title": "🛠️ Tools",
-      "dropdown": [
-        { "title": "🧙‍♀️ Emoji Wizard", "url": "/tools/emoji-builder/" },
-        { "title": "🏳️ Flags Wizard", "url": "/tools/flags-builder/" },
-        { "separator": true },
-        { "title": "🔮 Favicon Wizard", "url": "/tools/favicon-wizard/" },
-        { "title": "🖼️ Transparency Wizard", "url": "/tools/transparency-wizard/" },
-        { "title": "📲 App Icon Wizard", "url": "/tools/icon-wizard/" }
-      ]
-    },
     { "title": "🔮 About", "url": "/about/" }
   ]
 }
