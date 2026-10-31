@@ -1,17 +1,14 @@
 /* Responsive */
 @media (max-width: 1100px) {
-  .page-frame .content-area,
-  .page-frame .home-content,
-  .page-frame > main {
-    max-width: 560px;
+  .page-frame {
+    gap: 1rem;
   }
 
-  .side-image.left {
-    left: max(0.75rem, calc(50% - 470px));
-  }
-
-  .side-image.right {
-    right: max(0.75rem, calc(50% - 470px));
+  .side-image {
+    flex-basis: 132px;
+    width: 132px;
+    min-width: 132px;
+    max-width: 132px;
   }
 }
 
@@ -38,32 +35,25 @@
 
 @media (max-width: 900px) {
   .page-frame {
-    flex-direction: column;
-    align-items: center;
-    padding-top: 1rem;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    gap: 0.75rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 
   .side-image {
-    position: static;
-    width: 120px;
+    flex-basis: 104px;
+    width: 104px;
+    min-width: 104px;
+    max-width: 104px;
     margin: 0;
-    display: none; /* the columns are for a wide window; the article comes first */
   }
 
-  .side-image.left { order: 1; margin-top: 0; }
-  .content-area { order: 2; }
-  .side-image.right { order: 3; }
-
-  /* width: 100% is content-box, so the column padding was spilling off the screen. */
   .page-frame .content-area,
-  .page-frame .home-content {
-    align-self: stretch;
+  .page-frame .home-content,
+  .page-frame > main {
     box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
     min-width: 0;
+    max-width: none;
   }
 
   .markdown-body pre,
@@ -78,9 +68,30 @@
   }
 }
 
+@media (max-width: 700px) {
+  .page-frame {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .side-image {
+    display: none;
+  }
+
+  .page-frame .content-area,
+  .page-frame .home-content,
+  .page-frame > main {
+    align-self: stretch;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 600px) {
   .side-image {
     width: 100px;
+    min-width: 0;
+    max-width: 100px;
   }
 
   body {

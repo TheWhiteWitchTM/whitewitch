@@ -4,12 +4,12 @@
 @import "{{ site.theme }}";
 
 /* The window has to grow with the page. height: 100% plus overflow-x: hidden
-   locked it at one screen, so Page Down and the touchpad never moved it and
-   the portraits stayed hidden behind the banner. clip does not turn the
-   other axis into a scroll box. */
+   locked it at one screen, so Page Down never moved it and the portraits
+   stayed hidden behind the banner. clip on the page also clips a sticky
+   rail, so the sides stay in normal flow and the window scrolls. */
 html, body {
   height: auto;
-  overflow-x: clip;
+  max-width: 100%;
 }
 
 body {

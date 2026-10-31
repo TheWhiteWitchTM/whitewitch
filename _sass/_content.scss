@@ -1,37 +1,35 @@
-/* Main content frame */
+/* Main content frame. Three real columns: Mira, the reading text, the witch.
+   The rails are in the row. A fixed picture leaves the row, and the text
+   then sits in an empty margin. */
 .page-frame {
   flex: 1 0 auto;
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: center;
   gap: 1.5rem;
-  max-width: 1400px;
+  max-width: 1120px;
   width: 100%;
   margin: 0 auto;
   padding: 0 1rem 3rem;
+  box-sizing: border-box;
 }
 
-/* Fixed, not sticky. Sticky joined the flex row, so both rails sat on the
-   left and the article collapsed to a few characters a line. Fixed keeps
-   them in the margins. On the home page they fade in as the banner scrolls
-   up. No inner scroll: a wheel over the picture has to move the page. */
 .side-image {
-  flex: 0 0 148px;
-  position: fixed;
-  top: 5.5rem;
-  width: 148px;
-  max-width: 148px;
+  flex: 0 0 168px;
+  width: 168px;
+  min-width: 168px;
+  max-width: 168px;
+  position: relative;
   opacity: 1;
   transition: opacity 0.35s ease;
-  z-index: 10;
+  z-index: 2;
 }
 
-.side-image.left {
-  left: max(0.75rem, calc(50% - 540px));
-}
-
-.side-image.right {
-  right: max(0.75rem, calc(50% - 540px));
+/* Sticky lives on the inner box. Sticky on the flex item itself pulled both
+   rails to the left and crushed the article to a few characters a line. */
+.side-stick {
+  position: sticky;
+  top: 5.5rem;
 }
 
 .side-image.hidden {
@@ -59,19 +57,21 @@
   margin-top: 1.1rem;
 }
 
-.content-area {
-  flex: 1 1 720px;
+.content-area,
+.page-frame > main,
+.page-frame > .home-content {
+  flex: 1 1 640px;
   min-width: 0;
   max-width: 720px;
+  width: auto;
 }
 
 .home-text,
 .home-content {
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 1rem 1.5rem 2rem;
-  width: min(680px, 100%);
-  flex: 0 0 auto;
+  max-width: 720px;
+  margin: 0;
+  padding: 1rem 0 2rem;
+  width: auto;
 }
 
 .intro {
