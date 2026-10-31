@@ -13,25 +13,25 @@
 
 /* Fixed, not sticky. Sticky joined the flex row, so both rails sat on the
    left and the article collapsed to a few characters a line. Fixed keeps
-   them in the margins. On the home page they fade in once the banner leaves.
-   No inner scroll: a wheel over the picture has to move the page. */
+   them in the margins. On the home page they fade in as the banner scrolls
+   up. No inner scroll: a wheel over the picture has to move the page. */
 .side-image {
-  flex: 0 0 150px;
+  flex: 0 0 148px;
   position: fixed;
   top: 5.5rem;
-  width: 150px;
-  max-width: 150px;
+  width: 148px;
+  max-width: 148px;
   opacity: 1;
   transition: opacity 0.35s ease;
   z-index: 10;
 }
 
 .side-image.left {
-  left: max(0.75rem, calc(50% - 518px));
+  left: max(0.75rem, calc(50% - 540px));
 }
 
 .side-image.right {
-  right: max(0.75rem, calc(50% - 518px));
+  right: max(0.75rem, calc(50% - 540px));
 }
 
 .side-image.hidden {
@@ -39,58 +39,24 @@
   pointer-events: none;
 }
 
-.side-figure {
-  margin: 0;
-}
-
-.side-figure + .side-figure {
-  margin-top: 1.35rem;
-}
-
-.side-figure a {
+.side-image a {
   color: inherit;
   text-decoration: none;
   border-bottom: 0;
 }
 
-.side-figure a:hover {
-  text-decoration: none;
-}
-
-.side-figure a:hover strong {
-  color: #e8d5ff;
-}
-
 .side-image img {
   width: 100%;
   height: auto;
-  max-width: 140px;
-  object-fit: cover;
-  object-position: top;
   display: block;
   background: transparent;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
 
-.side-figure figcaption {
-  margin-top: 0.65rem;
-}
-
-.side-figure strong {
+.side-andreas {
   display: block;
-  color: #c9a6ff;
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 0;
-}
-
-.side-figure span {
-  display: block;
-  margin-top: 0.15rem;
-  color: #9a9a9a;
-  font-size: 0.75rem;
-  line-height: 1.35;
+  margin-top: 1.1rem;
 }
 
 .content-area {

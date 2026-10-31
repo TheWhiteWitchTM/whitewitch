@@ -1,34 +1,16 @@
 {% if include.where == "left" %}
 <aside class="side-image left{% if page.layout == 'home' %} hidden{% endif %}">
-  <figure class="side-figure">
-    <a href="https://thewhitewitchtm.github.io/mira/">
-      <img src="{{ '/assets/images/mira.jpg' | relative_url }}" alt="Mira, smiling, red hair in a ponytail, black jacket, pointing." width="1008" height="1792">
-    </a>
-    <figcaption>
-      <a href="https://thewhitewitchtm.github.io/mira/"><strong>Mira</strong></a>
-      <span>The lab.</span>
-    </figcaption>
-  </figure>
+  <a href="https://thewhitewitchtm.github.io/mira/">
+    <img src="{{ '/assets/images/mira.jpg' | relative_url }}" alt="Mira, smiling, red hair in a ponytail, black jacket, pointing." width="1008" height="1792">
+  </a>
 </aside>
 {% endif %}
 
 {% if include.where == "right" %}
 <aside class="side-image right{% if page.layout == 'home' %} hidden{% endif %}">
-  <figure class="side-figure">
-    <img src="{{ '/assets/images/witch.jpg' | relative_url }}" alt="The White Witch. Green witch in a white hat, holding a book and a wand." width="1408" height="1408">
-    <figcaption>
-      <strong>The Witch</strong>
-      <span>This room.</span>
-    </figcaption>
-  </figure>
-  <figure class="side-figure">
-    <a href="https://thewhitewitchtm.github.io/andreas/">
-      <img src="{{ '/assets/images/andreas.jpg' | relative_url }}" alt="Andreas, short brown hair, glasses, black jacket, against a black background." width="832" height="1248">
-    </a>
-    <figcaption>
-      <a href="https://thewhitewitchtm.github.io/andreas/"><strong>Andreas</strong></a>
-      <span>Freelance software.</span>
-    </figcaption>
-  </figure>
+  <img src="{{ '/assets/images/witch.jpg' | relative_url }}" alt="The White Witch. Green witch in a white hat, holding a book and a wand." width="1408" height="1408">
+  <a class="side-andreas" href="https://thewhitewitchtm.github.io/andreas/">
+    <img src="{{ '/assets/images/andreas.jpg' | relative_url }}" alt="Andreas, short brown hair, glasses, black jacket, against a black background." width="832" height="1248">
+  </a>
 </aside>
 {% endif %}

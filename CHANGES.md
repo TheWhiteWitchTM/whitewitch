@@ -9,7 +9,7 @@ permalink: /changes/
 
 ## 2026-10-31
 
-- **Portraits.** Mira, the witch, and Andreas stand in the margins again. On the home page they stay out of the way until the banner scrolls off, then they fade in and stay put while the page moves. On posts and the MAGIC pages they are there when the page opens. Andreas links to his own site. Mira links to the lab. The reading column stays a reading column.
+- **Portraits.** The old margin pictures are back. Mira is on the left and links to the lab. The witch is on the right, and Andreas is the picture under her. He links to his site. There are no captions in the rails. On the home page the three stay out of the way, then fade in as the banner scrolls up, and they stay put while the page moves. On posts and the MAGIC pages they are there when the page opens. The reading column stays a reading column.
 - **Scroll.** The window was locked at one screen, so the banner never left and the three never faded in. The page scrolls again. Page Down, the wheel, and the touchpad all move it.
 - **Type.** Post and page text is set at reading size, left aligned, with the light GitHub rules under the headings taken off. The home introduction stays centered.
 
