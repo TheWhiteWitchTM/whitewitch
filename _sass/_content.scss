@@ -13,18 +13,14 @@
 
 /* Fixed, not sticky. Sticky joined the flex row, so both rails sat on the
    left and the article collapsed to a few characters a line. Fixed keeps
-   them in the margins. On the home page they fade in once the banner leaves. */
+   them in the margins. On the home page they fade in once the banner leaves.
+   No inner scroll: a wheel over the picture has to move the page. */
 .side-image {
   flex: 0 0 150px;
   position: fixed;
   top: 5.5rem;
   width: 150px;
   max-width: 150px;
-  max-height: calc(100dvh - 5.5rem - 6.5rem);
-  overflow-x: hidden;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #6b4c8a transparent;
   opacity: 1;
   transition: opacity 0.35s ease;
   z-index: 10;
@@ -41,7 +37,6 @@
 .side-image.hidden {
   opacity: 0;
   pointer-events: none;
-  overflow: hidden;
 }
 
 .side-figure {

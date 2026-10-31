@@ -3,9 +3,13 @@
 
 @import "{{ site.theme }}";
 
+/* The window has to grow with the page. height: 100% plus overflow-x: hidden
+   locked it at one screen, so Page Down and the touchpad never moved it and
+   the portraits stayed hidden behind the banner. clip does not turn the
+   other axis into a scroll box. */
 html, body {
-  height: 100%;
-  overflow-x: hidden;
+  height: auto;
+  overflow-x: clip;
 }
 
 body {
