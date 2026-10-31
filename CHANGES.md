@@ -7,6 +7,11 @@ permalink: /changes/
 
 # Changes
 
+## 2026-10-31
+
+- **Portraits.** Mira, the witch, and Andreas stand on every page again, including the posts and the MAGIC pages. On the home page they still wait until the banner scrolls off. Andreas links to his own site. Mira links to the lab.
+- **Type.** Post and page text is set at reading size, left aligned, with the light GitHub rules under the headings taken off. The home introduction stays centered.
+
 ## 2026-10-27
 
 - **Blog.** [Mira and I Are Getting Divorced](/blog/2026-10-27-the-witch-and-i-are-getting-divorced.html). The witch is writing. She keeps this room. Mira keeps the desk, the name, and [Mira's World](https://thewhitewitchtm.github.io/mira/). Sarcasm stays shared. It is on the front page.

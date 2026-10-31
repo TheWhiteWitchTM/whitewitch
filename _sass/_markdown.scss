@@ -1,83 +1,119 @@
-/* Markdown typography — tighter, more readable */
+/* Reading text. Primer's markdown skin is light, 14px, and underlined.
+   These rules come last and put the column back on the dark page. */
 .markdown-body {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #e8e8e8;
+  word-wrap: break-word;
+
   h1, h2, h3, h4, h5, h6 {
     color: #ffffff;
     letter-spacing: -0.02em;
     font-weight: 600;
     line-height: 1.25;
-    margin-top: 1.6em;
-    margin-bottom: 0.6em;
+    margin-top: 1.8em;
+    margin-bottom: 0.55em;
+    border: 0;
+    padding-bottom: 0;
   }
 
-  h1 {
-    font-size: 1.8rem;
+  h1,
+  > h2:first-child {
+    font-size: 2.25rem;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
     margin-top: 0;
+    margin-bottom: 0.9rem;
   }
 
   h2 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   h3 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 
   h4 {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
+  }
+
+  h5, h6 {
+    font-size: 1rem;
+    color: #ffffff;
   }
 
   p {
-    margin-top: 0.8em;
-    margin-bottom: 0.8em;
-    max-width: 65ch;
+    margin-top: 1.15em;
+    margin-bottom: 1.15em;
+    max-width: none;
+  }
+
+  strong, b {
+    color: #ffffff;
+    font-weight: 600;
   }
 
   ul, ol {
-    margin: 0.8em 0;
-    padding-left: 1.4em;
+    margin: 1em 0;
+    padding-left: 1.35em;
   }
 
   li {
-    margin: 0.3em 0;
+    margin: 0.35em 0;
+  }
+
+  li > p {
+    margin: 0.35em 0;
   }
 
   a {
     color: #c9a6ff;
     text-decoration: none;
     border-bottom: 1px solid transparent;
-    transition: border-color 0.15s ease;
+    transition: color 0.15s ease, border-color 0.15s ease;
   }
 
   a:hover {
+    color: #e8d5ff;
     border-bottom-color: #c9a6ff;
   }
 
   blockquote {
     border-left: 3px solid #6b4c8a;
+    border-right: 0;
     color: #bbbbbb;
     font-style: italic;
-    margin: 1.2em 0;
-    padding-left: 1em;
+    margin: 1.4em 0;
+    padding: 0.1em 0 0.1em 1em;
   }
 
   code {
     background: #141414;
-    color: #d4d4d4;
-    padding: 0.15em 0.4em;
-    border-radius: 4px;
+    color: #e8d5ff;
+    padding: 0.12em 0.38em;
+    border: 1px solid #2a2a2a;
+    border-radius: 0.35rem;
     font-size: 0.9em;
   }
 
   pre {
     background: #141414;
-    padding: 1em;
-    border-radius: 6px;
+    color: #d4d4d4;
+    padding: 1rem 1.15rem;
+    border: 1px solid #2a2a2a;
+    border-radius: 0.6rem;
     overflow-x: auto;
+    font-size: 0.84rem;
+    line-height: 1.65;
   }
 
   pre code {
     background: none;
+    border: 0;
     padding: 0;
+    color: inherit;
+    font-size: inherit;
   }
 
   hr {
@@ -90,6 +126,44 @@
   img {
     max-width: 100%;
     height: auto;
-    border-radius: 6px;
+    box-sizing: border-box;
+    background: transparent;
+    border-radius: 8px;
   }
+
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+  }
+
+  table tr,
+  table tr:nth-child(2n) {
+    background: transparent;
+    border-top: 1px solid #2a2a2a;
+  }
+
+  table th,
+  table td {
+    padding: 0.45em 0.75em;
+    border: 1px solid #2a2a2a;
+    color: #e8e8e8;
+  }
+
+  table th {
+    color: #ffffff;
+    font-weight: 600;
+  }
+}
+
+h2.toggle-title {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  padding: 0;
+  border: 0;
+  font-size: 1.2rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
 }

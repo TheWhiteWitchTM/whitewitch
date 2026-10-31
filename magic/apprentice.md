@@ -6,7 +6,6 @@ image: /assets/images/apprentice.jpg
 image_width: 1200
 image_height: 630
 permalink: /magic/apprentice/
-hide_sides: true
 ---
 
 <img class="project-banner" src="{{ '/assets/images/apprentice.jpg' | relative_url }}" alt="MAGIC Apprentice. Paper, night, yours." width="100%">

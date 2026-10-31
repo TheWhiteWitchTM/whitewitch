@@ -6,7 +6,6 @@ image: /assets/images/studio.jpg
 image_width: 1200
 image_height: 630
 permalink: /magic/studio/
-hide_sides: true
 ---
 
 <img class="project-banner" src="{{ '/assets/images/studio.jpg' | relative_url }}" alt="MAGIC Studio. Black, local, yours." width="100%">

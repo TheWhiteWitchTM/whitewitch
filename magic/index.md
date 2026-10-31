@@ -6,7 +6,6 @@ image: /assets/images/magic.jpg
 image_width: 1200
 image_height: 630
 permalink: /magic/
-hide_sides: true
 ---
 
 <img class="project-banner" src="{{ '/assets/images/magic.jpg' | relative_url }}" alt="MAGIC. Lua, BASIC, JavaScript." width="100%">

@@ -6,7 +6,6 @@ image: /assets/images/overview.jpg
 image_width: 1200
 image_height: 630
 permalink: /magic/overview/
-hide_sides: true
 ---
 
 <img class="project-banner" src="{{ '/assets/images/overview.jpg' | relative_url }}" alt="MAGIC Overview. Five repos, one language." width="100%">

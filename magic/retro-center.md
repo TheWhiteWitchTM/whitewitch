@@ -6,7 +6,6 @@ image: /assets/images/retro-center.jpg
 image_width: 1200
 image_height: 630
 permalink: /magic/retro/center/
-hide_sides: true
 ---
 
 <img class="project-banner" src="{{ '/assets/images/retro-center.jpg' | relative_url }}" alt="RETRO Center. Five machines, one shelf." width="100%">

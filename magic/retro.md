@@ -6,7 +6,6 @@ image: /assets/images/retro-magic.jpg
 image_width: 1200
 image_height: 630
 permalink: /magic/retro/
-hide_sides: true
 ---
 
 <img class="project-banner" src="{{ '/assets/images/retro-magic.jpg' | relative_url }}" alt="RETRO MAGIC. C64, Apple II, TI-99." width="100%">

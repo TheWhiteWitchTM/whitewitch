@@ -12,23 +12,15 @@
 }
 
 .side-image {
-  flex: 0 0 140px;
-  position: fixed;
-  top: 5.5rem;
-  width: 140px;
-  max-width: 140px;
+  flex: 0 0 150px;
+  position: sticky;
+  top: 5rem;
+  width: 150px;
+  max-width: 150px;
+  align-self: start;
   opacity: 1;
   transition: opacity 0.35s ease;
   z-index: 10;
-}
-
-.side-image.left {
-  left: max(1rem, calc(50% - 540px));
-  margin-top: -24px;
-}
-
-.side-image.right {
-  right: max(1rem, calc(50% - 540px));
 }
 
 .side-image.hidden {
@@ -36,15 +28,58 @@
   pointer-events: none;
 }
 
+.side-figure {
+  margin: 0;
+}
+
+.side-figure + .side-figure {
+  margin-top: 1.35rem;
+}
+
+.side-figure a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 0;
+}
+
+.side-figure a:hover {
+  text-decoration: none;
+}
+
+.side-figure a:hover strong {
+  color: #e8d5ff;
+}
+
 .side-image img {
   width: 100%;
   height: auto;
   max-width: 140px;
-  object-fit: contain;
+  object-fit: cover;
   object-position: top;
   display: block;
+  background: transparent;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+}
+
+.side-figure figcaption {
+  margin-top: 0.65rem;
+}
+
+.side-figure strong {
+  display: block;
+  color: #c9a6ff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.side-figure span {
+  display: block;
+  margin-top: 0.15rem;
+  color: #9a9a9a;
+  font-size: 0.75rem;
+  line-height: 1.35;
 }
 
 .content-area {
@@ -61,16 +96,15 @@
   width: 100%;
 }
 
-.home-text p,
-.home-content p {
-  max-width: 62ch;
-  margin-left: auto;
-  margin-right: auto;
+.intro {
+  margin: 1.25rem 0 2.5rem;
+  text-align: center;
 }
 
-.home-text h1,
-.home-content h1 {
-  margin-bottom: 1.2rem;
+.intro p {
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Full-bleed site banner (lives outside the constrained column in home.html).
@@ -90,50 +124,16 @@
   object-position: center;
 }
 
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3 {
-  color: #ffffff !important;
-  letter-spacing: -0.02em;
-  font-weight: 600;
-}
-
-.markdown-body h1 {
-  font-size: 2.4rem;
-  text-shadow: 0 0 12px rgba(180, 160, 220, 0.15);
-}
-
 .markdown-body a {
   color: #c9a6ff !important;
   text-decoration: none;
   border-bottom: 1px solid transparent;
-  transition: all 0.2s ease;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .markdown-body a:hover {
   color: #e8d5ff !important;
   border-bottom-color: #c9a6ff;
-}
-
-.markdown-body hr {
-  border: none;
-  height: 1px;
-  background: linear-gradient(to right, transparent, #3a2a4a, transparent);
-  margin: 2rem 0;
-}
-
-.markdown-body code,
-.markdown-body pre {
-  background-color: #141414 !important;
-  color: #d4d4d4 !important;
-  border: 1px solid #2a2a2a;
-  border-radius: 6px;
-}
-
-.markdown-body blockquote {
-  border-left: 3px solid #6b4c8a;
-  color: #bbbbbb;
-  font-style: italic;
 }
 
 .markdown-body img[width="100%"],
@@ -203,21 +203,26 @@
   outline-offset: 2px;
 }
 
-/* Force readable content width */
+/* The portraits sit in the columns. They do not cover the type. */
 @media (min-width: 901px) {
   .page-frame {
-    padding-left: 170px !important;
-    padding-right: 170px !important;
+    display: grid;
+    grid-template-columns: 150px minmax(0, 40rem) 150px;
+    justify-content: center;
+    align-items: start;
+    column-gap: 2.25rem;
+    max-width: 1180px;
+    padding: 0 1.25rem 3rem;
   }
 
   .page-frame .content-area,
   .page-frame .home-content,
   .page-frame > .content-area {
-    max-width: 640px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: 100% !important;
-    flex: 0 1 640px !important;
+    max-width: 40rem;
+    width: auto;
+    min-width: 0;
+    margin: 0;
+    flex: none;
   }
 }
 

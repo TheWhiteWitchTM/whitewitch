@@ -6,7 +6,6 @@ image: /assets/images/retro-studio.jpg
 image_width: 1200
 image_height: 630
 permalink: /magic/retro/studio/
-hide_sides: true
 ---
 
 <img class="project-banner" src="{{ '/assets/images/retro-studio.jpg' | relative_url }}" alt="RETRO Studio. BASIC, assembly, yours." width="100%">

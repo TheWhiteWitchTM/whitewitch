@@ -6,7 +6,6 @@ image: /assets/images/retro-toolchain.jpg
 image_width: 1200
 image_height: 630
 permalink: /magic/retro/toolchain/
-hide_sides: true
 ---
 
 <img class="project-banner" src="{{ '/assets/images/retro-toolchain.jpg' | relative_url }}" alt="RETRO Toolchain. Assembler, C, Pascal, BASIC." width="100%">
