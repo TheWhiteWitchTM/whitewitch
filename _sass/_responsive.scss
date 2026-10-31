@@ -1,4 +1,20 @@
 /* Responsive */
+@media (max-width: 1100px) {
+  .page-frame .content-area,
+  .page-frame .home-content,
+  .page-frame > main {
+    max-width: 560px;
+  }
+
+  .side-image.left {
+    left: max(0.75rem, calc(50% - 458px));
+  }
+
+  .side-image.right {
+    right: max(0.75rem, calc(50% - 458px));
+  }
+}
+
 @media (max-width: 1180px) {
   .site-nav {
     padding-left: 0.85rem;

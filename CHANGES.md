@@ -9,7 +9,7 @@ permalink: /changes/
 
 ## 2026-10-31
 
-- **Portraits.** Mira, the witch, and Andreas stand on every page again, including the posts and the MAGIC pages. On the home page they still wait until the banner scrolls off. Andreas links to his own site. Mira links to the lab.
+- **Portraits.** Mira, the witch, and Andreas stand in the margins again. On the home page they stay out of the way until the banner scrolls off, then they fade in and stay put while the page moves. On posts and the MAGIC pages they are there when the page opens. Andreas links to his own site. Mira links to the lab. The reading column stays a reading column.
 - **Type.** Post and page text is set at reading size, left aligned, with the light GitHub rules under the headings taken off. The home introduction stays centered.
 
 ## 2026-10-27

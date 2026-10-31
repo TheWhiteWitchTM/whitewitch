@@ -11,21 +11,37 @@
   padding: 0 1rem 3rem;
 }
 
+/* Fixed, not sticky. Sticky joined the flex row, so both rails sat on the
+   left and the article collapsed to a few characters a line. Fixed keeps
+   them in the margins. On the home page they fade in once the banner leaves. */
 .side-image {
   flex: 0 0 150px;
-  position: sticky;
-  top: 5rem;
+  position: fixed;
+  top: 5.5rem;
   width: 150px;
   max-width: 150px;
-  align-self: start;
+  max-height: calc(100dvh - 5.5rem - 6.5rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #6b4c8a transparent;
   opacity: 1;
   transition: opacity 0.35s ease;
   z-index: 10;
 }
 
+.side-image.left {
+  left: max(0.75rem, calc(50% - 518px));
+}
+
+.side-image.right {
+  right: max(0.75rem, calc(50% - 518px));
+}
+
 .side-image.hidden {
   opacity: 0;
   pointer-events: none;
+  overflow: hidden;
 }
 
 .side-figure {
@@ -93,7 +109,8 @@
   max-width: 680px;
   margin: 0 auto;
   padding: 1rem 1.5rem 2rem;
-  width: 100%;
+  width: min(680px, 100%);
+  flex: 0 0 auto;
 }
 
 .intro {
@@ -201,29 +218,6 @@
 .markdown-body a.repo-link:focus-visible {
   outline: 2px solid #c9a6ff;
   outline-offset: 2px;
-}
-
-/* The portraits sit in the columns. They do not cover the type. */
-@media (min-width: 901px) {
-  .page-frame {
-    display: grid;
-    grid-template-columns: 150px minmax(0, 40rem) 150px;
-    justify-content: center;
-    align-items: start;
-    column-gap: 2.25rem;
-    max-width: 1180px;
-    padding: 0 1.25rem 3rem;
-  }
-
-  .page-frame .content-area,
-  .page-frame .home-content,
-  .page-frame > .content-area {
-    max-width: 40rem;
-    width: auto;
-    min-width: 0;
-    margin: 0;
-    flex: none;
-  }
 }
 
 /* Expandable post items */

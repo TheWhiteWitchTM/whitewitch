@@ -1,4 +1,5 @@
-<aside class="side-image left">
+{% if include.where == "left" %}
+<aside class="side-image left{% if page.layout == 'home' %} hidden{% endif %}">
   <figure class="side-figure">
     <a href="https://thewhitewitchtm.github.io/mira/">
       <img src="{{ '/assets/images/mira.jpg' | relative_url }}" alt="Mira, smiling, red hair in a ponytail, black jacket, pointing." width="1008" height="1792">
@@ -9,8 +10,10 @@
     </figcaption>
   </figure>
 </aside>
+{% endif %}
 
-<aside class="side-image right">
+{% if include.where == "right" %}
+<aside class="side-image right{% if page.layout == 'home' %} hidden{% endif %}">
   <figure class="side-figure">
     <img src="{{ '/assets/images/witch.jpg' | relative_url }}" alt="The White Witch. Green witch in a white hat, holding a book and a wand." width="1408" height="1408">
     <figcaption>
@@ -28,3 +31,4 @@
     </figcaption>
   </figure>
 </aside>
+{% endif %}

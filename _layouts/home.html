@@ -10,11 +10,13 @@
     <img src="{{ '/assets/images/banner.jpg?v=' | append: site.github.build_revision | relative_url }}" alt="The White Witch banner. Mira on the left, the witch on the right." width="1200" height="400" class="site-banner">
 
     <div class="page-frame">
-      {% include sides.html %}
+      {% include sides.html where="left" %}
 
       <main class="home-content markdown-body">
         {{ content }}
       </main>
+
+      {% include sides.html where="right" %}
     </div>
 
     {% include footer.html %}

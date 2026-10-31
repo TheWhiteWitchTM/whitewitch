@@ -7,7 +7,7 @@
     {% include nav.html %}
 
     <main class="page-frame">
-      {% include sides.html %}
+      {% include sides.html where="left" %}
 
       <div class="content-area home-content markdown-body">
         {{ content }}
@@ -16,6 +16,8 @@
           {% include post-actions.html %}
         {% endif %}
       </div>
+
+      {% include sides.html where="right" %}
     </main>
 
     {% include footer.html %}
