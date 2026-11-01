@@ -9,8 +9,8 @@ permalink: /changes/
 
 ## 2026-10-31
 
-- **Portraits.** Mira is a column on the left of the text. The witch is a column on the right, and Andreas is the picture under her. They are in the page row, so a blog or an article opens with a picture on each side. On the home page they fade in as the banner scrolls up, then stay beside the text while the page moves. A phone hides the columns. A wide window does not.
-- **Scroll.** The window was locked at one screen, so the banner never left and the three never faded in. The page scrolls again. Page Down, the wheel, and the touchpad all move it.
+- **Portraits.** Mira is a column on the left of the text. The witch is a column on the right. They are in the page row, so a blog or an article opens with a picture on each side. On the home page they fade in as the banner scrolls up, then stay beside the text while the page moves. A phone hides the columns. A wide window does not.
+- **Scroll.** The window was locked at one screen, so the banner never left and the portraits never faded in. The page scrolls again. Page Down, the wheel, and the touchpad all move it.
 - **Type.** Post and page text is set at reading size, left aligned, with the light GitHub rules under the headings taken off. The home introduction stays centered.
 
 ## 2026-10-27
