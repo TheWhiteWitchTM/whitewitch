@@ -4,6 +4,9 @@ title: "I did ask Dr AI about the mental state of Trump!"
 date: 2026-11-01
 highlight: false
 description: "A chatbot has no license and no couch. It still got asked for a readout, so here is the sarcastic version."
+image: /articles/2026-11-01-i-did-ask-dr-ai-about-the-mental-state-of-trump.jpg
+image_width: 1200
+image_height: 630
 tags: [politics, trump, satire, humor]
 ---
 
