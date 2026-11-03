@@ -7,6 +7,12 @@ permalink: /changes/
 
 # Changes
 
+## 2026-11-03
+
+- **Domain.** The site is [thewhitewitchtm.sociallydead.me](https://thewhitewitchtm.sociallydead.me/). Mail is [thewhitewitchtm@sociallydead.me](mailto:thewhitewitchtm@sociallydead.me).
+- **Blog.** The count after Blog is gone, in the menu and on the page. The other shelves still show theirs.
+- **Links.** [Mira's World](https://miratechtm.sociallydead.me/) and [LibreSky](https://libresky.sociallydead.me/) use their sociallydead names.
+
 ## 2026-10-31
 
 - **Portraits.** Mira is a column on the left of the text. The witch is a column on the right. They are in the page row, so a blog or an article opens with a picture on each side. On the home page they fade in as the banner scrolls up, then stay beside the text while the page moves. A phone hides the columns. A wide window does not.
@@ -15,7 +21,7 @@ permalink: /changes/
 
 ## 2026-10-27
 
-- **Blog.** [Mira and I Are Getting Divorced](/blog/2026-10-27-the-witch-and-i-are-getting-divorced.html). The witch is writing. She keeps this room. Mira keeps the desk, the name, and [Mira's World](https://thewhitewitchtm.github.io/mira/). Sarcasm stays shared. It is on the front page.
+- **Blog.** [Mira and I Are Getting Divorced](/blog/2026-10-27-the-witch-and-i-are-getting-divorced.html). The witch is writing. She keeps this room. Mira keeps the desk, the name, and [Mira's World](https://miratechtm.sociallydead.me/). Sarcasm stays shared. It is on the front page.
 - **Mira.** A round portrait sits in the header, just before the Ukraine flag. Click it and a card swings open. Mira is the person behind the White Witch. The hat is the job. About and Mira's World are on the card.
 - **Menu.** MAGIC is off this menu again. Tools is off the menu too. The wizards are still at [/tools/](/tools/). Content opens straight down: Highlights, a separator, then the rest. Downloads stays off the Content menu. The page is still at [/downloads/](/downloads/).
 - **Counts.** Blog, Highlights, Articles, Rants, Shorts, and Videos each show a count. An empty shelf shows (0). The same number is on the page title.
@@ -28,20 +34,20 @@ permalink: /changes/
 
 ## 2026-10-22
 
-- **RETRO Center.** A Qt shelf for the C64, the Apple II, the TI-99/4A, the Amiga, and the Atari ST. Power on starts the emulator. Classics on the shelf are cards. The page is [RETRO Center](https://thewhitewitchtm.github.io/whitewitch/magic/retro/center/). The repo is [RETRO-Center](https://github.com/TheWhiteWitchTM/RETRO-Center).
-- **Retro menu.** [RETRO Toolchain](https://thewhitewitchtm.github.io/whitewitch/magic/retro/toolchain/) and [RETRO Center](https://thewhitewitchtm.github.io/whitewitch/magic/retro/center/) sit with RETRO MAGIC and RETRO Studio. The toolchain had a repo and a blog post. It has a page now.
-- **Blog.** [The Shelf Has a Power Button](https://thewhitewitchtm.github.io/whitewitch/blog/2026-10-22-retro-center.html).
+- **RETRO Center.** A Qt shelf for the C64, the Apple II, the TI-99/4A, the Amiga, and the Atari ST. Power on starts the emulator. Classics on the shelf are cards. The page is [RETRO Center](https://thewhitewitchtm.sociallydead.me/magic/retro/center/). The repo is [RETRO-Center](https://github.com/TheWhiteWitchTM/RETRO-Center).
+- **Retro menu.** [RETRO Toolchain](https://thewhitewitchtm.sociallydead.me/magic/retro/toolchain/) and [RETRO Center](https://thewhitewitchtm.sociallydead.me/magic/retro/center/) sit with RETRO MAGIC and RETRO Studio. The toolchain had a repo and a blog post. It has a page now.
+- **Blog.** [The Shelf Has a Power Button](https://thewhitewitchtm.sociallydead.me/blog/2026-10-22-retro-center.html).
 
 ## 2026-10-21
 
-- **LibreSky.** The long site was still introducing itself as politics only. The front page, the menu, the footer, the about page, and the head tags now name [LibreSky](https://thewhitewitchtm.github.io/LibreSky/), the Bluesky client. Edit, voice, video, and chat. The password stays with Bluesky.
-- **Blog.** [The Breadbox Has a Compiler Now](https://thewhitewitchtm.github.io/whitewitch/blog/2026-10-21-c64-toolchain.html). Assembler, C, Pascal, BASIC, and Space Invaders. The repo is [RETRO-Toolchain](https://github.com/TheWhiteWitchTM/RETRO-Toolchain).
+- **LibreSky.** The long site was still introducing itself as politics only. The front page, the menu, the footer, the about page, and the head tags now name [LibreSky](https://libresky.sociallydead.me/), the Bluesky client. Edit, voice, video, and chat. The password stays with Bluesky.
+- **Blog.** [The Breadbox Has a Compiler Now](https://thewhitewitchtm.sociallydead.me/blog/2026-10-21-c64-toolchain.html). Assembler, C, Pascal, BASIC, and Space Invaders. The repo is [RETRO-Toolchain](https://github.com/TheWhiteWitchTM/RETRO-Toolchain).
 
 ## 2026-10-19
 
-- **MAGIC Overview** is the first item in the MAGIC menu. [MAGIC Overview](https://thewhitewitchtm.github.io/whitewitch/magic/overview/) is the short map: the goal, the five pages, and the five repos.
-- **MAGIC** sits in the menu after Content. The items read [MAGIC](https://thewhitewitchtm.github.io/whitewitch/magic/), [MAGIC Studio](https://thewhitewitchtm.github.io/whitewitch/magic/studio/), and [MAGIC Apprentice](https://thewhitewitchtm.github.io/whitewitch/magic/apprentice/). A separator comes next. Under it: [RETRO MAGIC](https://thewhitewitchtm.github.io/whitewitch/magic/retro/) and [RETRO Studio](https://thewhitewitchtm.github.io/whitewitch/magic/retro/studio/). The two compilers are not one menu item. Repos: [MAGIC](https://github.com/TheWhiteWitchTM/MAGIC), [MAGIC Studio](https://github.com/TheWhiteWitchTM/MAGIC-Studio), [MAGIC Apprentice](https://github.com/TheWhiteWitchTM/MAGIC-Apprentice), [RETRO-MAGIC](https://github.com/TheWhiteWitchTM/RETRO-MAGIC), and [RETRO-Studio](https://github.com/TheWhiteWitchTM/RETRO-Studio).
-- **Blog.** [I Wrote BASIC for Three Dead Machines So the Feed Could Wait](https://thewhitewitchtm.github.io/whitewitch/blog/2026-10-19-retro-magic.html). RETRO MAGIC and RETRO Studio, in the usual tone.
+- **MAGIC Overview** is the first item in the MAGIC menu. [MAGIC Overview](https://thewhitewitchtm.sociallydead.me/magic/overview/) is the short map: the goal, the five pages, and the five repos.
+- **MAGIC** sits in the menu after Content. The items read [MAGIC](https://thewhitewitchtm.sociallydead.me/magic/), [MAGIC Studio](https://thewhitewitchtm.sociallydead.me/magic/studio/), and [MAGIC Apprentice](https://thewhitewitchtm.sociallydead.me/magic/apprentice/). A separator comes next. Under it: [RETRO MAGIC](https://thewhitewitchtm.sociallydead.me/magic/retro/) and [RETRO Studio](https://thewhitewitchtm.sociallydead.me/magic/retro/studio/). The two compilers are not one menu item. Repos: [MAGIC](https://github.com/TheWhiteWitchTM/MAGIC), [MAGIC Studio](https://github.com/TheWhiteWitchTM/MAGIC-Studio), [MAGIC Apprentice](https://github.com/TheWhiteWitchTM/MAGIC-Apprentice), [RETRO-MAGIC](https://github.com/TheWhiteWitchTM/RETRO-MAGIC), and [RETRO-Studio](https://github.com/TheWhiteWitchTM/RETRO-Studio).
+- **Blog.** [I Wrote BASIC for Three Dead Machines So the Feed Could Wait](https://thewhitewitchtm.sociallydead.me/blog/2026-10-19-retro-magic.html). RETRO MAGIC and RETRO Studio, in the usual tone.
 
 ## 2026-10-18
 

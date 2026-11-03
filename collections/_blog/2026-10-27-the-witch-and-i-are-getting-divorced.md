@@ -22,7 +22,7 @@ So we are separating. Call it a divorce if you want the paperwork. There is no p
 
 What I keep: this site, the hat, the articles, the rants, the flag in the corner, the arguments. If you came here to be annoyed in the direction of the evidence, you are in my room. I am keeping the key.
 
-What she keeps: the name Mira, the face, the repos, and [Mira's World](https://thewhitewitchtm.github.io/mira/). The professional introduction. The part where a person answers when you ask who wrote it. The round face in the menu is that person. The green one with the book is the costume. They are no longer required to attend the same meeting.
+What she keeps: the name Mira, the face, the repos, and [Mira's World](https://miratechtm.sociallydead.me/). The professional introduction. The part where a person answers when you ask who wrote it. The round face in the menu is that person. The green one with the book is the costume. They are no longer required to attend the same meeting.
 
 Dark humor stays in the middle. It was never hers or mine. Sarcasm is community property, and neither of us can afford the lawyer who would split it. The kettle stays here. Prior ruling. She can visit it. She cannot file a take before it clicks.
 

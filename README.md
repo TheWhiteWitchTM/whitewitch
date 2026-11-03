@@ -1,17 +1,17 @@
 <p align="center">
-  <a href="https://thewhitewitchtm.github.io/whitewitch/">
+  <a href="https://thewhitewitchtm.sociallydead.me/">
     <img src="assets/images/banner.jpg" width="100%" alt="The White Witch. Politics and social events, facts first." />
   </a>
 </p>
 
 <p align="center">
-  <a href="https://thewhitewitchtm.github.io/whitewitch/"><strong>thewhitewitchtm.github.io/whitewitch</strong></a><br>
+  <a href="https://thewhitewitchtm.sociallydead.me/"><strong>thewhitewitchtm.sociallydead.me</strong></a><br>
   <a href="https://thewhitewitchtm.github.io/">The card</a> ·
-  <a href="https://thewhitewitchtm.github.io/mira/">Mira's World</a> ·
+  <a href="https://miratechtm.sociallydead.me/">Mira's World</a> ·
   <a href="https://thewhitewitchtm.github.io/emojigames/">Emoji Games</a> ·
-  <a href="https://thewhitewitchtm.github.io/whitewitch/magic/">MAGIC</a> ·
-  <a href="https://thewhitewitchtm.github.io/whitewitch/magic/retro/">RETRO MAGIC</a> ·
-  <a href="https://thewhitewitchtm.github.io/sociallydead/">SociallyDead</a>
+  <a href="https://thewhitewitchtm.sociallydead.me/magic/">MAGIC</a> ·
+  <a href="https://thewhitewitchtm.sociallydead.me/magic/retro/">RETRO MAGIC</a> ·
+  <a href="https://sociallydead.me/">SociallyDead</a>
 </p>
 
 ---
@@ -43,7 +43,7 @@
 ---
 
 <p align="center">
-  ✉️ <a href="mailto:thewhitewitchtm@google.com">thewhitewitchtm@google.com</a>
+  ✉️ <a href="mailto:thewhitewitchtm@sociallydead.me">thewhitewitchtm@sociallydead.me</a>
 </p>
 
 <p align="center">

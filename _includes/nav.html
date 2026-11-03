@@ -104,7 +104,7 @@
                 {% assign days = now_sec | minus: post_sec | divided_by: 86400 %}
                 {% if days <= 3 %}{% assign is_new = true %}{% endif %}
               {% endif %}
-              <a href="{{ item.url | relative_url }}">{{ item.title }}{% if counted %} ({{ count }}){% endif %}{% if is_new %} New{% endif %}</a>
+              <a href="{{ item.url | relative_url }}">{{ item.title }}{% if is_new %} New{% endif %}</a>
             {% endif %}
           </li>
         {% endif %}

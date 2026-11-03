@@ -10,7 +10,7 @@ permalink: /blog/
 
 {% assign items = site.blog | sort: "date" | reverse %}
 
-{% include tag-filter.html title="📝 Blog" collection=items %}
+{% include tag-filter.html title="📝 Blog" collection=items nocount=true %}
 
 <p>The stuff that isn’t politics, history, or a rant. Games, tools, and the occasional experiment. Same rules: no paid posts, no quiet sponsors, and no pretending the data doesn’t matter.</p>
 

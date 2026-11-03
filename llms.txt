@@ -4,26 +4,26 @@
 
 ## LibreSky
 
-- [LibreSky](https://thewhitewitchtm.github.io/LibreSky/): Bluesky client. Edit, voice, video, and chat. The password stays with Bluesky.
+- [LibreSky](https://libresky.sociallydead.me/): Bluesky client. Edit, voice, video, and chat. The password stays with Bluesky.
 - [LibreSky Corporate](https://thewhitewitchtm.github.io/corporate/): self-hosted, small enough for a Pi. Coming soon.
 - [LibreSky source](https://github.com/TheWhiteWitchTM/LibreSky)
 
 ## This site
 
-- [Home](https://thewhitewitchtm.github.io/whitewitch/)
-- [Blog](https://thewhitewitchtm.github.io/whitewitch/blog/)
-- [Articles](https://thewhitewitchtm.github.io/whitewitch/articles/)
-- [Rants](https://thewhitewitchtm.github.io/whitewitch/rants/)
-- [MAGIC](https://thewhitewitchtm.github.io/whitewitch/magic/)
-- [RETRO MAGIC](https://thewhitewitchtm.github.io/whitewitch/magic/retro/)
-- [RETRO Studio](https://thewhitewitchtm.github.io/whitewitch/magic/retro/studio/)
-- [RETRO Toolchain](https://thewhitewitchtm.github.io/whitewitch/magic/retro/toolchain/)
-- [RETRO Center](https://thewhitewitchtm.github.io/whitewitch/magic/retro/center/)
+- [Home](https://thewhitewitchtm.sociallydead.me/)
+- [Blog](https://thewhitewitchtm.sociallydead.me/blog/)
+- [Articles](https://thewhitewitchtm.sociallydead.me/articles/)
+- [Rants](https://thewhitewitchtm.sociallydead.me/rants/)
+- [MAGIC](https://thewhitewitchtm.sociallydead.me/magic/)
+- [RETRO MAGIC](https://thewhitewitchtm.sociallydead.me/magic/retro/)
+- [RETRO Studio](https://thewhitewitchtm.sociallydead.me/magic/retro/studio/)
+- [RETRO Toolchain](https://thewhitewitchtm.sociallydead.me/magic/retro/toolchain/)
+- [RETRO Center](https://thewhitewitchtm.sociallydead.me/magic/retro/center/)
 - [Emoji Games](https://thewhitewitchtm.github.io/emojigames/)
-- [Mira's World](https://thewhitewitchtm.github.io/mira/)
-- [SociallyDead](https://thewhitewitchtm.github.io/sociallydead/): a directory of social media.
+- [Mira's World](https://miratechtm.sociallydead.me/)
+- [SociallyDead](https://sociallydead.me/): a directory of social media.
 - [The card](https://thewhitewitchtm.github.io/)
-- [Feed](https://thewhitewitchtm.github.io/whitewitch/feed.xml)
+- [Feed](https://thewhitewitchtm.sociallydead.me/feed.xml)
 
 ## Elsewhere
 
